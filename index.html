@@ -1770,17 +1770,17 @@ function makeChannel(slug) {
         slug: slug,
         messages: '',           // الرسائل (كل سطر = رسالة)
         interval: 5,            // التأخير بالثواني (ثابت)
-        repeat: 1,              // عدد التكرار
+        repeat: 0,              // عدد التكرار
         isInfinite: true,      // تكرار لا نهائي
         enabled: true,          // ✅ مفعّلة افتراضياً (زر التشغيل/الإطفاء)
-        randomDelay: false,     // ✅ التأخير العشوائي
-        delayMin: 5,            // ✅ الحد الأدنى للتأخير العشوائي
-        delayMax: 60,            // ✅ الحد الأقصى للتأخير العشوائي
+        randomDelay: true,     // ✅ التأخير العشوائي
+        delayMin: 240,            // ✅ الحد الأدنى للتأخير العشوائي
+        delayMax: 300,            // ✅ الحد الأقصى للتأخير العشوائي
         randomMessages: false,  // ✅ الرسائل العشوائية
         chatroomId: null,       // ✅ معرّف الدردشة (يُحفظ عند الإضافة)
         verified: false,        // ✅ تم التحقق من القناة
-        twoMessages: false,     // ✅ رسالتين معاً
-        stickersOnly: false,    // ✅ وضع رسائل سندس
+        twoMessages: true,     // ✅ رسالتين معاً
+        stickersOnly: true,    // ✅ وضع رسائل سندس
         // حالة التشغيل (لا تُحفظ)
         status: 'idle',         // idle | connecting | on | off | sending | failed
         sent: 0,
@@ -1815,10 +1815,10 @@ var unifiedSettings = {
     messages: '',
     interval: 5,
     repeat: 1,
-    isInfinite: false,
-    randomDelay: false,
-    delayMin: 3,
-    delayMax: 7,
+    isInfinite: true,
+    randomDelay: true,
+    delayMin: 240,
+    delayMax: 300,
     randomMessages: false
 };
 
