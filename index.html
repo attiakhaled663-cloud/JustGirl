@@ -4285,7 +4285,7 @@ async function runChannelOnce(bot, ch, eff, msgs, interval, infinite, repeatCoun
 
         // ✅ رسالتين معاً — أرسل رسالة ثانية فوراً بعد فاصل قصير (2 ثانية) قبل الانتظار الطويل
         if (eff.twoMessages && msgSent && bot.isSending && ch.enabled !== false) {
-            try { await delay(2000, abortControllers[bot.id] ? abortControllers[bot.id].signal : undefined); }
+            try { await delay(400, abortControllers[bot.id] ? abortControllers[bot.id].signal : undefined); }
             catch(aborted) { return; }
             if (bot.isSending && ch.enabled !== false) {
                 var r2 = await sendOneMessage();
