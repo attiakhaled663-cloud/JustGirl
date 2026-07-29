@@ -1033,6 +1033,18 @@
             <div class="toggle" id="tgRandomMessages" onclick="cToggleRandomMessages()"></div>
         </div>
 
+        <!-- ✅ رسالتين معاً -->
+        <div class="toggle-row">
+            <div class="toggle-label">
+                <div class="tlicon"><i class="fas fa-clone"></i></div>
+                <div>
+                    <span>رسالتين معاً</span>
+                    <span class="toggle-hint">يرسل رسالتين ورا بعض ثم ينتظر الفاصل الزمني</span>
+                </div>
+            </div>
+            <div class="toggle" id="tgTwoMessages" onclick="cToggleTwoMessages()"></div>
+        </div>
+
         <div class="toggle-row">
             <div class="toggle-label">
                 <div class="tlicon"><i class="fas fa-face-grin-stars"></i></div>
@@ -1839,7 +1851,8 @@ function getEffectiveChannelSettings(ch) {
             delayMin: unifiedSettings.delayMin,
             delayMax: unifiedSettings.delayMax,
             randomMessages: unifiedSettings.randomMessages,
-            sendToNonLive: sendToNonLive
+            sendToNonLive: sendToNonLive,
+            twoMessages: !!ch.twoMessages
         };
     }
     ch.sendToNonLive = sendToNonLive;
@@ -3523,6 +3536,7 @@ function openChannelSettings(slug) {
     setToggle('tgChannelInfinite', ch.isInfinite);
     setToggle('tgRandomDelay', ch.randomDelay);
     setToggle('tgRandomMessages', ch.randomMessages);
+    setToggle('tgTwoMessages', !!ch.twoMessages);
     setToggle('tgStickersOnly', !!ch.stickersOnly);
 
     if (ch.stickersOnly) {
@@ -3588,6 +3602,17 @@ function cToggleRandomMessages() {
     persist();
 }
 
+// ✅ تبديل "رسالتين معاً"
+function cToggleTwoMessages() {
+    if (activeModalBotId === null || !activeChannelSlug) return;
+    var b = findBot(activeModalBotId);
+    var ch = findChannel(b, activeChannelSlug);
+    if (!ch) return;
+    ch.twoMessages = !ch.twoMessages;
+    setToggle('tgTwoMessages', ch.twoMessages);
+    persist();
+}
+
 function cToggleStickersOnly() {
     if (activeModalBotId === null || !activeChannelSlug) return;
     var b = findBot(activeModalBotId);
@@ -3621,6 +3646,7 @@ function saveChannelSettings() {
     ch.isInfinite = $('tgChannelInfinite').classList.contains('on');
     ch.randomDelay = $('tgRandomDelay').classList.contains('on');
     ch.randomMessages = $('tgRandomMessages').classList.contains('on');
+    ch.twoMessages = $('tgTwoMessages').classList.contains('on');
     ch.stickersOnly = $('tgStickersOnly').classList.contains('on');
     var rv = parseInt($('cRepeat').value) || 1;
     ch.repeat = ch.isInfinite ? 0 : Math.max(1, rv);
@@ -4135,100 +4161,122 @@ async function runChannelOnce(bot, ch, eff, msgs, interval, infinite, repeatCoun
 
         if (!bot.isSending) break;
 
-        // ✅ احصل على الرسالة التالية (عشوائية أو ثابتة)
-        var currentMsg = nextMessage();
-        sentInRound++;
+        // ✅ إرسال رسالة واحدة كاملة (اختيار الرسالة + فحص البث + إعادة المحاولة)
+        // ترجع: 'sent' نجح الإرسال، 'failed' فشل نهائياً (وضع غير لا نهائي)، 'exit' يجب الخروج من runChannelOnce فوراً
+        async function sendOneMessage() {
+            // ✅ احصل على الرسالة التالية (عشوائية أو ثابتة)
+            var currentMsg = nextMessage();
+            sentInRound++;
 
-        // ✅ تحقق من التفعيل قبل كل رسالة
-        if (ch.enabled === false) {
-            ch.status = 'idle';
-            requestUIUpdate();
-            return;
-        }
-
-        // ✅ فحص البث المباشر قبل كل رسالة (السلوك الافتراضي: فقط للبث المباشر)
-        if (!eff.sendToNonLive) {
-            var stillLive = await checkLiveNow();
-            if (!stillLive) {
-                // القناة أوفلاين — انتظر عودة البث
-                var resumed2 = await waitForLive();
-                if (!resumed2) return;
-                // عاد البث — أعد المحاولة لنفس الرسالة
-            }
-        }
-
-        // انتظار عودة الإنترنت
-        if (!NetworkGuard.isOnline && infinite) {
-            ch.status = 'warning';
-            ch.error = 'بانتظار عودة الإنترنت...';
-            requestUIUpdate();
-            while (!NetworkGuard.isOnline && bot.isSending) {
-                if (ch.enabled === false) {
-                    ch.status = 'idle';
-                    requestUIUpdate();
-                    return;
-                }
-                try { await delay(1000, abortControllers[bot.id] ? abortControllers[bot.id].signal : undefined); }
-                catch(aborted) { return; }
-            }
-            if (!bot.isSending) return;
-            ch.status = 'on';
-        }
-
-        // ✅ إرسال الرسالة الحالية
-        var msgSent = false, failCount = 0, lastErr = null;
-        while (!msgSent && bot.isSending) {
-            if (!infinite && failCount >= MAX_SEND_RETRIES) break;
-            try {
-                var result = await sendMessage(cid, currentMsg, bot.token, bot.workingSendProxy);
-                if (result.proxyUsed >= 0) bot.workingSendProxy = result.proxyUsed;
-                bot.sent++;
-                ch.sent++;
-                msgSent = true;
-                ch.status = 'on';
-                ch.error = '';
+            // ✅ تحقق من التفعيل قبل كل رسالة
+            if (ch.enabled === false) {
+                ch.status = 'idle';
                 requestUIUpdate();
-            } catch(e) {
-                failCount++;
-                lastErr = e;
-                var isCritical = e.message.indexOf('حظر')>=0 || e.message.indexOf('صلاحية')>=0 || e.message.indexOf('منتهي')>=0;
-                var isNetwork = (e instanceof TypeError) || e.message.indexOf('Failed to fetch')>=0 || e.message==='timeout';
+                return 'exit';
+            }
 
-                if (isCritical && !infinite) throw e;
-
-                if (bot.isSending) {
-                    var backoff;
-                    if (isNetwork && !NetworkGuard.isOnline) {
-                        ch.status = 'warning';
-                        ch.error = 'بانتظار عودة الإنترنت...';
-                        requestUIUpdate();
-                        while (!NetworkGuard.isOnline && bot.isSending) {
-                            if (ch.enabled === false) {
-                                ch.status = 'idle';
-                                requestUIUpdate();
-                                return;
-                            }
-                            try { await delay(1000, abortControllers[bot.id] ? abortControllers[bot.id].signal : undefined); }
-                            catch(aborted) { return; }
-                        }
-                        if (!bot.isSending) return;
-                        continue;
-                    } else if (isCritical) {
-                        backoff = Math.min(5000 + (failCount * 1500), 30000);
-                        if (failCount === 1) toast('('+bot.username+' → '+slug+') '+e.message+' — إعادة خلال '+Math.round(backoff/1000)+'ث', 'i');
-                    } else if (isNetwork) {
-                        backoff = 1000 + Math.min(failCount * 500, 4000);
-                    } else {
-                        backoff = RETRY_DELAY + Math.min(failCount * 200, 2000);
-                    }
-                    ch.status = 'warning';
-                    ch.error = isCritical ? (e.message+' ('+failCount+')') :
-                                  isNetwork ? ('إعادة اتصال ('+failCount+')') :
-                                  ('إعادة ('+failCount+')');
-                    requestUIUpdate();
-                    try { await delay(backoff, abortControllers[bot.id] ? abortControllers[bot.id].signal : undefined); }
-                    catch(aborted) { return; }
+            // ✅ فحص البث المباشر قبل كل رسالة (السلوك الافتراضي: فقط للبث المباشر)
+            if (!eff.sendToNonLive) {
+                var stillLive = await checkLiveNow();
+                if (!stillLive) {
+                    // القناة أوفلاين — انتظر عودة البث
+                    var resumed2 = await waitForLive();
+                    if (!resumed2) return 'exit';
+                    // عاد البث — أعد المحاولة لنفس الرسالة
                 }
+            }
+
+            // انتظار عودة الإنترنت
+            if (!NetworkGuard.isOnline && infinite) {
+                ch.status = 'warning';
+                ch.error = 'بانتظار عودة الإنترنت...';
+                requestUIUpdate();
+                while (!NetworkGuard.isOnline && bot.isSending) {
+                    if (ch.enabled === false) {
+                        ch.status = 'idle';
+                        requestUIUpdate();
+                        return 'exit';
+                    }
+                    try { await delay(1000, abortControllers[bot.id] ? abortControllers[bot.id].signal : undefined); }
+                    catch(aborted) { return 'exit'; }
+                }
+                if (!bot.isSending) return 'exit';
+                ch.status = 'on';
+            }
+
+            // ✅ إرسال الرسالة الحالية
+            var msgSentLocal = false, failCount = 0, lastErr = null;
+            while (!msgSentLocal && bot.isSending) {
+                if (!infinite && failCount >= MAX_SEND_RETRIES) break;
+                try {
+                    var result = await sendMessage(cid, currentMsg, bot.token, bot.workingSendProxy);
+                    if (result.proxyUsed >= 0) bot.workingSendProxy = result.proxyUsed;
+                    bot.sent++;
+                    ch.sent++;
+                    msgSentLocal = true;
+                    ch.status = 'on';
+                    ch.error = '';
+                    requestUIUpdate();
+                } catch(e) {
+                    failCount++;
+                    lastErr = e;
+                    var isCritical = e.message.indexOf('حظر')>=0 || e.message.indexOf('صلاحية')>=0 || e.message.indexOf('منتهي')>=0;
+                    var isNetwork = (e instanceof TypeError) || e.message.indexOf('Failed to fetch')>=0 || e.message==='timeout';
+
+                    if (isCritical && !infinite) throw e;
+
+                    if (bot.isSending) {
+                        var backoff;
+                        if (isNetwork && !NetworkGuard.isOnline) {
+                            ch.status = 'warning';
+                            ch.error = 'بانتظار عودة الإنترنت...';
+                            requestUIUpdate();
+                            while (!NetworkGuard.isOnline && bot.isSending) {
+                                if (ch.enabled === false) {
+                                    ch.status = 'idle';
+                                    requestUIUpdate();
+                                    return 'exit';
+                                }
+                                try { await delay(1000, abortControllers[bot.id] ? abortControllers[bot.id].signal : undefined); }
+                                catch(aborted) { return 'exit'; }
+                            }
+                            if (!bot.isSending) return 'exit';
+                            continue;
+                        } else if (isCritical) {
+                            backoff = Math.min(5000 + (failCount * 1500), 30000);
+                            if (failCount === 1) toast('('+bot.username+' → '+slug+') '+e.message+' — إعادة خلال '+Math.round(backoff/1000)+'ث', 'i');
+                        } else if (isNetwork) {
+                            backoff = 1000 + Math.min(failCount * 500, 4000);
+                        } else {
+                            backoff = RETRY_DELAY + Math.min(failCount * 200, 2000);
+                        }
+                        ch.status = 'warning';
+                        ch.error = isCritical ? (e.message+' ('+failCount+')') :
+                                      isNetwork ? ('إعادة اتصال ('+failCount+')') :
+                                      ('إعادة ('+failCount+')');
+                        requestUIUpdate();
+                        try { await delay(backoff, abortControllers[bot.id] ? abortControllers[bot.id].signal : undefined); }
+                        catch(aborted) { return 'exit'; }
+                    }
+                }
+            }
+            return msgSentLocal ? 'sent' : 'failed';
+        }
+
+        // ✅ إرسال الرسالة الأولى
+        var r1 = await sendOneMessage();
+        if (r1 === 'exit') return;
+        var msgSent = (r1 === 'sent');
+
+        // ✅ رسالتين معاً — أرسل رسالة ثانية فوراً بعد فاصل قصير (2 ثانية) قبل الانتظار الطويل
+        if (eff.twoMessages && msgSent && bot.isSending && ch.enabled !== false) {
+            try { await delay(2000, abortControllers[bot.id] ? abortControllers[bot.id].signal : undefined); }
+            catch(aborted) { return; }
+            if (bot.isSending && ch.enabled !== false) {
+                var r2 = await sendOneMessage();
+                if (r2 === 'exit') return;
+                // ملحوظة: msgSent تبقى true من الرسالة الأولى حتى لو فشلت الثانية،
+                // لضمان استمرار دورة الانتظار الطبيعية للقناة
             }
         }
 
