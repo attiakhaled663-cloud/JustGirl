@@ -683,7 +683,310 @@
         }
         .channel-card.disabled:hover { opacity:0.65; }
         .channel-card.disabled .channel-name { color:var(--muted); text-decoration:line-through; text-decoration-color:rgba(215,0,128,0.4); }
-    </style>
+    
+
+        /* ===== Pink Premium Rebuild (override) ===== */
+        :root {
+            --bg: #050507;
+            --fg: #f7eef7;
+            --muted: #8c7a89;
+            --accent: #ff67b4;
+            --accent2: #ffd1e8;
+            --accent3: #ff8fcb;
+            --card: rgba(18, 18, 22, 0.96);
+            --border: rgba(255, 103, 180, 0.34);
+            --danger: #ff4f74;
+            --success: #20d38d;
+        }
+        body {
+            background:
+                radial-gradient(circle at 15% 0%, rgba(255,103,180,.14), transparent 26%),
+                radial-gradient(circle at 100% 100%, rgba(255,255,255,.06), transparent 22%),
+                var(--bg) !important;
+            color: var(--fg) !important;
+        }
+        #fireCanvas { opacity: .28; }
+        .bg-vignette { background: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.72) 72%, rgba(0,0,0,0.97) 100%) !important; }
+        .bg-glow.g1, .bg-glow.g3 { background: rgba(255,103,180,.08) !important; }
+        .bg-glow.g2 { background: rgba(255,255,255,.035) !important; }
+
+        .app-container {
+            max-width: 430px !important;
+            padding: 12px 10px 88px !important;
+            gap: 12px !important;
+        }
+
+        .app-header.top-shell {
+            width: 100%;
+            display: flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+            padding: 12px !important;
+            border-radius: 28px !important;
+            background: rgba(11, 11, 13, 0.96) !important;
+            border: 1px solid rgba(255, 103, 180, .32) !important;
+            box-shadow: 0 14px 40px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.03) !important;
+            backdrop-filter: blur(12px);
+        }
+        .header-menu {
+            width: 44px; height: 44px; flex: 0 0 auto;
+            border-radius: 16px !important;
+            border: 1px solid rgba(255,103,180,.32) !important;
+            background: rgba(255,255,255,.03) !important;
+            color: var(--fg) !important;
+            display: inline-flex; align-items: center; justify-content: center;
+            font-size: 16px;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.02);
+        }
+        .top-tabs {
+            flex: 1 1 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+        .tab-btn {
+            height: 44px;
+            border-radius: 16px !important;
+            border: 1px solid rgba(255,255,255,.12) !important;
+            background: rgba(255,255,255,.03) !important;
+            color: var(--fg) !important;
+            font-family: inherit;
+            font-weight: 800;
+            font-size: 13px;
+            display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+            padding: 0 10px;
+        }
+        .tab-btn.active {
+            background: linear-gradient(180deg, rgba(255,103,180,.28), rgba(255,103,180,.1)) !important;
+            border-color: rgba(255,103,180,.75) !important;
+            box-shadow: 0 0 0 1px rgba(255,255,255,.04), 0 0 18px rgba(255,103,180,.12) !important;
+        }
+        .tab-btn i { font-size: 12px; opacity: .95; }
+
+        .hero-card {
+            width: 100%;
+            border: 2px solid rgba(255,103,180,.34) !important;
+            background: linear-gradient(180deg, rgba(24, 23, 29, .98), rgba(15, 15, 18, .98)) !important;
+            color: var(--fg) !important;
+            border-radius: 28px !important;
+            padding: 16px 18px !important;
+            display: flex; align-items: center; gap: 14px;
+            text-align: right;
+            box-shadow: 0 12px 28px rgba(0,0,0,.34), inset 0 1px 0 rgba(255,255,255,.03) !important;
+        }
+        .hero-card:active { transform: scale(.99); }
+        .hero-icon {
+            width: 58px; height: 58px; flex: 0 0 auto;
+            border-radius: 18px;
+            background: linear-gradient(135deg, #ff76bb, #ffc0de) !important;
+            color: #120814;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 22px;
+            box-shadow: 0 10px 24px rgba(255,103,180,.16);
+        }
+        .hero-copy { flex: 1; min-width: 0; }
+        .hero-title { font-size: 18px; font-weight: 900; letter-spacing: -.3px; color: var(--fg); }
+        .hero-subtitle { margin-top: 4px; font-size: 12px; color: var(--muted); }
+        .hero-arrow { color: var(--accent); font-size: 18px; flex: 0 0 auto; }
+        .section-title {
+            width: 100%;
+            text-align: right;
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--muted);
+            padding: 2px 4px 0;
+        }
+
+        .header-toggle {
+            margin-top: 2px !important;
+            width: 100%;
+            justify-content: flex-start !important;
+            padding: 10px 12px !important;
+            border-radius: 18px !important;
+            background: rgba(255,255,255,.025) !important;
+            border: 1px solid rgba(255,255,255,.12) !important;
+        }
+        .header-toggle .ht-label { font-size: 11px !important; }
+        .header-toggle .toggle { width: 34px !important; height: 20px !important; }
+        .header-toggle .toggle::after { width: 14px !important; height: 14px !important; }
+
+        .card,
+        .modal,
+        .bot-card,
+        .toggle-row,
+        .quick-item,
+        .channel-card,
+        .qs-sep-row,
+        .qs-sep-toggle,
+        .channel-card,
+        .channel-toggle,
+        .bot-checkbox {
+            border-color: rgba(255,103,180,.30) !important;
+        }
+        .card,
+        .modal,
+        .bot-card,
+        .toggle-row,
+        .quick-item,
+        .channel-card,
+        .qs-sep-row {
+            background: rgba(18, 18, 22, .96) !important;
+            box-shadow: 0 14px 34px rgba(0,0,0,.34), inset 0 1px 0 rgba(255,255,255,.03) !important;
+        }
+        .card { border-radius: 28px !important; padding: 22px 18px !important; }
+        .modal { border-radius: 28px !important; max-width: 430px !important; border-width: 2px !important; }
+        .modal-title, .back-title, .app-name { color: var(--accent) !important; background: linear-gradient(135deg, #ff67b4, #ffd1e8) !important; -webkit-background-clip: text !important; -webkit-text-fill-color: transparent !important; }
+        .modal-head { padding-top: 4px !important; }
+        .modal-icon { border-radius: 18px !important; background: linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,103,180,.12)) !important; }
+        .modal-icon i { color: var(--accent) !important; }
+        .modal-divider,
+        .fire-divider {
+            background: linear-gradient(90deg, transparent, rgba(255,103,180,.08), rgba(255,255,255,.14), rgba(255,103,180,.08), transparent) !important;
+        }
+        .modal-divider { height: 1px !important; }
+
+        input, textarea, select {
+            background: rgba(255,255,255,.03) !important;
+            border-color: rgba(255,103,180,.18) !important;
+            border-radius: 16px !important;
+            color: var(--fg) !important;
+        }
+        input:focus, textarea:focus, select:focus {
+            border-color: var(--accent) !important;
+            box-shadow: 0 0 0 3px rgba(255,103,180,.12) !important;
+        }
+        input::placeholder, textarea::placeholder { color: #7d7180 !important; }
+
+        .btn {
+            border-radius: 18px !important;
+            border: 2px solid rgba(255,255,255,.92) !important;
+            color: #fff !important;
+        }
+        .btn-fire {
+            background: linear-gradient(135deg, #ff67b4, #ffc0de) !important;
+            color: #120814 !important;
+            border-color: #fff !important;
+            box-shadow: 0 10px 22px rgba(255,103,180,.16) !important;
+        }
+        .btn-fire:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 12px 26px rgba(255,103,180,.22) !important; }
+        .btn-ghost {
+            background: rgba(255,255,255,.025) !important;
+            border-color: rgba(255,103,180,.26) !important;
+            color: var(--fg) !important;
+        }
+        .btn-stop { background: #09090b !important; border-color: rgba(255,255,255,.92) !important; }
+        .btn-sm, .btn-xs, .btn-xxs { border-radius: 14px !important; }
+
+        .selection-info {
+            text-align: right !important;
+            padding: 6px 4px 0 !important;
+            font-size: 12px !important;
+            color: var(--muted) !important;
+        }
+        .selection-info .count { color: var(--accent) !important; font-weight: 900 !important; }
+        .bot-list { gap: 12px !important; padding-top: 2px !important; }
+        .bot-card {
+            border-radius: 24px !important;
+            padding: 14px !important;
+            align-items: center !important;
+        }
+        .bot-card:hover { background: rgba(255,255,255,.05) !important; }
+        .bot-card.selected {
+            background: rgba(255,103,180,.12) !important;
+            border-color: var(--accent) !important;
+            box-shadow: 0 0 0 1px rgba(255,255,255,.04), 0 0 18px rgba(255,103,180,.09) !important;
+        }
+        .bot-avatar {
+            border-radius: 16px !important;
+            background: linear-gradient(135deg, rgba(255,255,255,.12), rgba(255,103,180,.12)) !important;
+            color: var(--accent) !important;
+        }
+        .bot-name { font-size: 15px !important; }
+        .bot-status { color: var(--muted) !important; }
+        .bot-checkbox,
+        .toggle,
+        .channel-toggle,
+        .quick-item,
+        .qs-sep-toggle {
+            transition: all .2s ease !important;
+        }
+        .bot-checkbox {
+            width: 28px !important; height: 28px !important; border-radius: 9px !important;
+        }
+        .bot-checkbox.checked {
+            background: linear-gradient(135deg, #ff67b4, #ffc0de) !important;
+            color: #140815 !important;
+        }
+        .bot-checkbox.checked::after { content: '✓' !important; font-size: 14px !important; color: #140815 !important; }
+
+        .bulk-bar, .secondary-actions { gap: 10px !important; }
+        .bulk-bar .btn { padding: 15px 16px !important; border-radius: 22px !important; }
+        .secondary-actions .btn { padding: 11px 10px !important; }
+        .progress-track { background: rgba(255,255,255,.05) !important; }
+        .progress-fill { background: linear-gradient(90deg, #ff67b4, #ffd1e8, #ff67b4) !important; }
+
+        .modal-x {
+            width: 30px !important; height: 30px !important;
+            border-radius: 50% !important;
+            background: rgba(255,255,255,.05) !important;
+            border-color: rgba(255,103,180,.2) !important;
+            color: var(--muted) !important;
+        }
+        .modal-x:hover { border-color: var(--accent) !important; background: rgba(255,103,180,.10) !important; }
+
+        .toggle {
+            background: rgba(255,255,255,.05) !important;
+            border-color: rgba(255,255,255,.92) !important;
+        }
+        .toggle.on, .channel-toggle.on {
+            background: linear-gradient(135deg, #ff67b4, #ffc0de) !important;
+            box-shadow: 0 0 0 1px rgba(255,255,255,.04), 0 0 14px rgba(255,103,180,.15) !important;
+        }
+        .toggle.on::after, .channel-toggle.on::after { background: #100712 !important; }
+        .channel-toggle.off { opacity: .55 !important; }
+
+        .quick-list::-webkit-scrollbar, .bot-list::-webkit-scrollbar, .channels-list::-webkit-scrollbar, .modal::-webkit-scrollbar { width: 5px !important; }
+        .quick-list::-webkit-scrollbar-thumb, .bot-list::-webkit-scrollbar-thumb, .channels-list::-webkit-scrollbar-thumb, .modal::-webkit-scrollbar-thumb {
+            background: rgba(255,103,180,.28) !important; border-radius: 3px !important;
+        }
+
+        .qs-sep-toggle { border-radius: 20px !important; padding: 12px 14px !important; }
+        .qs-sep-toggle .sep-label i { color: var(--accent) !important; }
+        .qs-sep-row { border-radius: 20px !important; }
+        .qs-sep-row .sep-send-btn {
+            border-radius: 14px !important;
+            background: linear-gradient(135deg, #ff67b4, #ffc0de) !important;
+            color: #120814 !important;
+            border-color: #fff !important;
+        }
+        .chip, .quick-item, .channel-card {
+            border-radius: 18px !important;
+        }
+        .chip.sending, .channel-card.sending, .quick-item.selected, .channel-card.on {
+            border-color: var(--accent) !important;
+            box-shadow: 0 0 0 1px rgba(255,255,255,.04), 0 0 14px rgba(255,103,180,.10) !important;
+        }
+
+        .channel-status.on, .channel-status.sending, .channel-status.off, .channel-status.idle, .channel-status.connecting {
+            border-radius: 999px !important;
+        }
+        .channel-status.sending { color: var(--accent) !important; }
+        .channel-status.on { color: #8cffc6 !important; }
+        .channel-status.off { color: #ff9db0 !important; }
+
+        .modal-actions.sticky-actions {
+            border-top-color: rgba(255,103,180,.18) !important;
+            background: linear-gradient(180deg, rgba(18,18,22,0) 0%, rgba(18,18,22,.96) 30%, rgba(18,18,22,.96) 100%) !important;
+        }
+
+        @media (max-width: 560px) {
+            .app-container { max-width: 100% !important; padding-left: 8px !important; padding-right: 8px !important; }
+            .top-tabs { gap: 6px; }
+            .tab-btn { font-size: 12px; }
+            .hero-card { padding: 15px 16px !important; }
+            .hero-title { font-size: 17px; }
+        }
+</style>
 </head>
 <body>
 
@@ -1061,18 +1364,6 @@
             <div class="toggle" id="tgTwoMessages" onclick="cToggleTwoMessages()"></div>
         </div>
 
-        <!-- ✅ ثلاث رسائل معاً -->
-        <div class="toggle-row">
-            <div class="toggle-label">
-                <div class="tlicon"><i class="fas fa-clone"></i></div>
-                <div>
-                    <span>ثلاث رسائل معاً</span>
-                    <span class="toggle-hint">يرسل ثلاث رسائل ورا بعض ثم ينتظر الفاصل الزمني</span>
-                </div>
-            </div>
-            <div class="toggle" id="tgThreeMessages" onclick="cToggleThreeMessages()"></div>
-        </div>
-
         <div class="toggle-row">
             <div class="toggle-label">
                 <div class="tlicon"><i class="fas fa-face-grin-stars"></i></div>
@@ -1150,29 +1441,38 @@
 
     <!-- قائمة البوتات (الواجهة الرئيسية) -->
     <div class="phase active" id="ph-main">
-        <div class="app-header">
-            <div class="logo-img" style="background:url('./RedKick_files/ab46995c-be54-4f0c-97d9-dc9965e3150b.png') center/cover no-repeat;border-radius:50%;outline:none;border:2px solid #000;box-shadow:0 0 0 2px #000,0 0 8px rgba(255,170,220,.05)"></div>
-            <div style="flex:1">
-                <div class="app-name">JustGirl</div>
-                <div class="app-tagline">البوتات</div>
-            </div>
-            <button class="btn btn-ghost btn-xs" onclick="openUnifiedSettings()" title="إعدادات موحدة لكل القنوات" style="flex-shrink:0"><i class="fas fa-screwdriver-wrench"></i></button>
-            <button class="btn btn-ghost btn-xs" onclick="openTransferModal()" title="نقل البيانات بين الأجهزة" style="flex-shrink:0"><i class="fas fa-share-nodes"></i></button>
-            <button class="btn btn-fire btn-xs" onclick="openQuickSend()" title="إرسال رسالة مباشرة" style="flex-shrink:0"><i class="fas fa-paper-plane"></i></button>
-            <!-- ✅ زر الإرسال لغير المباشر — مستقل عن الإعدادات الموحدة -->
-            <div class="header-toggle" onclick="toggleSendToNonLive()" title="عند التفعيل: ترسل لكل القنوات (مباشر وغير مباشر). عند الإيقاف: ترسل فقط للبث المباشر">
-                <i class="fas fa-tower-broadcast" style="color:var(--accent);font-size:10px"></i>
-                <span class="ht-label">غير مباشر</span>
-                <div class="toggle" id="tgSendNonLive"></div>
+        <div class="app-header top-shell">
+            <button class="header-menu" onclick="openSettings()" title="المزيد"><i class="fas fa-ellipsis-vertical"></i></button>
+            <div class="top-tabs">
+                <button class="tab-btn active" onclick="document.getElementById('botList').scrollIntoView({behavior:'smooth', block:'start'})"><i class="fas fa-robot"></i><span>البوتات</span></button>
+                <button class="tab-btn" onclick="openQuickSend()"><i class="fas fa-comment-dots"></i><span>الشات</span></button>
+                <button class="tab-btn" onclick="openUnifiedSettings()"><i class="fas fa-gear"></i><span>المزيد</span></button>
             </div>
         </div>
 
-        <div class="bot-list" id="botList"></div>
+        <button type="button" class="hero-card" onclick="openQuickSend()" aria-label="رسالة لكل بوت">
+            <div class="hero-icon"><i class="fas fa-pen-to-square"></i></div>
+            <div class="hero-copy">
+                <div class="hero-title">رسالة لكل بوت</div>
+                <div class="hero-subtitle">كل بوت يبعث رسالته الخاصة</div>
+            </div>
+            <div class="hero-arrow"><i class="fas fa-chevron-left"></i></div>
+        </button>
+
+        <div class="section-title">حسابات البوتات</div>
+
+        <div class="header-toggle" onclick="toggleSendToNonLive()" title="عند التفعيل: ترسل لكل القنوات (مباشر وغير مباشر). عند الإيقاف: ترسل فقط للبث المباشر">
+            <i class="fas fa-tower-broadcast" style="color:var(--accent);font-size:10px"></i>
+            <span class="ht-label">غير مباشر</span>
+            <div class="toggle" id="tgSendNonLive"></div>
+        </div>
+
+<div class="bot-list" id="botList"></div>
 
         <div class="selection-info" id="selectionInfo">المحدد: <span class="count">8</span> بوت (8 جاهز)</div>
 
         <div class="bulk-bar">
-            <button class="btn btn-fire" id="btnBulkStart" onclick="startSelectedBots()"><i class="fas fa-play"></i> 🎀تشغيل (8) بوت🎀</button>
+            <button class="btn btn-fire" id="btnBulkStart" onclick="startSelectedBots()"><i class="fas fa-play"></i> تشغيل المحدد (24/7)</button>
             <button class="btn btn-stop btn-icon" id="btnBulkStop" onclick="stopAllBots()">🎀</button>
         </div>
 
@@ -1808,7 +2108,6 @@ function makeChannel(slug) {
         chatroomId: null,       // ✅ معرّف الدردشة (يُحفظ عند الإضافة)
         verified: false,        // ✅ تم التحقق من القناة
         twoMessages: true,     // ✅ رسالتين معاً
-        threeMessages: false,  // ✅ ثلاث رسائل معاً
         stickersOnly: true,    // ✅ وضع رسائل سندس
         // حالة التشغيل (لا تُحفظ)
         status: 'idle',         // idle | connecting | on | off | sending | failed
@@ -1883,8 +2182,7 @@ function getEffectiveChannelSettings(ch) {
             delayMax: unifiedSettings.delayMax,
             randomMessages: unifiedSettings.randomMessages,
             sendToNonLive: sendToNonLive,
-            twoMessages: !!ch.twoMessages,
-            threeMessages: !!ch.threeMessages
+            twoMessages: !!ch.twoMessages
         };
     }
     ch.sendToNonLive = sendToNonLive;
@@ -1998,7 +2296,6 @@ function generateTransferCode() {
                             chatroomId: ch.chatroomId || null,
                             verified: !!ch.verified,
                             twoMessages: !!ch.twoMessages,
-                            threeMessages: !!ch.threeMessages,
                             stickersOnly: !!ch.stickersOnly
                         };
                     }),
@@ -2181,7 +2478,6 @@ function importTransferCode() {
                     chatroomId: ch.chatroomId || null,
                     verified: !!ch.verified,
                     twoMessages: !!ch.twoMessages,
-                    threeMessages: !!ch.threeMessages,
                     stickersOnly: !!ch.stickersOnly,
                     status: 'idle', sent: 0, error: '', retries: 0
                 });
@@ -2701,7 +2997,6 @@ function persist() {
                             chatroomId: ch.chatroomId || null,
                             verified: !!ch.verified,
                             twoMessages: !!ch.twoMessages,
-                            threeMessages: !!ch.threeMessages,
                             stickersOnly: !!ch.stickersOnly
                         };
                     }),
@@ -2747,7 +3042,6 @@ function loadFromStorage() {
                         chatroomId: ch.chatroomId || null,
                         verified: !!ch.verified,
                         twoMessages: !!ch.twoMessages,
-                        threeMessages: !!ch.threeMessages,
                         stickersOnly: !!ch.stickersOnly,
                         status: 'idle', sent: 0, error: '', retries: 0
                     });
@@ -3529,66 +3823,44 @@ function saveSettings() {
 // ═══════════════════════════════════════
 var activeChannelSlug = null;
 
-const stickersList = `اللهم اجعلنا ممّن إذا أحسنوا استبشروا وإذا أساؤوا استغفروا
-[emote:4157265:dommyxmommyKISSY]
+const stickersList = `[emote:4851601:dommyxmommyevilduck]
 !points
-اذكُروا الله كثيرًا، فبذِكرِه تَطمئنُّ القلوب
-[emote:3301303:destrox88xKermitPanic]
-!xp
-اللهم ارزُقنا راحةَ البال وصلاحَ الحال وحُسنَ الخاتمة
-[emote:4851610:dommyxmommysadduck]
-!watchtime
-وما عندَ الله خيرٌ وأبقى، فاصبروا وتوكّلوا على الله
-[emote:3538787:dommyxmommydapmeup]
-!commands
-اللهم افتح لنا أبوابَ رحمتك، ووفّقنا لما تُحب وترضى
-[emote:2030859:destrox88xKermitNod]
-!level
-استغفِروا ربَّكم، إنَّ الله غفورٌ رحيم
-[emote:3301303:destrox88xKermitPanic]
+⚡🔥 ULTRA POWER 🔥⚡
+[emote:3302862:destrox88xElmoShrug]
+💥👑 KING MODE 👑💥
+[emote:5470844:kickclassic]
+[emote:3421897:dommyxmommycatpunch]
 !points
-اللهم بارِك لنا في أوقاتنا وأعمالنا، واجعلها شاهدةً لنا لا علينا
-[emote:3304146:dommyxMegamanHB]
-!xp
-يا رب اجعل قلوبَنا معلّقةً بك، وأعمالَنا خالصةً لوجهك
+⚡️🔥 BIG ENERGY 🔥⚡️
+[emote:3304255:destrox88xSus]
+🔥⚡ MAX POWER ⚡🔥
+[emote:2030528:destrox88xExcellent]
+!points
 [emote:4851601:dommyxmommyevilduck]
-!watchtime
-الحمدُ لله على كلِّ نعمةٍ ظاهرةٍ وباطنة
-[emote:4851610:dommyxmommyevilduck]
-!commands
-اللهم اجعل لنا في كلِّ خطوةٍ خيرًا، وفي كلِّ دعاءٍ إجابة
-[emote:2030859:destrox88xKermitNod]
-!level
-مَن أكثرَ من الصلاةِ على النبي، نالَ خيرًا كثيرًا بإذن الله
-[emote:4157265:dommyxmommyKISSY]
+⚡💣 BOOM TIME 💣⚡
+[emote:4851612:dommyxmommycoolduck]
+🔥⚡ OVERDRIVE ⚡🔥
+[emote:3304255:destrox88xSus]
 !points
-اللهم اجعل القرآنَ نورَ طريقنا، وشفاءً لصدورنا، وهدايةً لقلوبنا
-[emote:3301303:destrox88xKermitPanic]
-!xp
-ربِّ اجعلني لك شَكورًا، ولنعمتك ذَكورًا، ولك طائعًا
 [emote:4851610:dommyxmommysadduck]
-!watchtime
-لا تجعل الدنيا أكبرَ همّنا، واجعل الآخرةَ غايتَنا
+👑⚡ LEGEND 👑⚡
 [emote:3538787:dommyxmommydapmeup]
-!commands
-اللهم اغسِل قلوبَنا من الهمِّ والحزن، واملأها يقينًا بك
+🔥💣 FIRE UP 💣🔥
 [emote:2030859:destrox88xKermitNod]
-!level
-سبحانَ الله، والحمدُ لله، والله أكبر، ولا حولَ ولا قوّةَ إلا بالله
-[emote:3304146:dommyxMegamanHB]
+[emote:4157261:dommyxmommyFACEPALM]
 !points
-اللهم ارزُقنا الصبرَ عند البلاء، والشكرَ عند النعماء
-[emote:4851601:dommyxmommyevilduck]
-!xp
-يا رب لا تَكِلنا إلى أنفسِنا طرفةَ عين، وأصلح لنا شأنَنا كلَّه
-[emote:3301303:destrox88xKermitPanic]
-!watchtime
-اللهم اجعل يومَنا هذا خيرًا من أمسنا، وغدَنا خيرًا من يومنا
+💥⚡ HYPER ⚡💥
 [emote:4157265:dommyxmommyKISSY]
-!commands
-ربِّ زدني علمًا، وارزُقني فهمًا نافعًا وقلبًا خاشعًا
-[emote:4851610:dommyxmommysadduck]
-!level`;
+⚡🚀 SKY HIGH 🚀⚡
+[emote:1508551:destrox88xlove]
+[emote:4157273:dommyxmommyANGRYGROGU]
+!points
+💥⚡3AAAAASH⚡💥
+[emote:4851601:dommyxmommyevilduck]
+🔥⚡ OVERDRIVE ⚡🔥
+[emote:3304255:destrox88xSus]
+!points
+[emote:2030528:destrox88xExcellent]`;
 
 function openChannelSettings(slug) {
     if (activeModalBotId === null) return;
@@ -3608,7 +3880,6 @@ function openChannelSettings(slug) {
     setToggle('tgRandomDelay', ch.randomDelay);
     setToggle('tgRandomMessages', ch.randomMessages);
     setToggle('tgTwoMessages', !!ch.twoMessages);
-    setToggle('tgThreeMessages', !!ch.threeMessages);
     setToggle('tgStickersOnly', !!ch.stickersOnly);
 
     if (ch.stickersOnly) {
@@ -3685,17 +3956,6 @@ function cToggleTwoMessages() {
     persist();
 }
 
-// ✅ تبديل "ثلاث رسائل معاً"
-function cToggleThreeMessages() {
-    if (activeModalBotId === null || !activeChannelSlug) return;
-    var b = findBot(activeModalBotId);
-    var ch = findChannel(b, activeChannelSlug);
-    if (!ch) return;
-    ch.threeMessages = !ch.threeMessages;
-    setToggle('tgThreeMessages', ch.threeMessages);
-    persist();
-}
-
 function cToggleStickersOnly() {
     if (activeModalBotId === null || !activeChannelSlug) return;
     var b = findBot(activeModalBotId);
@@ -3730,7 +3990,6 @@ function saveChannelSettings() {
     ch.randomDelay = $('tgRandomDelay').classList.contains('on');
     ch.randomMessages = $('tgRandomMessages').classList.contains('on');
     ch.twoMessages = $('tgTwoMessages').classList.contains('on');
-    ch.threeMessages = $('tgThreeMessages').classList.contains('on');
     ch.stickersOnly = $('tgStickersOnly').classList.contains('on');
     var rv = parseInt($('cRepeat').value) || 1;
     ch.repeat = ch.isInfinite ? 0 : Math.max(1, rv);
@@ -4360,18 +4619,6 @@ async function runChannelOnce(bot, ch, eff, msgs, interval, infinite, repeatCoun
                 var r2 = await sendOneMessage();
                 if (r2 === 'exit') return;
                 // ملحوظة: msgSent تبقى true من الرسالة الأولى حتى لو فشلت الثانية،
-                // لضمان استمرار دورة الانتظار الطبيعية للقناة
-            }
-        }
-
-        // ✅ ثلاث رسائل معاً — أرسل رسالة ثالثة فوراً بعد فاصل قصير (40 ميلي ثانيه) قبل الانتظار الطويل
-        if (eff.threeMessages && msgSent && bot.isSending && ch.enabled !== false) {
-            try { await delay(40, abortControllers[bot.id] ? abortControllers[bot.id].signal : undefined); }
-            catch(aborted) { return; }
-            if (bot.isSending && ch.enabled !== false) {
-                var r3 = await sendOneMessage();
-                if (r3 === 'exit') return;
-                // ملحوظة: msgSent تبقى true من الرسالة الأولى حتى لو فشلت الثالثة،
                 // لضمان استمرار دورة الانتظار الطبيعية للقناة
             }
         }
