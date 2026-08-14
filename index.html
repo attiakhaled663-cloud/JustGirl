@@ -1061,18 +1061,6 @@
             <div class="toggle" id="tgTwoMessages" onclick="cToggleTwoMessages()"></div>
         </div>
 
-        <!-- ✅ ثلاث رسائل معاً -->
-        <div class="toggle-row">
-            <div class="toggle-label">
-                <div class="tlicon"><i class="fas fa-clone"></i></div>
-                <div>
-                    <span>ثلاث رسائل معاً</span>
-                    <span class="toggle-hint">يرسل ثلاث رسائل ورا بعض ثم ينتظر الفاصل الزمني</span>
-                </div>
-            </div>
-            <div class="toggle" id="tgThreeMessages" onclick="cToggleThreeMessages()"></div>
-        </div>
-
         <div class="toggle-row">
             <div class="toggle-label">
                 <div class="tlicon"><i class="fas fa-face-grin-stars"></i></div>
@@ -1808,7 +1796,6 @@ function makeChannel(slug) {
         chatroomId: null,       // ✅ معرّف الدردشة (يُحفظ عند الإضافة)
         verified: false,        // ✅ تم التحقق من القناة
         twoMessages: true,     // ✅ رسالتين معاً
-        threeMessages: false,  // ✅ ثلاث رسائل معاً
         stickersOnly: true,    // ✅ وضع رسائل سندس
         // حالة التشغيل (لا تُحفظ)
         status: 'idle',         // idle | connecting | on | off | sending | failed
@@ -1883,8 +1870,7 @@ function getEffectiveChannelSettings(ch) {
             delayMax: unifiedSettings.delayMax,
             randomMessages: unifiedSettings.randomMessages,
             sendToNonLive: sendToNonLive,
-            twoMessages: !!ch.twoMessages,
-            threeMessages: !!ch.threeMessages
+            twoMessages: !!ch.twoMessages
         };
     }
     ch.sendToNonLive = sendToNonLive;
@@ -1998,7 +1984,6 @@ function generateTransferCode() {
                             chatroomId: ch.chatroomId || null,
                             verified: !!ch.verified,
                             twoMessages: !!ch.twoMessages,
-                            threeMessages: !!ch.threeMessages,
                             stickersOnly: !!ch.stickersOnly
                         };
                     }),
@@ -2181,7 +2166,6 @@ function importTransferCode() {
                     chatroomId: ch.chatroomId || null,
                     verified: !!ch.verified,
                     twoMessages: !!ch.twoMessages,
-                    threeMessages: !!ch.threeMessages,
                     stickersOnly: !!ch.stickersOnly,
                     status: 'idle', sent: 0, error: '', retries: 0
                 });
@@ -2701,7 +2685,6 @@ function persist() {
                             chatroomId: ch.chatroomId || null,
                             verified: !!ch.verified,
                             twoMessages: !!ch.twoMessages,
-                            threeMessages: !!ch.threeMessages,
                             stickersOnly: !!ch.stickersOnly
                         };
                     }),
@@ -2747,7 +2730,6 @@ function loadFromStorage() {
                         chatroomId: ch.chatroomId || null,
                         verified: !!ch.verified,
                         twoMessages: !!ch.twoMessages,
-                        threeMessages: !!ch.threeMessages,
                         stickersOnly: !!ch.stickersOnly,
                         status: 'idle', sent: 0, error: '', retries: 0
                     });
@@ -3529,44 +3511,66 @@ function saveSettings() {
 // ═══════════════════════════════════════
 var activeChannelSlug = null;
 
-const stickersList = `[emote:4851601:dommyxmommyevilduck]
-!points
-⚡🔥 ULTRA POWER 🔥⚡
-[emote:3302862:destrox88xElmoShrug]
-💥👑 KING MODE 👑💥
-[emote:5470844:kickclassic]
-[emote:3421897:dommyxmommycatpunch]
-!points
-⚡️🔥 BIG ENERGY 🔥⚡️
-[emote:3304255:destrox88xSus]
-🔥⚡ MAX POWER ⚡🔥
-[emote:2030528:destrox88xExcellent]
-!points
-[emote:4851601:dommyxmommyevilduck]
-⚡💣 BOOM TIME 💣⚡
-[emote:4851612:dommyxmommycoolduck]
-🔥⚡ OVERDRIVE ⚡🔥
-[emote:3304255:destrox88xSus]
-!points
-[emote:4851610:dommyxmommysadduck]
-👑⚡ LEGEND 👑⚡
-[emote:3538787:dommyxmommydapmeup]
-🔥💣 FIRE UP 💣🔥
-[emote:2030859:destrox88xKermitNod]
-[emote:4157261:dommyxmommyFACEPALM]
-!points
-💥⚡ HYPER ⚡💥
+const stickersList = `اللهم اجعلنا ممّن إذا أحسنوا استبشروا وإذا أساؤوا استغفروا
 [emote:4157265:dommyxmommyKISSY]
-⚡🚀 SKY HIGH 🚀⚡
-[emote:1508551:destrox88xlove]
-[emote:4157273:dommyxmommyANGRYGROGU]
 !points
-💥⚡3AAAAASH⚡💥
+اذكُروا الله كثيرًا، فبذِكرِه تَطمئنُّ القلوب
+[emote:3301303:destrox88xKermitPanic]
+!xp
+اللهم ارزُقنا راحةَ البال وصلاحَ الحال وحُسنَ الخاتمة
+[emote:4851610:dommyxmommysadduck]
+!watchtime
+وما عندَ الله خيرٌ وأبقى، فاصبروا وتوكّلوا على الله
+[emote:3538787:dommyxmommydapmeup]
+!commands
+اللهم افتح لنا أبوابَ رحمتك، ووفّقنا لما تُحب وترضى
+[emote:2030859:destrox88xKermitNod]
+!level
+استغفِروا ربَّكم، إنَّ الله غفورٌ رحيم
+[emote:3301303:destrox88xKermitPanic]
+!points
+اللهم بارِك لنا في أوقاتنا وأعمالنا، واجعلها شاهدةً لنا لا علينا
+[emote:3304146:dommyxMegamanHB]
+!xp
+يا رب اجعل قلوبَنا معلّقةً بك، وأعمالَنا خالصةً لوجهك
 [emote:4851601:dommyxmommyevilduck]
-🔥⚡ OVERDRIVE ⚡🔥
-[emote:3304255:destrox88xSus]
+!watchtime
+الحمدُ لله على كلِّ نعمةٍ ظاهرةٍ وباطنة
+[emote:4851610:dommyxmommyevilduck]
+!commands
+اللهم اجعل لنا في كلِّ خطوةٍ خيرًا، وفي كلِّ دعاءٍ إجابة
+[emote:2030859:destrox88xKermitNod]
+!level
+مَن أكثرَ من الصلاةِ على النبي، نالَ خيرًا كثيرًا بإذن الله
+[emote:4157265:dommyxmommyKISSY]
 !points
-[emote:2030528:destrox88xExcellent]`;
+اللهم اجعل القرآنَ نورَ طريقنا، وشفاءً لصدورنا، وهدايةً لقلوبنا
+[emote:3301303:destrox88xKermitPanic]
+!xp
+ربِّ اجعلني لك شَكورًا، ولنعمتك ذَكورًا، ولك طائعًا
+[emote:4851610:dommyxmommysadduck]
+!watchtime
+لا تجعل الدنيا أكبرَ همّنا، واجعل الآخرةَ غايتَنا
+[emote:3538787:dommyxmommydapmeup]
+!commands
+اللهم اغسِل قلوبَنا من الهمِّ والحزن، واملأها يقينًا بك
+[emote:2030859:destrox88xKermitNod]
+!level
+سبحانَ الله، والحمدُ لله، والله أكبر، ولا حولَ ولا قوّةَ إلا بالله
+[emote:3304146:dommyxMegamanHB]
+!points
+اللهم ارزُقنا الصبرَ عند البلاء، والشكرَ عند النعماء
+[emote:4851601:dommyxmommyevilduck]
+!xp
+يا رب لا تَكِلنا إلى أنفسِنا طرفةَ عين، وأصلح لنا شأنَنا كلَّه
+[emote:3301303:destrox88xKermitPanic]
+!watchtime
+اللهم اجعل يومَنا هذا خيرًا من أمسنا، وغدَنا خيرًا من يومنا
+[emote:4157265:dommyxmommyKISSY]
+!commands
+ربِّ زدني علمًا، وارزُقني فهمًا نافعًا وقلبًا خاشعًا
+[emote:4851610:dommyxmommysadduck]
+!level`;
 
 function openChannelSettings(slug) {
     if (activeModalBotId === null) return;
@@ -3586,7 +3590,6 @@ function openChannelSettings(slug) {
     setToggle('tgRandomDelay', ch.randomDelay);
     setToggle('tgRandomMessages', ch.randomMessages);
     setToggle('tgTwoMessages', !!ch.twoMessages);
-    setToggle('tgThreeMessages', !!ch.threeMessages);
     setToggle('tgStickersOnly', !!ch.stickersOnly);
 
     if (ch.stickersOnly) {
@@ -3663,17 +3666,6 @@ function cToggleTwoMessages() {
     persist();
 }
 
-// ✅ تبديل "ثلاث رسائل معاً"
-function cToggleThreeMessages() {
-    if (activeModalBotId === null || !activeChannelSlug) return;
-    var b = findBot(activeModalBotId);
-    var ch = findChannel(b, activeChannelSlug);
-    if (!ch) return;
-    ch.threeMessages = !ch.threeMessages;
-    setToggle('tgThreeMessages', ch.threeMessages);
-    persist();
-}
-
 function cToggleStickersOnly() {
     if (activeModalBotId === null || !activeChannelSlug) return;
     var b = findBot(activeModalBotId);
@@ -3708,7 +3700,6 @@ function saveChannelSettings() {
     ch.randomDelay = $('tgRandomDelay').classList.contains('on');
     ch.randomMessages = $('tgRandomMessages').classList.contains('on');
     ch.twoMessages = $('tgTwoMessages').classList.contains('on');
-    ch.threeMessages = $('tgThreeMessages').classList.contains('on');
     ch.stickersOnly = $('tgStickersOnly').classList.contains('on');
     var rv = parseInt($('cRepeat').value) || 1;
     ch.repeat = ch.isInfinite ? 0 : Math.max(1, rv);
@@ -4338,18 +4329,6 @@ async function runChannelOnce(bot, ch, eff, msgs, interval, infinite, repeatCoun
                 var r2 = await sendOneMessage();
                 if (r2 === 'exit') return;
                 // ملحوظة: msgSent تبقى true من الرسالة الأولى حتى لو فشلت الثانية،
-                // لضمان استمرار دورة الانتظار الطبيعية للقناة
-            }
-        }
-
-        // ✅ ثلاث رسائل معاً — أرسل رسالة ثالثة فوراً بعد فاصل قصير (40 ميلي ثانيه) قبل الانتظار الطويل
-        if (eff.threeMessages && msgSent && bot.isSending && ch.enabled !== false) {
-            try { await delay(40, abortControllers[bot.id] ? abortControllers[bot.id].signal : undefined); }
-            catch(aborted) { return; }
-            if (bot.isSending && ch.enabled !== false) {
-                var r3 = await sendOneMessage();
-                if (r3 === 'exit') return;
-                // ملحوظة: msgSent تبقى true من الرسالة الأولى حتى لو فشلت الثالثة،
                 // لضمان استمرار دورة الانتظار الطبيعية للقناة
             }
         }
