@@ -1061,6 +1061,18 @@
             <div class="toggle" id="tgTwoMessages" onclick="cToggleTwoMessages()"></div>
         </div>
 
+        <!-- ✅ ثلاث رسائل معاً -->
+        <div class="toggle-row">
+            <div class="toggle-label">
+                <div class="tlicon"><i class="fas fa-clone"></i></div>
+                <div>
+                    <span>ثلاث رسائل معاً</span>
+                    <span class="toggle-hint">يرسل ثلاث رسائل ورا بعض ثم ينتظر الفاصل الزمني</span>
+                </div>
+            </div>
+            <div class="toggle" id="tgThreeMessages" onclick="cToggleThreeMessages()"></div>
+        </div>
+
         <div class="toggle-row">
             <div class="toggle-label">
                 <div class="tlicon"><i class="fas fa-face-grin-stars"></i></div>
@@ -1796,6 +1808,7 @@ function makeChannel(slug) {
         chatroomId: null,       // ✅ معرّف الدردشة (يُحفظ عند الإضافة)
         verified: false,        // ✅ تم التحقق من القناة
         twoMessages: true,     // ✅ رسالتين معاً
+        threeMessages: false,  // ✅ ثلاث رسائل معاً
         stickersOnly: true,    // ✅ وضع رسائل سندس
         // حالة التشغيل (لا تُحفظ)
         status: 'idle',         // idle | connecting | on | off | sending | failed
@@ -1870,7 +1883,8 @@ function getEffectiveChannelSettings(ch) {
             delayMax: unifiedSettings.delayMax,
             randomMessages: unifiedSettings.randomMessages,
             sendToNonLive: sendToNonLive,
-            twoMessages: !!ch.twoMessages
+            twoMessages: !!ch.twoMessages,
+            threeMessages: !!ch.threeMessages
         };
     }
     ch.sendToNonLive = sendToNonLive;
@@ -1984,6 +1998,7 @@ function generateTransferCode() {
                             chatroomId: ch.chatroomId || null,
                             verified: !!ch.verified,
                             twoMessages: !!ch.twoMessages,
+                            threeMessages: !!ch.threeMessages,
                             stickersOnly: !!ch.stickersOnly
                         };
                     }),
@@ -2166,6 +2181,7 @@ function importTransferCode() {
                     chatroomId: ch.chatroomId || null,
                     verified: !!ch.verified,
                     twoMessages: !!ch.twoMessages,
+                    threeMessages: !!ch.threeMessages,
                     stickersOnly: !!ch.stickersOnly,
                     status: 'idle', sent: 0, error: '', retries: 0
                 });
@@ -2685,6 +2701,7 @@ function persist() {
                             chatroomId: ch.chatroomId || null,
                             verified: !!ch.verified,
                             twoMessages: !!ch.twoMessages,
+                            threeMessages: !!ch.threeMessages,
                             stickersOnly: !!ch.stickersOnly
                         };
                     }),
@@ -2730,6 +2747,7 @@ function loadFromStorage() {
                         chatroomId: ch.chatroomId || null,
                         verified: !!ch.verified,
                         twoMessages: !!ch.twoMessages,
+                        threeMessages: !!ch.threeMessages,
                         stickersOnly: !!ch.stickersOnly,
                         status: 'idle', sent: 0, error: '', retries: 0
                     });
@@ -3590,6 +3608,7 @@ function openChannelSettings(slug) {
     setToggle('tgRandomDelay', ch.randomDelay);
     setToggle('tgRandomMessages', ch.randomMessages);
     setToggle('tgTwoMessages', !!ch.twoMessages);
+    setToggle('tgThreeMessages', !!ch.threeMessages);
     setToggle('tgStickersOnly', !!ch.stickersOnly);
 
     if (ch.stickersOnly) {
@@ -3666,6 +3685,17 @@ function cToggleTwoMessages() {
     persist();
 }
 
+// ✅ تبديل "ثلاث رسائل معاً"
+function cToggleThreeMessages() {
+    if (activeModalBotId === null || !activeChannelSlug) return;
+    var b = findBot(activeModalBotId);
+    var ch = findChannel(b, activeChannelSlug);
+    if (!ch) return;
+    ch.threeMessages = !ch.threeMessages;
+    setToggle('tgThreeMessages', ch.threeMessages);
+    persist();
+}
+
 function cToggleStickersOnly() {
     if (activeModalBotId === null || !activeChannelSlug) return;
     var b = findBot(activeModalBotId);
@@ -3700,6 +3730,7 @@ function saveChannelSettings() {
     ch.randomDelay = $('tgRandomDelay').classList.contains('on');
     ch.randomMessages = $('tgRandomMessages').classList.contains('on');
     ch.twoMessages = $('tgTwoMessages').classList.contains('on');
+    ch.threeMessages = $('tgThreeMessages').classList.contains('on');
     ch.stickersOnly = $('tgStickersOnly').classList.contains('on');
     var rv = parseInt($('cRepeat').value) || 1;
     ch.repeat = ch.isInfinite ? 0 : Math.max(1, rv);
@@ -4329,6 +4360,18 @@ async function runChannelOnce(bot, ch, eff, msgs, interval, infinite, repeatCoun
                 var r2 = await sendOneMessage();
                 if (r2 === 'exit') return;
                 // ملحوظة: msgSent تبقى true من الرسالة الأولى حتى لو فشلت الثانية،
+                // لضمان استمرار دورة الانتظار الطبيعية للقناة
+            }
+        }
+
+        // ✅ ثلاث رسائل معاً — أرسل رسالة ثالثة فوراً بعد فاصل قصير (40 ميلي ثانيه) قبل الانتظار الطويل
+        if (eff.threeMessages && msgSent && bot.isSending && ch.enabled !== false) {
+            try { await delay(40, abortControllers[bot.id] ? abortControllers[bot.id].signal : undefined); }
+            catch(aborted) { return; }
+            if (bot.isSending && ch.enabled !== false) {
+                var r3 = await sendOneMessage();
+                if (r3 === 'exit') return;
+                // ملحوظة: msgSent تبقى true من الرسالة الأولى حتى لو فشلت الثالثة،
                 // لضمان استمرار دورة الانتظار الطبيعية للقناة
             }
         }
