@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<!-- saved from url=(0036)https://alali88ko.github.io/3loshex/ -->
+<!-- saved from url=(0048)https://attiakhaled663-cloud.github.io/JustGirl/ -->
 <html lang="ar" dir="rtl"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RedKick</title>
-    <link href="./RedKick_files/css2" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>BloodMoonKick</title>
+    <link rel="icon" type="image/png" href="./BloodMoonKick_files/ab46995c-be54-4f0c-97d9-dc9965e3150b.png">
+    <link rel="stylesheet" href="./BloodMoonKick_files/all.min.css">
     <style>
         :root {
-            --bg: #05020a; --fg: #f0e6f6; --muted: #5e4a6b;
-            --accent: #8000D7; --accent2: #a224f0; --accent3: #c266ff;
-            --card: rgba(12,5,20,0.95); --border: rgba(128,0,215,0.25);
+            --bg: #0a0505; --fg: #f0e6f6; --muted: #8a6060;
+            --accent: #c81e2c; --accent2: #ff5a6a; --accent3: #c81e2c;
+            --card: rgba(18,6,8,0.95); --border: rgba(200,20,44,.35);
             --danger: #ff3b3b; --success: #00c853;
         }
         * { margin:0; padding:0; box-sizing:border-box; }
@@ -18,12 +18,22 @@
             background:var(--bg); color:var(--fg); font-family:'Tajawal',sans-serif;
             min-height:100vh; overflow-x:hidden;
         }
+        .bg-hero {
+            position:fixed; inset:0; z-index:0; pointer-events:none;
+            background-image:
+                linear-gradient(180deg, rgba(6,2,3,.55) 0%, rgba(6,2,3,.55) 40%, rgba(6,2,3,.88) 78%, rgba(4,1,2,.97) 100%),
+                url('./vampire-throne.png');
+            background-size:cover;
+            background-position:center 20%;
+            background-repeat:no-repeat;
+            filter:saturate(1.05) contrast(1.05);
+        }
         #fireCanvas { position:fixed; inset:0; z-index:0; pointer-events:none; }
         .bg-vignette { position:fixed; inset:0; background:radial-gradient(ellipse at center,transparent 30%,rgba(5,2,10,0.7) 70%,rgba(5,2,10,0.95) 100%); pointer-events:none; z-index:1; }
         .bg-glow { position:fixed; pointer-events:none; z-index:0; border-radius:50%; filter:blur(120px); }
-        .bg-glow.g1 { width:500px;height:500px;top:-150px;left:-100px;background:rgba(128,0,215,0.06);animation:gd1 14s ease-in-out infinite; }
-        .bg-glow.g2 { width:400px;height:400px;bottom:-100px;right:-80px;background:rgba(162,36,240,0.05);animation:gd2 18s ease-in-out infinite; }
-        .bg-glow.g3 { width:300px;height:300px;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(194,102,255,0.03);animation:gd3 10s ease-in-out infinite; }
+        .bg-glow.g1 { width:500px;height:500px;top:-150px;left:-100px;background:rgba(200,20,44,.08);animation:gd1 14s ease-in-out infinite; }
+        .bg-glow.g2 { width:400px;height:400px;bottom:-100px;right:-80px;background:rgba(255,255,255,0.05);animation:gd2 18s ease-in-out infinite; }
+        .bg-glow.g3 { width:300px;height:300px;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(200,20,44,.05);animation:gd3 10s ease-in-out infinite; }
         @keyframes gd1{0%,100%{transform:translate(0,0)}50%{transform:translate(30px,20px)}}
         @keyframes gd2{0%,100%{transform:translate(0,0)}50%{transform:translate(-20px,-30px)}}
         @keyframes gd3{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.15)}}
@@ -31,7 +41,7 @@
         /* ✅ شاشة الدخول النارية */
         .splash {
             position:fixed; inset:0; z-index:9999;
-            background:radial-gradient(ellipse at center,#120224 0%,#05020a 70%);
+            background:radial-gradient(ellipse at center,#3a0a12 0%,#0a0505 70%);
             display:flex; align-items:center; justify-content:center;
             transition:opacity .8s ease; overflow:hidden;
         }
@@ -52,13 +62,13 @@
             100%{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(0)}
         }
         @keyframes splashLogoPulse{
-            0%,100%{filter:drop-shadow(0 0 8px rgba(128,0,215,0.6)) drop-shadow(0 0 20px rgba(162,36,240,0.4))}
-            50%{filter:drop-shadow(0 0 20px rgba(128,0,215,0.9)) drop-shadow(0 0 40px rgba(194,102,255,0.5))}
+            0%,100%{filter:drop-shadow(0 0 8px rgba(200,20,44,.08)) drop-shadow(0 0 20px rgba(200,20,44,.06))}
+            50%{filter:drop-shadow(0 0 20px rgba(255,255,255,0.9)) drop-shadow(0 0 40px rgba(255,255,255,0.5))}
         }
         .splash-lightning {
             position:absolute; inset:0; width:100%; height:100%;
             animation:splashLightning 2s ease-in-out infinite;
-            filter:drop-shadow(0 0 4px rgba(128,0,215,0.8));
+            filter:drop-shadow(0 0 4px rgba(255,255,255,0.8));
         }
         .splash-lightning.l2 { animation-delay:.5s; transform:rotate(120deg); }
         @keyframes splashLightning{
@@ -70,22 +80,22 @@
         }
         .splash-name {
             font-size:42px; font-weight:900; letter-spacing:-1px;
-            background:linear-gradient(135deg,#8000D7 0%,#a224f0 50%,#c266ff 100%);
+            background:linear-gradient(135deg,#c81e2c 0%,#ff5a6a 50%,#c81e2c 100%);
             -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
             animation:splashNameIn 1s cubic-bezier(.16,1,.3,1) .5s forwards; opacity:0;
         }
         @keyframes splashNameIn{0%{opacity:0;transform:translateY(20px) scale(.8)}100%{opacity:1;transform:translateY(0) scale(1)}}
         .splash-bar {
-            width:180px; height:3px; background:rgba(255,255,255,0.06); border-radius:2px;
+            width:180px; height:3px; background:rgba(200,20,44,.08); border-radius:2px;
             margin:24px auto 0; overflow:hidden;
             animation:splashFadeIn .8s ease .8s forwards; opacity:0;
         }
         .splash-bar-fill {
             height:100%; width:0;
-            background:linear-gradient(90deg,#8000D7,#a224f0,#c266ff,#a224f0,#8000D7);
+            background:linear-gradient(90deg,#c81e2c,#ff5a6a,#c81e2c,#ff5a6a,#c81e2c);
             background-size:200% 100%; border-radius:2px;
             animation:splashBarFill 2.5s ease 1s forwards, splashBarShimmer 1.5s linear 1s infinite;
-            box-shadow:0 0 10px rgba(128,0,215,0.4);
+            box-shadow:0 0 10px rgba(200,20,44,.06);
         }
         @keyframes splashBarFill{0%{width:0}100%{width:100%}}
         @keyframes splashBarShimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
@@ -105,15 +115,15 @@
         .back-btn {
             display:flex; align-items:center; gap:6px;
             padding:9px 14px; border-radius:10px; cursor:pointer;
-            background:rgba(255,255,255,0.04); border:1px solid rgba(128,0,215,0.18);
+            background:rgba(200,20,44,.06); border:1px solid rgba(255,255,255,0.18);
             color:var(--fg); font-size:12px; font-weight:700; font-family:inherit;
             transition:all .2s;
         }
-        .back-btn:hover { background:rgba(128,0,215,0.1); border-color:rgba(128,0,215,0.35); }
+        .back-btn:hover { background:rgba(200,20,44,.15); border-color:rgba(255,255,255,0.35); }
         .back-btn i { font-size:13px; }
         .back-title {
             font-size:18px; font-weight:900;
-            background:linear-gradient(135deg,#8000D7 0%,#a224f0 50%,#c266ff 100%);
+            background:linear-gradient(135deg,#c81e2c 0%,#ff5a6a 50%,#c81e2c 100%);
             -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
         }
         /* ✅ زر الواتساب العائم — في الأسفل ولا يغطّي أي زر */
@@ -124,8 +134,8 @@
             padding:11px 22px; border-radius:30px;
             background:linear-gradient(135deg,#25D366,#128C7E);
             color:#fff; font-size:13px; font-weight:700; font-family:inherit;
-            border:none; cursor:pointer;
-            box-shadow:0 6px 20px rgba(37,211,102,0.4), 0 0 0 1px rgba(255,255,255,0.1);
+            border:2px solid #fff; cursor:pointer;
+            box-shadow:0 6px 20px rgba(37,211,102,0.4), 0 0 0 1px rgba(200,20,44,.15);
             transition:all .25s;
         }
         .whatsapp-fab:hover { transform:translateX(-50%) translateY(-2px); box-shadow:0 8px 28px rgba(37,211,102,0.55); }
@@ -145,7 +155,7 @@
         .wa-dev-label { font-size:13px; color:var(--muted); margin-bottom:8px; }
         .wa-dev-name {
             font-size:26px; font-weight:900; letter-spacing:1px;
-            background:linear-gradient(135deg,#8000D7 0%,#a224f0 50%,#c266ff 100%);
+            background:linear-gradient(135deg,#c81e2c 0%,#ff5a6a 50%,#c81e2c 100%);
             -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
         }
         .wa-phone-btn {
@@ -163,18 +173,18 @@
         .info-fab {
             position:fixed; top:14px; left:14px; z-index:45;
             width:38px; height:38px; border-radius:50%;
-            background:linear-gradient(135deg,#8000D7,#a224f0);
-            color:#fff; border:none; cursor:pointer;
+            background:linear-gradient(135deg,#c81e2c,#ff5a6a);
+            color:#000; border:2px solid #fff; cursor:pointer;
             display:flex; align-items:center; justify-content:center;
             font-size:16px; font-weight:900; font-family:inherit;
-            box-shadow:0 4px 14px rgba(128,0,215,0.45), 0 0 0 1px rgba(255,255,255,0.1);
+            box-shadow:0 4px 14px rgba(255,255,255,0.45), 0 0 0 1px rgba(200,20,44,.15);
             transition:all .25s;
         }
-        .info-fab:hover { transform:scale(1.08); box-shadow:0 6px 20px rgba(128,0,215,0.6); }
+        .info-fab:hover { transform:scale(1.08); box-shadow:0 6px 20px rgba(200,20,44,.08); }
         .info-fab i { font-size:16px; }
         .info-fab::before {
             content:''; position:absolute; inset:-3px; border-radius:50%;
-            border:2px solid rgba(128,0,215,0.4); opacity:0;
+            border:2px solid rgba(200,20,44,.06); opacity:0;
             animation:infoPulse 2.5s ease-in-out infinite;
         }
         @keyframes infoPulse{
@@ -186,7 +196,7 @@
         .info-modal-body { padding:8px 4px; max-height:65vh; overflow-y:auto; }
         .info-tabs {
             display:flex; gap:4px; margin-bottom:12px;
-            flex-wrap:wrap; padding:4px; background:rgba(255,255,255,0.03);
+            flex-wrap:wrap; padding:4px; background:rgba(200,20,44,.05);
             border-radius:10px;
         }
         .info-tab {
@@ -196,11 +206,11 @@
             color:var(--muted); font-size:11px; font-weight:700; font-family:inherit;
             transition:all .2s; text-align:center;
         }
-        .info-tab:hover { color:var(--fg); background:rgba(255,255,255,0.04); }
+        .info-tab:hover { color:var(--fg); background:rgba(200,20,44,.06); }
         .info-tab.active {
-            background:linear-gradient(135deg,#8000D7,#a224f0);
-            color:#fff; border-color:var(--accent);
-            box-shadow:0 0 10px rgba(128,0,215,0.3);
+            background:linear-gradient(135deg,#c81e2c,#ff5a6a);
+            color:#000; border-color:var(--accent);
+            box-shadow:0 0 10px rgba(200,20,44,.05);
         }
         .info-section { display:none; animation:infoFadeIn .35s ease; }
         .info-section.active { display:block; }
@@ -208,7 +218,7 @@
         .info-section h3 {
             font-size:14px; font-weight:900; color:var(--accent);
             margin-bottom:10px; padding-bottom:6px;
-            border-bottom:1px solid rgba(128,0,215,0.18);
+            border-bottom:1px solid rgba(255,255,255,0.18);
             display:flex; align-items:center; gap:6px;
         }
         .info-section h3 i { font-size:13px; }
@@ -217,8 +227,8 @@
             margin-bottom:10px; opacity:.92;
         }
         .info-section .qa-item {
-            background:rgba(255,255,255,0.025);
-            border:1px solid rgba(128,0,215,0.12);
+            background:rgba(200,20,44,.35);
+            border:1px solid rgba(255,255,255,0.12);
             border-radius:9px; padding:10px 12px; margin-bottom:8px;
         }
         .info-section .qa-item .qa-q {
@@ -239,10 +249,10 @@
         .app-header .header-toggle {
             display:flex; align-items:center; gap:6px;
             padding:4px 10px; border-radius:9px;
-            background:rgba(255,255,255,0.03); border:1px solid rgba(128,0,215,0.12);
+            background:rgba(200,20,44,.05); border:1px solid rgba(255,255,255,0.12);
             cursor:pointer; transition:all .25s; flex-shrink:0;
         }
-        .app-header .header-toggle:hover { border-color:rgba(128,0,215,0.3); background:rgba(128,0,215,0.05); }
+        .app-header .header-toggle:hover { border-color:rgba(200,20,44,.05); background:rgba(255,255,255,0.05); }
         .app-header .header-toggle .ht-label { font-size:10px; font-weight:700; white-space:nowrap; }
         .app-header .header-toggle .toggle { width:30px; height:18px; border-radius:9px; }
         .app-header .header-toggle .toggle::after { width:14px; height:14px; top:1px; }
@@ -251,11 +261,11 @@
         .app-header .header-toggle .toggle.on::after { left:14px; }
         .logo-img {
             width:48px; height:48px; border-radius:12px; object-fit:cover;
-            box-shadow:0 0 20px rgba(128,0,215,0.25),0 0 40px rgba(128,0,215,0.1);
+            box-shadow:0 0 20px rgba(200,20,44,.35),0 0 40px rgba(200,20,44,.15);
         }
         .app-name {
             font-size:24px; font-weight:900; letter-spacing:-0.5px;
-            background:linear-gradient(135deg,#8000D7 0%,#a224f0 50%,#c266ff 100%);
+            background:linear-gradient(135deg,#c81e2c 0%,#ff5a6a 50%,#c81e2c 100%);
             -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
         }
         .app-tagline { font-size:11px; color:var(--muted); margin-top:2px; }
@@ -263,7 +273,7 @@
         .card {
             background:var(--card); border:1px solid var(--border); border-radius:24px;
             padding:24px 20px; width:100%;
-            box-shadow:0 0 60px rgba(128,0,215,0.04),0 0 120px rgba(128,0,215,0.02),inset 0 1px 0 rgba(255,255,255,0.02);
+            box-shadow:0 0 60px rgba(200,20,44,.06),0 0 120px rgba(255,255,255,0.02),inset 0 1px 0 rgba(255,255,255,0.02);
         }
         .phase { display:none; }
         .phase.active { display:block; animation:phaseIn .35s cubic-bezier(.16,1,.3,1); }
@@ -276,64 +286,64 @@
         label { display:block; font-size:13px; font-weight:700; color:var(--fg); margin-bottom:6px; }
         .hint { font-size:11px; color:var(--muted); margin-top:4px; }
         input,textarea,select {
-            width:100%; padding:12px 14px; background:rgba(255,255,255,0.025);
-            border:1px solid rgba(128,0,215,0.1); border-radius:12px; color:var(--fg);
+            width:100%; padding:12px 14px; background:rgba(200,20,44,.35);
+            border:1px solid rgba(200,20,44,.15); border-radius:12px; color:var(--fg);
             font-size:14px; font-family:inherit; outline:none; transition:border .25s,box-shadow .25s;
         }
-        input:focus,textarea:focus { border-color:var(--accent); box-shadow:0 0 0 3px rgba(128,0,215,0.08),0 0 24px rgba(128,0,215,0.06); }
-        input::placeholder,textarea::placeholder { color:#4b3a5a; }
+        input:focus,textarea:focus { border-color:var(--accent); box-shadow:0 0 0 3px rgba(255,255,255,0.08),0 0 24px rgba(200,20,44,.08); }
+        input::placeholder,textarea::placeholder { color:#5a3535; }
         textarea { resize:vertical; min-height:90px; line-height:1.8; }
         .row { display:flex; gap:8px; }
         .row input { flex:1; }
         .btn {
-            padding:12px 20px; border-radius:12px; border:none; cursor:pointer;
+            padding:12px 20px; border-radius:12px; border:2px solid #fff; cursor:pointer;
             font-weight:700; font-size:14px; font-family:inherit; transition:all .2s;
             display:inline-flex; align-items:center; gap:8px; justify-content:center;
         }
         .btn:active:not(:disabled) { transform:scale(.97); }
         .btn:disabled { opacity:.35; cursor:not-allowed; }
-        .btn-fire { background:linear-gradient(135deg,#8000D7,#a224f0); color:#fff; text-shadow:0 1px 2px rgba(0,0,0,0.3); }
-        .btn-fire:hover:not(:disabled) { box-shadow:0 0 24px rgba(128,0,215,0.3); transform:translateY(-1px); }
-        .btn-stop { background:linear-gradient(135deg,#cc0000,#990000); color:#fff; }
-        .btn-ghost { background:rgba(255,255,255,0.03); color:var(--fg); border:1px solid var(--border); }
-        .btn-ghost:hover:not(:disabled) { background:rgba(255,255,255,0.06); border-color:rgba(128,0,215,0.25); }
+        .btn-fire { background:linear-gradient(135deg,#c81e2c,#ff5a6a); color:#000; text-shadow:none; }
+        .btn-fire:hover:not(:disabled) { box-shadow:0 0 24px rgba(200,20,44,.05); transform:translateY(-1px); }
+        .btn-stop { background:#000; color:#fff; border:2px solid #fff !important; }
+        .btn-ghost { background:rgba(200,20,44,.05); color:var(--fg); border:2px solid #fff; }
+        .btn-ghost:hover:not(:disabled) { background:rgba(200,20,44,.08); border-color:rgba(200,20,44,.35); }
         .btn-sm { padding:10px 16px; font-size:13px; }
         .btn-xs { padding:6px 12px; font-size:12px; border-radius:8px; }
         .btn-xxs { padding:4px 8px; font-size:11px; border-radius:6px; line-height:1; }
         .btn-full { width:100%; }
         .field { margin-bottom:16px; }
-        .fire-divider { height:1px; background:linear-gradient(90deg,transparent,rgba(128,0,215,0.2),rgba(162,36,240,0.3),rgba(128,0,215,0.2),transparent); margin:18px 0; }
-        .spinner { width:32px; height:32px; border:3px solid rgba(128,0,215,0.15); border-top-color:var(--accent); border-radius:50%; animation:spin .7s linear infinite; margin:0 auto 16px; }
+        .fire-divider { height:1px; background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),rgba(200,20,44,.05),rgba(255,255,255,0.2),transparent); margin:18px 0; }
+        .spinner { width:32px; height:32px; border:3px solid rgba(255,255,255,0.15); border-top-color:var(--accent); border-radius:50%; animation:spin .7s linear infinite; margin:0 auto 16px; }
         @keyframes spin{to{transform:rotate(360deg)}}
         .spinner-sm { width:14px; height:14px; border:2px solid transparent; border-top-color:currentColor; border-radius:50%; animation:spin .6s linear infinite; display:inline-block; }
 
         .toast-box { position:fixed; top:16px; left:50%; transform:translateX(-50%); z-index:9999; display:flex; flex-direction:column; gap:6px; align-items:center; }
         .toast { padding:10px 22px; border-radius:10px; font-weight:700; font-size:13px; box-shadow:0 4px 24px rgba(0,0,0,0.5); animation:toastIn .3s ease; font-family:inherit; max-width:90vw; }
-        .toast-s { background:linear-gradient(135deg,#8000D7,#a224f0); color:#fff; }
+        .toast-s { background:linear-gradient(135deg,#c81e2c,#ff5a6a); color:#000; }
         .toast-e { background:rgba(200,0,0,0.92); color:#fff; }
-        .toast-i { background:rgba(194,102,255,0.92); color:#000; }
+        .toast-i { background:rgba(255,255,255,0.92); color:#000; }
         @keyframes toastIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
         @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
         @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 
         /* ═══ بطاقة البوت ═══ */
-        .bot-list { display:flex; flex-direction:column; gap:10px; max-height:60vh; overflow-y:auto; padding:4px 2px; }
+        .bot-list { display:flex; flex-direction:column; gap:10px; overflow-y:auto; padding:4px 2px; }
         .bot-list::-webkit-scrollbar { width:4px; }
-        .bot-list::-webkit-scrollbar-thumb { background:rgba(128,0,215,0.2); border-radius:2px; }
+        .bot-list::-webkit-scrollbar-thumb { background:rgba(255,255,255,0.2); border-radius:2px; }
         .bot-card {
             display:flex; align-items:center; gap:12px;
-            padding:12px 14px; background:rgba(128,0,215,0.04);
+            padding:12px 14px; background:rgba(200,20,44,.06);
             border:1px solid var(--border); border-radius:14px;
             transition:all .2s;
         }
-        .bot-card:hover { border-color:rgba(128,0,215,0.3); background:rgba(128,0,215,0.07); }
+        .bot-card:hover { border-color:rgba(200,20,44,.05); background:rgba(255,255,255,0.07); }
         .bot-card.selected {
-            border-color:var(--accent); background:rgba(128,0,215,0.1);
-            box-shadow:0 0 16px rgba(128,0,215,0.2);
+            border-color:var(--accent); background:rgba(200,20,44,.15);
+            box-shadow:0 0 16px rgba(255,255,255,0.2);
         }
         .bot-avatar {
             width:40px; height:40px; border-radius:11px; flex-shrink:0;
-            background:linear-gradient(135deg,rgba(128,0,215,0.15),rgba(162,36,240,0.1));
+            background:linear-gradient(135deg,rgba(255,255,255,0.15),rgba(200,20,44,.15));
             display:flex; align-items:center; justify-content:center;
             font-weight:900; font-size:16px; color:var(--accent);
         }
@@ -350,18 +360,18 @@
         /* مربع التحديد */
         .bot-checkbox {
             width:26px; height:26px; border-radius:7px; flex-shrink:0;
-            border:2px solid rgba(128,0,215,0.3); background:rgba(255,255,255,0.02);
+            border:2px solid #fff; background:rgba(255,255,255,0.02);
             cursor:pointer; transition:all .2s;
             display:flex; align-items:center; justify-content:center;
         }
-        .bot-checkbox:hover { border-color:var(--accent); background:rgba(128,0,215,0.1); }
+        .bot-checkbox:hover { border-color:var(--accent); background:rgba(200,20,44,.15); }
         .bot-checkbox.checked {
-            background:linear-gradient(135deg,#8000D7,#a224f0);
+            background:linear-gradient(135deg,#000,#ff5a6a);
             border-color:var(--accent);
-            box-shadow:0 0 12px rgba(128,0,215,0.5);
+            box-shadow:0 0 12px rgba(255,255,255,0.5);
         }
         .bot-checkbox.checked::after {
-            content:'✓'; color:#fff; font-weight:900; font-size:14px;
+            content:'❤️‍🩹'; color:fff; font-weight:900; font-size:14px;
             animation:checkPop .25s ease;
         }
         @keyframes checkPop{from{transform:scale(0)}to{transform:scale(1)}}
@@ -391,40 +401,40 @@
         .modal-overlay.open { display:flex; animation:fadeIn .25s ease; }
         .modal {
             width:100%; max-width:420px; max-height:96vh; overflow-y:auto;
-            background:linear-gradient(180deg,#120224 0%,#05020a 100%);
+            background:linear-gradient(180deg,#3a0a12 0%,#0a0505 100%);
             border:2px solid var(--accent); border-radius:16px;
             padding:16px 14px 14px; position:relative;
-            box-shadow:0 0 60px rgba(128,0,215,0.3),0 0 120px rgba(128,0,215,0.12);
+            box-shadow:0 0 60px rgba(200,20,44,.05),0 0 120px rgba(255,255,255,0.12);
             animation:modalIn .35s cubic-bezier(.16,1,.3,1);
         }
         @keyframes modalIn{from{opacity:0;transform:scale(.92) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
         .modal::-webkit-scrollbar { width:5px; }
-        .modal::-webkit-scrollbar-thumb { background:rgba(128,0,215,0.3); border-radius:3px; }
+        .modal::-webkit-scrollbar-thumb { background:rgba(200,20,44,.05); border-radius:3px; }
         .modal-x {
             position:absolute; top:10px; left:10px;
             width:28px; height:28px; border-radius:50%;
-            background:rgba(255,255,255,0.04); border:1px solid rgba(128,0,215,0.2);
+            background:rgba(200,20,44,.06); border:2px solid #fff;
             display:flex; align-items:center; justify-content:center;
             cursor:pointer; color:var(--muted); font-size:13px; transition:all .2s;
         }
-        .modal-x:hover { background:rgba(128,0,215,0.18); color:var(--fg); border-color:var(--accent); transform:rotate(90deg); }
+        .modal-x:hover { background:rgba(255,255,255,0.18); color:var(--fg); border-color:var(--accent); transform:rotate(90deg); }
         .modal-head { text-align:center; margin-bottom:8px; padding-top:2px; }
         .modal-icon {
             width:42px; height:42px; margin:0 auto 6px;
             border-radius:12px;
-            background:linear-gradient(135deg,rgba(128,0,215,0.15),rgba(162,36,240,0.1));
-            border:1px solid rgba(128,0,215,0.3);
+            background:linear-gradient(135deg,rgba(255,255,255,0.15),rgba(200,20,44,.15));
+            border:1px solid rgba(200,20,44,.05);
             display:flex; align-items:center; justify-content:center;
-            box-shadow:0 0 20px rgba(128,0,215,0.2);
+            box-shadow:0 0 20px rgba(255,255,255,0.2);
         }
-        .modal-icon i { color:var(--accent); font-size:18px; filter:drop-shadow(0 0 8px rgba(128,0,215,0.5)); }
+        .modal-icon i { color:var(--accent); font-size:18px; filter:drop-shadow(0 0 8px rgba(255,255,255,0.5)); }
         .modal-title {
             font-size:17px; font-weight:900;
-            background:linear-gradient(135deg,#8000D7,#a224f0);
+            background:linear-gradient(135deg,#c81e2c,#ff5a6a);
             -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
         }
         .modal-desc { text-align:center; font-size:10px; color:var(--muted); line-height:1.5; margin-bottom:8px; padding:0 4px; }
-        .modal-divider { height:1px; margin:8px 0; background:linear-gradient(90deg,transparent,rgba(128,0,215,0.3),rgba(162,36,240,0.3),rgba(128,0,215,0.3),transparent); }
+        .modal-divider { height:1px; margin:8px 0; background:linear-gradient(90deg,transparent,rgba(200,20,44,.05),rgba(200,20,44,.05),rgba(200,20,44,.05),transpare,.nt); }
         .modal-field { margin-bottom:10px; }
         .modal-field label { display:flex; align-items:center; gap:6px; margin-bottom:5px; font-size:11px; font-weight:700; }
         .modal-field label i { color:var(--accent); font-size:10px; }
@@ -432,6 +442,14 @@
         .modal-field input, .modal-field textarea { padding:9px 11px; font-size:13px; border-radius:9px; }
         .modal-field textarea { min-height:70px; }
         .modal-actions { display:flex; gap:8px; margin-top:10px; }
+        /* ✅ أزرار عائمة تلتصق بأسفل النافذة وتنزل مع السكرول */
+        .modal-actions.sticky-actions {
+            position:sticky; bottom:-14px; z-index:6;
+            margin:10px -14px -14px; padding:10px 14px 14px;
+            background:linear-gradient(180deg, rgba(10,5,5,0) 0%, #1c0a0a 35%, #1c0a0a 100%);
+            border-top:1px solid rgba(200,20,44,.25);
+            border-radius:0 0 14px 14px;
+        }
         .modal-actions .btn { flex:1; padding:10px; font-size:13px; }
 
         /* Chips للستريمرز */
@@ -439,14 +457,14 @@
         .chip-list:empty { display:none; }
         .chip {
             display:inline-flex; align-items:center; gap:5px;
-            padding:5px 9px; background:rgba(128,0,215,0.08);
-            border:1px solid rgba(128,0,215,0.25); border-radius:9px;
+            padding:5px 9px; background:rgba(255,255,255,0.08);
+            border:1px solid rgba(200,20,44,.35); border-radius:9px;
             font-size:11px; font-weight:700; color:var(--fg);
             animation:chipIn .25s ease;
         }
         @keyframes chipIn{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
-        .chip.sending { background:rgba(128,0,215,0.18); border-color:var(--accent); box-shadow:0 0 12px rgba(128,0,215,0.3); }
-        .chip.warning { background:rgba(194,102,255,0.12); border-color:var(--accent3); color:#ffd966; }
+        .chip.sending { background:rgba(255,255,255,0.18); border-color:var(--accent); box-shadow:0 0 12px rgba(200,20,44,.05); }
+        .chip.warning { background:rgba(255,255,255,0.12); border-color:var(--accent3); color:#ffd966; }
         .chip.done { background:rgba(0,200,83,0.1); border-color:rgba(0,200,83,0.4); color:#7dffb0; }
         .chip.failed { background:rgba(200,0,0,0.18); border-color:var(--danger); color:#ff8a8a; }
         .chip-dot { width:7px; height:7px; border-radius:50%; background:var(--muted); flex-shrink:0; }
@@ -463,21 +481,21 @@
         .toggle-row {
             display:flex; align-items:center; justify-content:space-between;
             padding:8px 11px; background:rgba(255,255,255,0.025);
-            border:1px solid rgba(128,0,215,0.12); border-radius:10px; margin-bottom:5px;
+            border:1px solid rgba(255,255,255,0.12); border-radius:10px; margin-bottom:5px;
             transition:all .2s;
         }
-        .toggle-row:hover { border-color:rgba(128,0,215,0.3); background:rgba(128,0,215,0.05); }
+        .toggle-row:hover { border-color:rgba(200,20,44,.05); background:rgba(255,255,255,0.05); }
         .toggle-label { display:flex; align-items:center; gap:9px; font-size:12px; font-weight:700; }
         .tlicon {
             width:24px; height:24px; border-radius:7px; flex-shrink:0;
-            background:linear-gradient(135deg,rgba(128,0,215,0.12),rgba(162,36,240,0.08));
+            background:linear-gradient(135deg,rgba(255,255,255,0.12),rgba(255,255,255,0.08));
             display:flex; align-items:center; justify-content:center;
         }
         .tlicon i { color:var(--accent); font-size:11px; }
         .toggle-hint { display:block; font-size:9px; color:var(--muted); margin-top:1px; font-weight:400; }
         .toggle {
             position:relative; width:38px; height:22px; flex-shrink:0;
-            background:rgba(255,255,255,0.06); border:1px solid rgba(128,0,215,0.15);
+            background:rgba(255,255,255,0.06); border:2px solid #fff;
             border-radius:11px; cursor:pointer; transition:all .25s;
         }
         .toggle::after {
@@ -486,7 +504,8 @@
             transition:all .25s cubic-bezier(.4,0,.2,1);
             box-shadow:0 2px 4px rgba(0,0,0,0.3);
         }
-        .toggle.on { background:linear-gradient(135deg,#8000D7,#a224f0); border-color:var(--accent); box-shadow:0 0 10px rgba(128,0,215,0.4); }
+        .toggle.on { background:linear-gradient(135deg,#c81e2c,#ff5a6a); border-color:#fff; box-shadow:0 0 10px rgba(200,20,44,.06); }
+        .toggle.on::after { background:#000; }
         .toggle.on::after { left:18px; }
         html[dir="rtl"] .toggle::after { left:auto; right:2px; }
         html[dir="rtl"] .toggle.on::after { right:18px; left:auto; }
@@ -532,35 +551,43 @@
         @keyframes pulseGlow{0%,100%{box-shadow:0 0 0 rgba(0,200,83,0)}50%{box-shadow:0 0 16px rgba(0,200,83,0.25)}}
 
         /* ═══ بطاقة القناة ═══ */
-        .channels-list { display:flex; flex-direction:column; gap:6px; max-height:none; }
+        .channels-list {
+            display:flex; flex-direction:column; gap:6px;
+            max-height:420px; overflow-y:auto; overflow-x:hidden;
+            padding-left:4px; margin-left:-4px;
+            scrollbar-width:thin; scrollbar-color:var(--accent) transparent;
+        }
+        .channels-list::-webkit-scrollbar { width:5px; }
+        .channels-list::-webkit-scrollbar-thumb { background:rgba(200,20,44,.35); border-radius:3px; }
+        .channels-list::-webkit-scrollbar-track { background:transparent; }
         .quick-list { display:flex; flex-direction:column; gap:5px; max-height:200px; overflow-y:auto; }
         .quick-item {
             display:flex; align-items:center; gap:8px;
             padding:8px 10px; background:rgba(255,255,255,0.025);
-            border:1px solid rgba(128,0,215,0.12); border-radius:9px;
+            border:1px solid rgba(255,255,255,0.12); border-radius:9px;
             transition:all .2s; cursor:pointer;
         }
-        .quick-item:hover { border-color:rgba(128,0,215,0.3); background:rgba(128,0,215,0.05); }
-        .quick-item.selected { border-color:var(--accent); background:rgba(128,0,215,0.1); box-shadow:0 0 10px rgba(128,0,215,0.15); }
+        .quick-item:hover { border-color:rgba(200,20,44,.05); background:rgba(255,255,255,0.05); }
+        .quick-item.selected { border-color:var(--accent); background:rgba(200,20,44,.15); box-shadow:0 0 10px rgba(255,255,255,0.15); }
         .quick-item .qi-name { flex:1; font-size:13px; font-weight:700; }
-        .quick-item .qi-icon { width:28px; height:28px; border-radius:7px; background:linear-gradient(135deg,rgba(128,0,215,0.12),rgba(162,36,240,0.08)); display:flex; align-items:center; justify-content:center; color:var(--accent); font-size:12px; flex-shrink:0; }
+        .quick-item .qi-icon { width:28px; height:28px; border-radius:7px; background:linear-gradient(135deg,rgba(255,255,255,0.12),rgba(255,255,255,0.08)); display:flex; align-items:center; justify-content:center; color:var(--accent); font-size:12px; flex-shrink:0; }
         .quick-channel { padding-left:28px !important; background:rgba(255,255,255,0.015) !important; }
 
         /* ✅ وضع الإعدادات المنفصلة — صف لكل بوت */
         .qs-sep-toggle {
             display:flex; align-items:center; justify-content:space-between;
             padding:10px 12px; margin-bottom:10px;
-            background:rgba(255,255,255,0.03); border:1px solid rgba(128,0,215,0.18);
+            background:rgba(200,20,44,.05); border:1px solid rgba(255,255,255,0.18);
             border-radius:10px; cursor:pointer; transition:all .2s;
         }
-        .qs-sep-toggle:hover { border-color:rgba(128,0,215,0.35); background:rgba(128,0,215,0.05); }
+        .qs-sep-toggle:hover { border-color:rgba(255,255,255,0.35); background:rgba(255,255,255,0.05); }
         .qs-sep-toggle .sep-label { display:flex; align-items:center; gap:8px; font-size:12px; font-weight:700; }
         .qs-sep-toggle .sep-label i { color:var(--accent); font-size:13px; }
         .qs-sep-row {
             display:flex; flex-direction:column; gap:6px;
             padding:10px; margin-bottom:8px;
             background:rgba(255,255,255,0.025);
-            border:1px solid rgba(128,0,215,0.15); border-radius:10px;
+            border:1px solid rgba(255,255,255,0.15); border-radius:10px;
         }
         .qs-sep-row .sep-bot-name {
             display:flex; align-items:center; gap:8px;
@@ -573,32 +600,32 @@
             flex:1; min-height:50px; padding:8px 10px; font-size:13px;
             border-radius:8px; resize:vertical;
             background:rgba(5,2,10,0.5); color:var(--fg);
-            border:1px solid rgba(128,0,215,0.15); font-family:inherit;
+            border:1px solid rgba(255,255,255,0.15); font-family:inherit;
         }
-        .qs-sep-row .sep-input-row textarea:focus { outline:none; border-color:var(--accent); box-shadow:0 0 8px rgba(128,0,215,0.2); }
+        .qs-sep-row .sep-input-row textarea:focus { outline:none; border-color:var(--accent); box-shadow:0 0 8px rgba(255,255,255,0.2); }
         .qs-sep-row .sep-send-btn {
             flex-shrink:0; padding:8px 14px; font-size:12px; font-weight:700;
-            background:linear-gradient(135deg,#8000D7,#a224f0); color:#fff;
-            border:none; border-radius:8px; cursor:pointer;
+            background:linear-gradient(135deg,#c81e2c,#ff5a6a); color:#000;
+            border:2px solid #fff; border-radius:8px; cursor:pointer;
             display:flex; align-items:center; gap:5px; white-space:nowrap;
             transition:all .15s; min-height:50px;
         }
-        .qs-sep-row .sep-send-btn:hover:not(:disabled) { transform:translateY(-1px); box-shadow:0 4px 12px rgba(128,0,215,0.4); }
+        .qs-sep-row .sep-send-btn:hover:not(:disabled) { transform:translateY(-1px); box-shadow:0 4px 12px rgba(255,255,255,0.4); }
         .qs-sep-row .sep-send-btn:active:not(:disabled) { transform:translateY(0) scale(.96); }
-        .qs-sep-row .sep-send-btn.sending { background:linear-gradient(135deg,#c266ff,#a224f0); }
+        .qs-sep-row .sep-send-btn.sending { background:linear-gradient(135deg,#c81e2c,#ff5a6a); }
         .qs-sep-row .sep-send-btn i { font-size:13px; }
         .channel-card {
             display:flex; align-items:center; gap:8px;
             padding:9px 11px;
             background:rgba(255,255,255,0.025);
-            border:1px solid rgba(128,0,215,0.15); border-radius:10px;
+            border:1px solid rgba(255,255,255,0.15); border-radius:10px;
             transition:all .2s;
         }
-        .channel-card:hover { border-color:rgba(128,0,215,0.35); background:rgba(128,0,215,0.05); }
+        .channel-card:hover { border-color:rgba(255,255,255,0.35); background:rgba(255,255,255,0.05); }
         .channel-card.on { border-color:rgba(0,200,83,0.5); background:rgba(0,200,83,0.06); }
         .channel-card.off { border-color:rgba(215,0,128,0.4); background:rgba(215,0,128,0.05); }
-        .channel-card.sending { border-color:var(--accent); background:rgba(128,0,215,0.1); box-shadow:0 0 12px rgba(128,0,215,0.2); }
-        .channel-card.warning { border-color:var(--accent3); background:rgba(194,102,255,0.08); }
+        .channel-card.sending { border-color:var(--accent); background:rgba(200,20,44,.15); box-shadow:0 0 12px rgba(255,255,255,0.2); }
+        .channel-card.warning { border-color:var(--accent3); background:rgba(255,255,255,0.08); }
 
         .channel-status {
             display:flex; align-items:center; gap:5px;
@@ -608,9 +635,9 @@
         }
         .channel-status.on { background:rgba(0,200,83,0.15); color:#7dffb0; border:1px solid rgba(0,200,83,0.4); }
         .channel-status.off { background:rgba(215,0,128,0.15); color:#ff8a8a; border:1px solid rgba(215,0,128,0.4); }
-        .channel-status.connecting { background:rgba(194,102,255,0.15); color:#ffd966; border:1px solid rgba(194,102,255,0.4); }
-        .channel-status.sending { background:rgba(128,0,215,0.15); color:var(--accent); border:1px solid var(--accent); animation:pulseGlow 1.5s infinite; }
-        .channel-status.idle { background:rgba(255,255,255,0.04); color:var(--muted); border:1px solid var(--border); }
+        .channel-status.connecting { background:rgba(255,255,255,0.15); color:#ffd966; border:1px solid rgba(200,20,44,.06); }
+        .channel-status.sending { background:rgba(255,255,255,0.15); color:var(--accent); border:1px solid var(--accent); animation:pulseGlow 1.5s infinite; }
+        .channel-status.idle { background:rgba(200,20,44,.06); color:var(--muted); border:1px solid var(--border); }
 
         .channel-name {
             flex:1; font-size:13px; font-weight:700; color:var(--fg);
@@ -629,21 +656,22 @@
         .channel-toggle {
             position:relative; width:34px; height:18px; flex-shrink:0;
             border-radius:10px; cursor:pointer; transition:all .25s;
-            border:1px solid transparent;
+            border:2px solid #fff;
         }
         .channel-toggle.on {
-            background:linear-gradient(135deg,#8000D7,#a224f0);
-            border-color:var(--accent);
-            box-shadow:0 0 10px rgba(128,0,215,0.5), inset 0 1px 0 rgba(255,255,255,0.15);
+            background:linear-gradient(135deg,#c81e2c,#ff5a6a);
+            border-color:#fff;
+            box-shadow:0 0 10px rgba(255,255,255,0.5), inset 0 1px 0 rgba(255,255,255,0.15);
             animation:channelOnPulse 2s ease-in-out infinite;
         }
+        .channel-toggle.on::after { background:#000; }
         @keyframes channelOnPulse{
-            0%,100%{box-shadow:0 0 8px rgba(128,0,215,0.4), inset 0 1px 0 rgba(255,255,255,0.15)}
-            50%{box-shadow:0 0 14px rgba(128,0,215,0.7), inset 0 1px 0 rgba(255,255,255,0.15)}
+            0%,100%{box-shadow:0 0 8px rgba(200,20,44,.06), inset 0 1px 0 rgba(255,255,255,0.15)}
+            50%{box-shadow:0 0 14px rgba(255,255,255,0.7), inset 0 1px 0 rgba(255,255,255,0.15)}
         }
         .channel-toggle.off {
             background:rgba(255,255,255,0.05);
-            border-color:rgba(255,255,255,0.1);
+            border-color:rgba(200,20,44,.15);
             opacity:0.5;
         }
         .channel-toggle::after {
@@ -670,6 +698,7 @@
 </head>
 <body>
 
+<div class="bg-hero"></div>
 <canvas id="fireCanvas" width="1024" height="568"></canvas>
 <div class="bg-glow g1"></div>
 <div class="bg-glow g2"></div>
@@ -806,6 +835,7 @@
                 <div class="toggle" id="uTgRandomMessages" onclick="uToggleRandomMessages()"></div>
             </div>
 
+
             <div class="toggle-row">
                 <div class="toggle-label">
                     <div class="tlicon"><i class="fas fa-shuffle"></i></div>
@@ -854,6 +884,7 @@
         <div class="modal-actions" style="margin-top:5px">
             <button class="btn btn-fire" onclick="generateTransferCode()"><i class="fas fa-rotate"></i> توليد الكود</button>
             <button class="btn btn-ghost" onclick="copyTransferCode()"><i class="fas fa-copy"></i> نسخ</button>
+            <button class="btn btn-ghost" onclick="exportTransferCodeToFile()"><i class="fas fa-file-export"></i> تصدير الى ملف txt</button>
         </div>
 
         <div class="modal-divider"></div>
@@ -863,8 +894,15 @@
             <label><i class="fas fa-file-import"></i> استيراد كود من جهاز آخر — الصق الكود هنا</label>
             <textarea id="transferCodeIn" placeholder="الصق الكود هنا..." style="min-height:90px;font-family:monospace;font-size:11px;word-break:break-all;resize:none"></textarea>
         </div>
+        <input type="file" id="transferFileInput" accept=".txt,text/plain" style="display:none" onchange="handleTransferFileChoose(event)">
         <div class="modal-actions" style="margin-top:5px">
-            <button class="btn btn-fire" onclick="importTransferCode()"><i class="fas fa-download"></i> استيراد البيانات</button>
+            <button class="btn btn-ghost" onclick="document.getElementById(&#39;transferFileInput&#39;).click()"><i class="fas fa-file-arrow-up"></i> اختر ملف (choose your file)</button>
+        </div>
+        <div style="font-size:11px;color:var(--danger);opacity:.85;margin-top:6px;line-height:1.6">
+            <i class="fas fa-triangle-exclamation"></i> تحذير: الاستيراد يمسح كل بيانات هذا الجهاز نهائياً ويستبدلها ببيانات الكود بالكامل (استبدال وليس إضافة).
+        </div>
+        <div class="modal-actions" style="margin-top:5px">
+            <button class="btn btn-fire" onclick="importTransferCode()"><i class="fas fa-download"></i> استيراد البيانات (استبدال كامل)</button>
         </div>
     </div>
 </div>
@@ -889,6 +927,23 @@
         <div class="modal-actions">
             <button class="btn btn-fire" id="btnRenewToken" onclick="doRenewToken()"><i class="fas fa-check"></i> تجديد</button>
             <button class="btn btn-ghost" onclick="closeRenewToken()"><i class="fas fa-xmark"></i> إلغاء</button>
+        </div>
+    </div>
+</div>
+
+<!-- ✅ نافذة تأكيد الحذف -->
+<div class="modal-overlay" id="confirmDeleteModal" style="z-index:2000" onclick="if(event.target===this)closeConfirmDelete()">
+    <div class="modal" style="max-width:340px;text-align:center">
+        <div class="modal-x" onclick="closeConfirmDelete()" title="إغلاق"><i class="fas fa-xmark"></i></div>
+        <div class="modal-head">
+            <div class="modal-icon" style="background:linear-gradient(135deg,rgba(255,59,59,0.25),rgba(255,59,59,0.1));border-color:rgba(255,59,59,0.5)"><i class="fas fa-triangle-exclamation" style="color:var(--danger)"></i></div>
+            <div class="modal-title">تأكيد الحذف</div>
+        </div>
+        <div class="modal-divider"></div>
+        <div class="modal-desc" id="confirmDeleteMsg" style="font-size:12px;color:var(--fg)"></div>
+        <div class="modal-actions" style="margin-top:10px">
+            <button class="btn" id="btnConfirmDeleteYes" style="background:var(--danger);color:#fff;border:2px solid var(--danger)" onclick="confirmDeleteYes()"><i class="fas fa-check"></i> نعم متأكد</button>
+            <button class="btn btn-ghost" onclick="closeConfirmDelete()"><i class="fas fa-xmark"></i> إلغاء</button>
         </div>
     </div>
 </div>
@@ -934,7 +989,7 @@
             <div class="toggle on" id="tgParallel" onclick="mToggle(&#39;tgParallel&#39;,&#39;parallel&#39;)"></div>
         </div>
 
-        <div class="modal-actions">
+        <div class="modal-actions sticky-actions">
             <button class="btn btn-fire" onclick="saveSettings()"><i class="fas fa-check"></i> حفظ والعودة</button>
             <button class="btn btn-ghost" onclick="closeSettings()"><i class="fas fa-xmark"></i> إلغاء</button>
         </div>
@@ -1006,6 +1061,29 @@
             <div class="toggle" id="tgRandomMessages" onclick="cToggleRandomMessages()"></div>
         </div>
 
+        <!-- ✅ رسالتين معاً -->
+        <div class="toggle-row">
+            <div class="toggle-label">
+                <div class="tlicon"><i class="fas fa-clone"></i></div>
+                <div>
+                    <span>رسالتين معاً</span>
+                    <span class="toggle-hint">يرسل رسالتين ورا بعض ثم ينتظر الفاصل الزمني</span>
+                </div>
+            </div>
+            <div class="toggle" id="tgTwoMessages" onclick="cToggleTwoMessages()"></div>
+        </div>
+
+        <div class="toggle-row">
+            <div class="toggle-label">
+                <div class="tlicon"><i class="fas fa-face-grin-stars"></i></div>
+                <div>
+                    <span>وضع رسائلي الفخمة</span>
+                    <span class="toggle-hint">يقفل الرسائل ويملأها تلقائيًا</span>
+                </div>
+            </div>
+            <div class="toggle" id="tgStickersOnly" onclick="cToggleStickersOnly()"></div>
+        </div>
+
         <div class="modal-actions">
             <button class="btn btn-fire" onclick="saveChannelSettings()"><i class="fas fa-check"></i> حفظ</button>
             <button class="btn btn-ghost" onclick="closeChannelSettings()"><i class="fas fa-xmark"></i> إلغاء</button>
@@ -1023,18 +1101,18 @@
         <div class="splash-content">
             <div class="splash-ring">
                 <div class="splash-logo">
-                    <img src="./RedKick_files/ab46995c-be54-4f0c-97d9-dc9965e3150b.png" alt="RedKick" style="width:100%;height:100%;object-fit:cover;border-radius:50%;outline:2px solid #000;border:3px solid #000;box-shadow:0 0 0 1px #000,0 0 20px rgba(128,0,215,0.6)">
+                    <img src="./BloodMoonKick_files/ab46995c-be54-4f0c-97d9-dc9965e3150b.png" alt="RedKick" style="width:100%;height:100%;object-fit:cover;border-radius:50%;outline:2px solid #000;border:3px solid #000;box-shadow:0 0 0 1px #000,0 0 20px rgba(255,255,255,0.6)">
                 </div>
                 <svg class="splash-lightning" viewBox="0 0 200 200">
-                    <path d="M100 5 L95 60 L105 55 L90 120 L100 110 L80 195" fill="none" stroke="#8000D7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"></path>
-                    <path d="M100 5 L105 60 L95 55 L110 120 L100 110 L120 195" fill="none" stroke="#c266ff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"></path>
+                    <path d="M100 5 L95 60 L105 55 L90 120 L100 110 L80 195" fill="none" stroke="#c81e2c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"></path>
+                    <path d="M100 5 L105 60 L95 55 L110 120 L100 110 L120 195" fill="none" stroke="#c81e2c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"></path>
                 </svg>
                 <svg class="splash-lightning l2" viewBox="0 0 200 200">
-                    <path d="M30 30 L50 70 L40 65 L60 110 L50 100 L35 170" fill="none" stroke="#a224f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"></path>
-                    <path d="M170 30 L150 70 L160 65 L140 110 L150 100 L165 170" fill="none" stroke="#8000D7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"></path>
+                    <path d="M30 30 L50 70 L40 65 L60 110 L50 100 L35 170" fill="none" stroke="#ff5a6a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"></path>
+                    <path d="M170 30 L150 70 L160 65 L140 110 L150 100 L165 170" fill="none" stroke="#c81e2c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"></path>
                 </svg>
             </div>
-            <div class="splash-name">RedKick</div>
+            <div class="splash-name">BloodMoonKick</div>
             <div class="splash-bar"><div class="splash-bar-fill"></div></div>
         </div>
     </div>
@@ -1056,8 +1134,7 @@
         </div>
         <div class="card">
             <div style="text-align:center;margin-bottom:20px">
-                <img src="./RedKick_files/ab46995c-be54-4f0c-97d9-dc9965e3150b.png" alt="RedKick" style="width:72px;height:72px;object-fit:cover;border-radius:50%;outline:none;border:2px solid #000;box-shadow:0 0 0 2px #000,0 0 15px rgba(128,0,215,0.4)">
-                <img src="./RedKick_files/redkick-k-logo.png" alt="RedKick" style="width:60px;height:60px;object-fit:contain;margin-top:12px">
+                <img src="./BloodMoonKick_files/ab46995c-be54-4f0c-97d9-dc9965e3150b.png" alt="RedKick" style="width:72px;height:72px;object-fit:cover;border-radius:50%;outline:none;border:2px solid #000;box-shadow:0 0 0 2px #000,0 0 15px rgba(255,255,255,0.4)">
             </div>
             <div class="fire-divider"></div>
             <div class="field">
@@ -1074,9 +1151,9 @@
     <!-- قائمة البوتات (الواجهة الرئيسية) -->
     <div class="phase active" id="ph-main">
         <div class="app-header">
-            <div class="logo-img" style="background:url(&#39;https://z-cdn-media.chatglm.cn/files/ab46995c-be54-4f0c-97d9-dc9965e3150b.png?auth_key=1881547846-5faaad2376f94647ae1522c3a0360a5e-0-48bb8eb6d9136f1963f04a687018a6a3&#39;) center/cover no-repeat;border-radius:50%;outline:none;border:2px solid #000;box-shadow:0 0 0 2px #000,0 0 8px rgba(128,0,215,0.3)"></div>
+            <div class="logo-img" style="background:url(&#39;./RedKick_files/ab46995c-be54-4f0c-97d9-dc9965e3150b.png&#39;) center/cover no-repeat;border-radius:50%;outline:none;border:2px solid #000;box-shadow:0 0 0 2px #000,0 0 8px rgba(200,20,44,.05)"></div>
             <div style="flex:1">
-                <div class="app-name">RedKick</div>
+                <div class="app-name">BloodMoonKick</div>
                 <div class="app-tagline">البوتات</div>
             </div>
             <button class="btn btn-ghost btn-xs" onclick="openUnifiedSettings()" title="إعدادات موحدة لكل القنوات" style="flex-shrink:0"><i class="fas fa-screwdriver-wrench"></i></button>
@@ -1090,18 +1167,18 @@
             </div>
         </div>
 
-        <div class="bot-list" id="botList"><div class="bot-card selected"><div class="bot-checkbox checked" onclick="toggleSelect(2)" title="تحديد"></div><div class="bot-info"><div class="bot-name">xKhaled12</div><div class="bot-status"><span class="dot idle"></span> جاهز • 30 قناة</div></div><div class="bot-actions"><button class="btn btn-ghost btn-xxs" onclick="openRenewToken(2)" title="تجديد التوكن"><i class="fas fa-rotate"></i></button><button class="btn btn-fire btn-xxs" onclick="openSettings(2)" title="إعدادات"><i class="fas fa-gear"></i></button><button class="btn btn-ghost btn-xxs" onclick="removeBot(2)" title="حذف"><i class="fas fa-trash"></i></button></div></div><div class="bot-card selected"><div class="bot-checkbox checked" onclick="toggleSelect(3)" title="تحديد"></div><div class="bot-info"><div class="bot-name">MohamedxMagdyx14x</div><div class="bot-status"><span class="dot idle"></span> جاهز • 2 قناة</div></div><div class="bot-actions"><button class="btn btn-ghost btn-xxs" onclick="openRenewToken(3)" title="تجديد التوكن"><i class="fas fa-rotate"></i></button><button class="btn btn-fire btn-xxs" onclick="openSettings(3)" title="إعدادات"><i class="fas fa-gear"></i></button><button class="btn btn-ghost btn-xxs" onclick="removeBot(3)" title="حذف"><i class="fas fa-trash"></i></button></div></div><div class="bot-card selected"><div class="bot-checkbox checked" onclick="toggleSelect(4)" title="تحديد"></div><div class="bot-info"><div class="bot-name">a7madx3marx14x</div><div class="bot-status"><span class="dot idle"></span> جاهز • 2 قناة</div></div><div class="bot-actions"><button class="btn btn-ghost btn-xxs" onclick="openRenewToken(4)" title="تجديد التوكن"><i class="fas fa-rotate"></i></button><button class="btn btn-fire btn-xxs" onclick="openSettings(4)" title="إعدادات"><i class="fas fa-gear"></i></button><button class="btn btn-ghost btn-xxs" onclick="removeBot(4)" title="حذف"><i class="fas fa-trash"></i></button></div></div><div class="bot-card selected"><div class="bot-checkbox checked" onclick="toggleSelect(5)" title="تحديد"></div><div class="bot-info"><div class="bot-name">3ADS_TAZA</div><div class="bot-status"><span class="dot idle"></span> جاهز • 2 قناة</div></div><div class="bot-actions"><button class="btn btn-ghost btn-xxs" onclick="openRenewToken(5)" title="تجديد التوكن"><i class="fas fa-rotate"></i></button><button class="btn btn-fire btn-xxs" onclick="openSettings(5)" title="إعدادات"><i class="fas fa-gear"></i></button><button class="btn btn-ghost btn-xxs" onclick="removeBot(5)" title="حذف"><i class="fas fa-trash"></i></button></div></div><div class="bot-card selected"><div class="bot-checkbox checked" onclick="toggleSelect(6)" title="تحديد"></div><div class="bot-info"><div class="bot-name">BTATES_SO5NAA</div><div class="bot-status"><span class="dot idle"></span> جاهز • 2 قناة</div></div><div class="bot-actions"><button class="btn btn-ghost btn-xxs" onclick="openRenewToken(6)" title="تجديد التوكن"><i class="fas fa-rotate"></i></button><button class="btn btn-fire btn-xxs" onclick="openSettings(6)" title="إعدادات"><i class="fas fa-gear"></i></button><button class="btn btn-ghost btn-xxs" onclick="removeBot(6)" title="حذف"><i class="fas fa-trash"></i></button></div></div><div class="bot-card selected"><div class="bot-checkbox checked" onclick="toggleSelect(7)" title="تحديد"></div><div class="bot-info"><div class="bot-name">Noor_LEEID</div><div class="bot-status"><span class="dot idle"></span> جاهز • 2 قناة</div></div><div class="bot-actions"><button class="btn btn-ghost btn-xxs" onclick="openRenewToken(7)" title="تجديد التوكن"><i class="fas fa-rotate"></i></button><button class="btn btn-fire btn-xxs" onclick="openSettings(7)" title="إعدادات"><i class="fas fa-gear"></i></button><button class="btn btn-ghost btn-xxs" onclick="removeBot(7)" title="حذف"><i class="fas fa-trash"></i></button></div></div><div class="bot-card selected"><div class="bot-checkbox checked" onclick="toggleSelect(8)" title="تحديد"></div><div class="bot-info"><div class="bot-name">xKhaled12</div><div class="bot-status"><span class="dot idle"></span> جاهز • 7 قناة</div></div><div class="bot-actions"><button class="btn btn-ghost btn-xxs" onclick="openRenewToken(8)" title="تجديد التوكن"><i class="fas fa-rotate"></i></button><button class="btn btn-fire btn-xxs" onclick="openSettings(8)" title="إعدادات"><i class="fas fa-gear"></i></button><button class="btn btn-ghost btn-xxs" onclick="removeBot(8)" title="حذف"><i class="fas fa-trash"></i></button></div></div><div class="bot-card selected"><div class="bot-checkbox checked" onclick="toggleSelect(9)" title="تحديد"></div><div class="bot-info"><div class="bot-name">ATRJOOD321</div><div class="bot-status"><span class="dot idle"></span> جاهز • 2 قناة</div></div><div class="bot-actions"><button class="btn btn-ghost btn-xxs" onclick="openRenewToken(9)" title="تجديد التوكن"><i class="fas fa-rotate"></i></button><button class="btn btn-fire btn-xxs" onclick="openSettings(9)" title="إعدادات"><i class="fas fa-gear"></i></button><button class="btn btn-ghost btn-xxs" onclick="removeBot(9)" title="حذف"><i class="fas fa-trash"></i></button></div></div></div>
+        <div class="bot-list" id="botList" style="max-height: 355px;"><div class="bot-card"><div class="bot-checkbox" onclick="toggleSelect(10)" title="تحديد"></div><div class="bot-info"><div class="bot-name">xKhaled12</div><div class="bot-status"><span class="dot idle"></span> جاهز • 50 قناة</div></div><div class="bot-actions"><button class="btn btn-ghost btn-xxs" onclick="openRenewToken(10)" title="تجديد التوكن"><i class="fas fa-rotate"></i></button><button class="btn btn-fire btn-xxs" onclick="openSettings(10)" title="إعدادات"><i class="fas fa-gear"></i></button><button class="btn btn-ghost btn-xxs" onclick="removeBot(10)" title="حذف"><i class="fas fa-trash"></i></button></div></div><div class="bot-card"><div class="bot-checkbox" onclick="toggleSelect(11)" title="تحديد"></div><div class="bot-info"><div class="bot-name">MohamedxMagdyx14x</div><div class="bot-status"><span class="dot idle"></span> جاهز • 5 قناة</div></div><div class="bot-actions"><button class="btn btn-ghost btn-xxs" onclick="openRenewToken(11)" title="تجديد التوكن"><i class="fas fa-rotate"></i></button><button class="btn btn-fire btn-xxs" onclick="openSettings(11)" title="إعدادات"><i class="fas fa-gear"></i></button><button class="btn btn-ghost btn-xxs" onclick="removeBot(11)" title="حذف"><i class="fas fa-trash"></i></button></div></div><div class="bot-card"><div class="bot-checkbox" onclick="toggleSelect(12)" title="تحديد"></div><div class="bot-info"><div class="bot-name">a7madx3marx14x</div><div class="bot-status"><span class="dot idle"></span> جاهز • 5 قناة</div></div><div class="bot-actions"><button class="btn btn-ghost btn-xxs" onclick="openRenewToken(12)" title="تجديد التوكن"><i class="fas fa-rotate"></i></button><button class="btn btn-fire btn-xxs" onclick="openSettings(12)" title="إعدادات"><i class="fas fa-gear"></i></button><button class="btn btn-ghost btn-xxs" onclick="removeBot(12)" title="حذف"><i class="fas fa-trash"></i></button></div></div><div class="bot-card"><div class="bot-checkbox" onclick="toggleSelect(13)" title="تحديد"></div><div class="bot-info"><div class="bot-name">3ADS_TAZA</div><div class="bot-status"><span class="dot idle"></span> جاهز • 5 قناة</div></div><div class="bot-actions"><button class="btn btn-ghost btn-xxs" onclick="openRenewToken(13)" title="تجديد التوكن"><i class="fas fa-rotate"></i></button><button class="btn btn-fire btn-xxs" onclick="openSettings(13)" title="إعدادات"><i class="fas fa-gear"></i></button><button class="btn btn-ghost btn-xxs" onclick="removeBot(13)" title="حذف"><i class="fas fa-trash"></i></button></div></div><div class="bot-card"><div class="bot-checkbox" onclick="toggleSelect(14)" title="تحديد"></div><div class="bot-info"><div class="bot-name">BTATES_SO5NAA</div><div class="bot-status"><span class="dot idle"></span> جاهز • 5 قناة</div></div><div class="bot-actions"><button class="btn btn-ghost btn-xxs" onclick="openRenewToken(14)" title="تجديد التوكن"><i class="fas fa-rotate"></i></button><button class="btn btn-fire btn-xxs" onclick="openSettings(14)" title="إعدادات"><i class="fas fa-gear"></i></button><button class="btn btn-ghost btn-xxs" onclick="removeBot(14)" title="حذف"><i class="fas fa-trash"></i></button></div></div><div class="bot-card"><div class="bot-checkbox" onclick="toggleSelect(15)" title="تحديد"></div><div class="bot-info"><div class="bot-name">Noor_LEEID</div><div class="bot-status"><span class="dot idle"></span> جاهز • 5 قناة</div></div><div class="bot-actions"><button class="btn btn-ghost btn-xxs" onclick="openRenewToken(15)" title="تجديد التوكن"><i class="fas fa-rotate"></i></button><button class="btn btn-fire btn-xxs" onclick="openSettings(15)" title="إعدادات"><i class="fas fa-gear"></i></button><button class="btn btn-ghost btn-xxs" onclick="removeBot(15)" title="حذف"><i class="fas fa-trash"></i></button></div></div><div class="bot-card"><div class="bot-checkbox" onclick="toggleSelect(16)" title="تحديد"></div><div class="bot-info"><div class="bot-name">ATRJOOD321</div><div class="bot-status"><span class="dot idle"></span> جاهز • 3 قناة</div></div><div class="bot-actions"><button class="btn btn-ghost btn-xxs" onclick="openRenewToken(16)" title="تجديد التوكن"><i class="fas fa-rotate"></i></button><button class="btn btn-fire btn-xxs" onclick="openSettings(16)" title="إعدادات"><i class="fas fa-gear"></i></button><button class="btn btn-ghost btn-xxs" onclick="removeBot(16)" title="حذف"><i class="fas fa-trash"></i></button></div></div><div class="bot-card"><div class="bot-checkbox" onclick="toggleSelect(17)" title="تحديد"></div><div class="bot-info"><div class="bot-name">alimoha98</div><div class="bot-status"><span class="dot idle"></span> جاهز • 4 قناة</div></div><div class="bot-actions"><button class="btn btn-ghost btn-xxs" onclick="openRenewToken(17)" title="تجديد التوكن"><i class="fas fa-rotate"></i></button><button class="btn btn-fire btn-xxs" onclick="openSettings(17)" title="إعدادات"><i class="fas fa-gear"></i></button><button class="btn btn-ghost btn-xxs" onclick="removeBot(17)" title="حذف"><i class="fas fa-trash"></i></button></div></div><div class="bot-card"><div class="bot-checkbox" onclick="toggleSelect(18)" title="تحديد"></div><div class="bot-info"><div class="bot-name">BEROO_CO</div><div class="bot-status"><span class="dot idle"></span> جاهز • 2 قناة</div></div><div class="bot-actions"><button class="btn btn-ghost btn-xxs" onclick="openRenewToken(18)" title="تجديد التوكن"><i class="fas fa-rotate"></i></button><button class="btn btn-fire btn-xxs" onclick="openSettings(18)" title="إعدادات"><i class="fas fa-gear"></i></button><button class="btn btn-ghost btn-xxs" onclick="removeBot(18)" title="حذف"><i class="fas fa-trash"></i></button></div></div><div class="bot-card"><div class="bot-checkbox" onclick="toggleSelect(19)" title="تحديد"></div><div class="bot-info"><div class="bot-name">VINI_GONYOR</div><div class="bot-status"><span class="dot idle"></span> جاهز • 1 قناة</div></div><div class="bot-actions"><button class="btn btn-ghost btn-xxs" onclick="openRenewToken(19)" title="تجديد التوكن"><i class="fas fa-rotate"></i></button><button class="btn btn-fire btn-xxs" onclick="openSettings(19)" title="إعدادات"><i class="fas fa-gear"></i></button><button class="btn btn-ghost btn-xxs" onclick="removeBot(19)" title="حذف"><i class="fas fa-trash"></i></button></div></div><div class="bot-card"><div class="bot-checkbox" onclick="toggleSelect(20)" title="تحديد"></div><div class="bot-info"><div class="bot-name">Milo_325</div><div class="bot-status"><span class="dot idle"></span> جاهز • 1 قناة</div></div><div class="bot-actions"><button class="btn btn-ghost btn-xxs" onclick="openRenewToken(20)" title="تجديد التوكن"><i class="fas fa-rotate"></i></button><button class="btn btn-fire btn-xxs" onclick="openSettings(20)" title="إعدادات"><i class="fas fa-gear"></i></button><button class="btn btn-ghost btn-xxs" onclick="removeBot(20)" title="حذف"><i class="fas fa-trash"></i></button></div></div><div class="bot-card"><div class="bot-checkbox" onclick="toggleSelect(21)" title="تحديد"></div><div class="bot-info"><div class="bot-name">BEKATSHO_1</div><div class="bot-status"><span class="dot idle"></span> جاهز • 2 قناة</div></div><div class="bot-actions"><button class="btn btn-ghost btn-xxs" onclick="openRenewToken(21)" title="تجديد التوكن"><i class="fas fa-rotate"></i></button><button class="btn btn-fire btn-xxs" onclick="openSettings(21)" title="إعدادات"><i class="fas fa-gear"></i></button><button class="btn btn-ghost btn-xxs" onclick="removeBot(21)" title="حذف"><i class="fas fa-trash"></i></button></div></div><div class="bot-card"><div class="bot-checkbox" onclick="toggleSelect(22)" title="تحديد"></div><div class="bot-info"><div class="bot-name">HADI_142</div><div class="bot-status"><span class="dot idle"></span> جاهز • 2 قناة</div></div><div class="bot-actions"><button class="btn btn-ghost btn-xxs" onclick="openRenewToken(22)" title="تجديد التوكن"><i class="fas fa-rotate"></i></button><button class="btn btn-fire btn-xxs" onclick="openSettings(22)" title="إعدادات"><i class="fas fa-gear"></i></button><button class="btn btn-ghost btn-xxs" onclick="removeBot(22)" title="حذف"><i class="fas fa-trash"></i></button></div></div></div>
 
-        <div class="selection-info" id="selectionInfo">المحدد: <span class="count">8</span> بوت (8 جاهز)</div>
+        <div class="selection-info" id="selectionInfo">المحدد: <span class="count">0</span> بوت</div>
 
         <div class="bulk-bar">
-            <button class="btn btn-fire" id="btnBulkStart" onclick="startSelectedBots()"><i class="fas fa-play"></i> تشغيل (8) بوت</button>
-            <button class="btn btn-stop btn-icon" id="btnBulkStop" onclick="stopAllBots()"><i class="fas fa-stop"></i></button>
+            <button class="btn btn-fire" id="btnBulkStart" onclick="startSelectedBots()" disabled=""><i class="fas fa-play"></i> تشغيل المحددة</button>
+            <button class="btn btn-stop btn-icon" id="btnBulkStop" onclick="stopAllBots()">❤️‍🩹</button>
         </div>
 
         <div class="secondary-actions">
             <button class="btn btn-ghost btn-sm" onclick="selectAllBots()"><i class="fas fa-check-double"></i> تحديد الكل</button>
-            <button class="btn btn-ghost btn-sm" onclick="clearSelection()" id="btnClearSel"><i class="fas fa-xmark"></i> مسح التحديد</button>
+            <button class="btn btn-ghost btn-sm" onclick="clearSelection()" id="btnClearSel" disabled=""><i class="fas fa-xmark"></i> مسح التحديد</button>
             <button class="btn btn-ghost btn-sm" onclick="goAddToken()"><i class="fas fa-plus"></i> إضافة</button>
         </div>
 
@@ -1116,108 +1193,8 @@
 <!-- ✅ زر الواتساب العائم في الأسفل -->
 <button class="whatsapp-fab" onclick="openWhatsAppModal()">
     <i class="fab fa-whatsapp"></i>
-    <span>تواصل معنا</span>
+    <span>،❤️‍🩹تواصل مع المطور❤️‍🩹</span>
 </button>
-
-<!-- ✅ زر المعلومات في الزاوية العلوية -->
-<button class="info-fab" onclick="openInfoModal()" title="معلومات الموقع">
-    <span style="font-size:18px; line-height:1;">📋</span>
-</button>
-
-<!-- ✅ نافذة المعلومات الشاملة -->
-<div class="modal-overlay" id="infoModal" onclick="if(event.target===this)closeInfoModal()">
-    <div class="modal">
-        <div class="modal-x" onclick="closeInfoModal()" title="إغلاق"><i class="fas fa-xmark"></i></div>
-        <div class="modal-head">
-            <div class="modal-icon"><i class="fas fa-circle-info"></i></div>
-            <div class="modal-title">معلومات الموقع</div>
-        </div>
-        <div class="modal-divider"></div>
-
-        <!-- ✅ تبويبات الأقسام -->
-        <div class="info-tabs">
-            <button class="info-tab active" onclick="switchInfoTab(&#39;about&#39;, this)"><i class="fas fa-users"></i> من نحن</button>
-            <button class="info-tab" onclick="switchInfoTab(&#39;privacy&#39;, this)"><i class="fas fa-shield-halved"></i> الخصوصية</button>
-            <button class="info-tab" onclick="switchInfoTab(&#39;terms&#39;, this)"><i class="fas fa-file-contract"></i> الشروط</button>
-            <button class="info-tab" onclick="switchInfoTab(&#39;contact&#39;, this)"><i class="fas fa-envelope"></i> اتصال</button>
-            <button class="info-tab" onclick="switchInfoTab(&#39;disclaimer&#39;, this)"><i class="fas fa-triangle-exclamation"></i> إخلاء</button>
-            <button class="info-tab" onclick="switchInfoTab(&#39;faq&#39;, this)"><i class="fas fa-circle-question"></i> FAQ</button>
-        </div>
-
-        <div class="info-modal-body">
-            <!-- ✅ من نحن -->
-            <div class="info-section active" id="info-about">
-                <h3><i class="fas fa-users"></i> من نحن</h3>
-                <p>مرحبًا بك في <strong>RedKick</strong>.</p>
-                <p>RedKick هو موقع إلكتروني يوفر أدوات وخدمات تساعد مستخدمي منصة Kick على التفاعل بسهولة من خلال واجهة بسيطة وسريعة وآمنة.</p>
-                <p>نسعى إلى تقديم تجربة استخدام موثوقة مع تحسين الأداء باستمرار وإضافة ميزات جديدة تلبي احتياجات المستخدمين. هدفنا هو توفير أدوات فعالة توفر الوقت وتمنح المستخدم تجربة سلسة.</p>
-                <p>إذا كانت لديك أي اقتراحات أو ملاحظات، يسعدنا التواصل معك والعمل على تطوير الموقع بشكل مستمر.</p>
-            </div>
-
-            <!-- ✅ سياسة الخصوصية -->
-            <div class="info-section" id="info-privacy">
-                <h3><i class="fas fa-shield-halved"></i> سياسة الخصوصية</h3>
-                <p>في RedKick، نحترم خصوصية جميع المستخدمين ونلتزم بحماية بياناتهم.</p>
-                <p>قد نقوم بجمع بعض المعلومات التقنية، مثل عنوان IP ونوع المتصفح ونظام التشغيل، وذلك لتحسين أداء الموقع، وتحليل الأخطاء، وتعزيز تجربة الاستخدام.</p>
-                <p>لا نقوم ببيع أو تأجير أو مشاركة بيانات المستخدمين مع أي طرف ثالث، إلا إذا كان ذلك مطلوبًا بموجب القانون أو ضروريًا لتقديم الخدمة.</p>
-                <p>قد يستخدم الموقع ملفات تعريف الارتباط (Cookies) لتحسين تجربة المستخدم. باستخدامك للموقع فإنك توافق على سياسة الخصوصية هذه.</p>
-            </div>
-
-            <!-- ✅ شروط الاستخدام -->
-            <div class="info-section" id="info-terms">
-                <h3><i class="fas fa-file-contract"></i> شروط الاستخدام</h3>
-                <p>باستخدامك لموقع RedKick، فإنك توافق على الالتزام بهذه الشروط.</p>
-                <p>يجب استخدام الموقع بطريقة قانونية ومسؤولة، وعدم استغلاله في أي نشاط مخالف للقوانين أو شروط الخدمات المرتبطة به.</p>
-                <p>يحتفظ RedKick بحق تعديل أو تحديث الخدمات أو شروط الاستخدام في أي وقت دون إشعار مسبق، ويُعد استمرار استخدام الموقع موافقة على هذه التعديلات.</p>
-                <p>يتحمل المستخدم المسؤولية الكاملة عن استخدامه للموقع والخدمات المقدمة من خلاله.</p>
-            </div>
-
-            <!-- ✅ اتصل بنا -->
-            <div class="info-section" id="info-contact">
-                <h3><i class="fas fa-envelope"></i> اتصل بنا</h3>
-                <p>إذا كانت لديك أي استفسارات أو اقتراحات أو واجهت مشكلة أثناء استخدام الموقع، يمكنك التواصل معنا.</p>
-                <p>نسعى للرد على جميع الرسائل في أقرب وقت ممكن وتحسين خدماتنا باستمرار.</p>
-                <p>شكراً لاستخدامك RedKick ونتمنى لك تجربة مميزة.</p>
-                <div style="text-align:center; margin-top:14px;">
-                    <button class="wa-phone-btn" onclick="closeInfoModal(); openWhatsAppModal();" style="max-width:280px; margin:0 auto;">
-                        <i class="fab fa-whatsapp"></i>
-                        <span>تواصل عبر واتساب</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- ✅ إخلاء المسؤولية -->
-            <div class="info-section" id="info-disclaimer">
-                <h3><i class="fas fa-triangle-exclamation"></i> إخلاء المسؤولية</h3>
-                <p>يتم توفير خدمات RedKick "كما هي" دون أي ضمانات صريحة أو ضمنية.</p>
-                <p>يبذل فريق الموقع جهده لضمان دقة المعلومات واستقرار الخدمة، إلا أننا لا نضمن عدم حدوث انقطاعات أو أخطاء تقنية.</p>
-                <p>لا يتحمل RedKick أي مسؤولية عن أي أضرار أو خسائر ناتجة عن استخدام الموقع أو الاعتماد على المعلومات والخدمات المقدمة من خلاله.</p>
-                <p>يجب على المستخدم الالتزام بجميع القوانين وشروط استخدام المنصات والخدمات التي يتعامل معها أثناء استخدام الموقع.</p>
-            </div>
-
-            <!-- ✅ الأسئلة الشائعة -->
-            <div class="info-section" id="info-faq">
-                <h3><i class="fas fa-circle-question"></i> الأسئلة الشائعة</h3>
-                <div class="qa-item">
-                    <div class="qa-q">ما هو RedKick؟</div>
-                    <div class="qa-a">RedKick هو موقع يقدم أدوات وخدمات لمساعدة مستخدمي منصة Kick.</div>
-                </div>
-                <div class="qa-item">
-                    <div class="qa-q">هل استخدام الموقع مجاني؟</div>
-                    <div class="qa-a">تتوفر الخدمات المجانية، وقد يتم إضافة ميزات أخرى مستقبلًا.</div>
-                </div>
-                <div class="qa-item">
-                    <div class="qa-q">هل بياناتي آمنة؟</div>
-                    <div class="qa-a">نعم، نحن نولي أهمية كبيرة لحماية خصوصية المستخدمين.</div>
-                </div>
-                <div class="qa-item">
-                    <div class="qa-q">كيف أتواصل معكم؟</div>
-                    <div class="qa-a">يمكنك التواصل معنا عبر صفحة "اتصل بنا" الموجودة في الموقع.</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- ✅ نافذة التواصل عبر واتساب -->
 <div class="modal-overlay" id="whatsAppModal" onclick="if(event.target===this)closeWhatsAppModal()">
@@ -1232,8 +1209,8 @@
         <div class="wa-modal">
             <!-- ✅ نص المطوّر -->
             <div class="wa-dev-text">
-                <div class="wa-dev-label">تم تطوير الموقع من خلال</div>
-                <div class="wa-dev-name">𝓚𝓱𝓪𝓵𝓮𝓭༝🇹🇱🧸</div>
+                <div class="wa-dev-label">تم تطوير موقع BloodMoonKick من خلال</div>
+                <div class="wa-dev-name">❤️‍🩹البحيري❤️‍🩹</div>
             </div>
 
             <div class="modal-divider"></div>
@@ -1251,7 +1228,7 @@
 
 <script>
 /* ═══════════════════════════════════════════════════════════
-   RedKick — نسخة محسّنة ونظيفة
+   BloodMoonKick — نسخة محسّنة ونظيفة
    ═══════════════════════════════════════════════════════════ */
 
 var KICK_BASE = 'https://kick.com';
@@ -1277,8 +1254,8 @@ var PROXIES = [
 ];
 
 // ✅ الحدود القصوى لتفادي اللاغ
-var MAX_BOTS = 30;
-var MAX_CHANNELS_PER_BOT = 30;
+var MAX_BOTS = 9999;
+var MAX_CHANNELS_PER_BOT = 9999;
 
 // ✅ نظام Throttling قوي لتحديثات UI — يمنع اللاغ تماماً
 var _uiUpdatePending = false;
@@ -1821,15 +1798,17 @@ function makeChannel(slug) {
         slug: slug,
         messages: '',           // الرسائل (كل سطر = رسالة)
         interval: 5,            // التأخير بالثواني (ثابت)
-        repeat: 1,              // عدد التكرار
-        isInfinite: false,      // تكرار لا نهائي
+        repeat: 0,              // عدد التكرار
+        isInfinite: true,      // تكرار لا نهائي
         enabled: true,          // ✅ مفعّلة افتراضياً (زر التشغيل/الإطفاء)
-        randomDelay: false,     // ✅ التأخير العشوائي
-        delayMin: 3,            // ✅ الحد الأدنى للتأخير العشوائي
-        delayMax: 7,            // ✅ الحد الأقصى للتأخير العشوائي
+        randomDelay: true,     // ✅ التأخير العشوائي
+        delayMin: 240,            // ✅ الحد الأدنى للتأخير العشوائي
+        delayMax: 300,            // ✅ الحد الأقصى للتأخير العشوائي
         randomMessages: false,  // ✅ الرسائل العشوائية
         chatroomId: null,       // ✅ معرّف الدردشة (يُحفظ عند الإضافة)
         verified: false,        // ✅ تم التحقق من القناة
+        twoMessages: true,     // ✅ رسالتين معاً
+        stickersOnly: true,    // ✅ وضع رسائلي
         // حالة التشغيل (لا تُحفظ)
         status: 'idle',         // idle | connecting | on | off | sending | failed
         sent: 0,
@@ -1864,10 +1843,10 @@ var unifiedSettings = {
     messages: '',
     interval: 5,
     repeat: 1,
-    isInfinite: false,
-    randomDelay: false,
-    delayMin: 3,
-    delayMax: 7,
+    isInfinite: true,
+    randomDelay: true,
+    delayMin: 240,
+    delayMax: 300,
     randomMessages: false
 };
 
@@ -1888,7 +1867,6 @@ function toggleSendToNonLive() {
     sendToNonLive = !sendToNonLive;
     setToggle('tgSendNonLive', sendToNonLive);
     saveSendToNonLive();
-    playToggleSound(sendToNonLive);
     toast(sendToNonLive ? 'تم تفعيل الإرسال لغير المباشر — كل القنوات' : 'تم تفعيل الإرسال للبث المباشر فقط', 'i');
 }
 
@@ -1903,7 +1881,8 @@ function getEffectiveChannelSettings(ch) {
             delayMin: unifiedSettings.delayMin,
             delayMax: unifiedSettings.delayMax,
             randomMessages: unifiedSettings.randomMessages,
-            sendToNonLive: sendToNonLive
+            sendToNonLive: sendToNonLive,
+            twoMessages: !!ch.twoMessages
         };
     }
     ch.sendToNonLive = sendToNonLive;
@@ -1911,7 +1890,6 @@ function getEffectiveChannelSettings(ch) {
 }
 
 function openUnifiedSettings() {
-    playModalSound(true);
     $('uMessages').value = unifiedSettings.messages || '';
     $('uRepeat').value = unifiedSettings.isInfinite ? 0 : (unifiedSettings.repeat || 1);
     $('uRepeat').disabled = unifiedSettings.isInfinite;
@@ -1933,7 +1911,6 @@ function openUnifiedSettings() {
 }
 
 function closeUnifiedSettings() {
-    playModalSound(false);
     $('unifiedModal').classList.remove('open');
 }
 
@@ -1979,34 +1956,36 @@ function base64ToUtf8(b64) {
 
 // ✅ فتح نافذة النقل
 function openTransferModal() {
-    playModalSound(true);
     $('transferCodeOut').value = '';
     $('transferCodeIn').value = '';
     $('transferModal').classList.add('open');
 }
 
 function closeTransferModal() {
-    playModalSound(false);
     $('transferModal').classList.remove('open');
 }
 
-// ✅ توليد كود النقل من كل بيانات الموقع
+// ✅ توليد كود النقل من كل بيانات الموقع (نسخة كاملة طبق الأصل لاستبدال الجهاز الآخر بالكامل)
 function generateTransferCode() {
     try {
-        // ✅ تجميع البوتات والقنوات فقط (بدون الإعدادات الموحدة)
+        // ✅ تجميع كل شيء: البوتات بنفس ترتيبها + القنوات + الرسائل + سرعة الإرسال + كل الإعدادات العامة
         var data = {
-            version: 2,
+            version: 3,
             timestamp: Date.now(),
+            counter: accIdCounter, // ✅ للحفاظ على تسلسل المعرفات كما هو
             bots: accounts.map(function(b) {
                 return {
-                    id: b.id,
+                    id: b.id, // ✅ نفس المعرف — يحافظ على نفس الترتيب والهوية بالضبط
                     token: b.token,
                     username: b.username,
+                    autoRecover: b.autoRecover,
+                    parallel: b.parallel,
+                    selected: !!selectedBots[b.id],
                     channels: b.channels.map(function(ch) {
                         return {
                             slug: ch.slug,
-                            messages: ch.messages || '',
-                            interval: ch.interval,
+                            messages: ch.messages || '',       // ✅ الرسائل
+                            interval: ch.interval,              // ✅ سرعة الإرسال (الفاصل الزمني)
                             repeat: ch.repeat,
                             isInfinite: ch.isInfinite,
                             enabled: ch.enabled !== false,
@@ -2015,12 +1994,20 @@ function generateTransferCode() {
                             delayMax: ch.delayMax || 7,
                             randomMessages: !!ch.randomMessages,
                             chatroomId: ch.chatroomId || null,
-                            verified: !!ch.verified
+                            verified: !!ch.verified,
+                            twoMessages: !!ch.twoMessages,
+                            stickersOnly: !!ch.stickersOnly
                         };
                     }),
                     workingProxy: b.workingProxy != null ? b.workingProxy : -1
                 };
-            })
+            }),
+            // ✅ الإعدادات الموحدة لكل القنوات
+            unifiedSettings: unifiedSettings,
+            // ✅ حالة الإرسال لغير المباشر (كل القنوات وليس فقط البث المباشر)
+            sendToNonLive: sendToNonLive,
+            // ✅ أفضل بروكسي محفوظ
+            bestProxy: _bestProxy
         };
 
         var json = JSON.stringify(data);
@@ -2028,7 +2015,7 @@ function generateTransferCode() {
         // ✅ إضافة بادئة للتمييز
         var code = 'RK1-' + b64;
         $('transferCodeOut').value = code;
-        toast('تم توليد الكود (' + data.bots.length + ' بوت)', 's');
+        toast('تم توليد الكود (' + data.bots.length + ' بوت) — كود استبدال كامل', 's');
     } catch(e) {
         toast('خطأ في توليد الكود: ' + e.message, 'e');
     }
@@ -2062,7 +2049,60 @@ function copyTransferCode() {
     }
 }
 
-// ✅ استيراد كود النقل — يضيف البوتات على الموجودة (بدون حذف)
+// ✅ تصدير كود النقل كملف txt وتحميله على الجهاز
+function exportTransferCodeToFile() {
+    var code = $('transferCodeOut').value.trim();
+    if (!code) {
+        toast('اضغط "توليد الكود" أولاً', 'e');
+        return;
+    }
+    try {
+        var blob = new Blob([code], { type: 'text/plain;charset=utf-8' });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = 'BloodMoonKick-transfer-' + Date.now() + '.txt';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(function() { URL.revokeObjectURL(url); }, 1000);
+        toast('تم تحميل ملف الكود', 's');
+    } catch(e) {
+        toast('تعذّر تحميل الملف: ' + e.message, 'e');
+    }
+}
+
+// ✅ اختيار ملف txt يحتوي كود النقل ووضعه في مربع النص
+function handleTransferFileChoose(event) {
+    var file = event.target.files && event.target.files[0];
+    if (!file) return;
+
+    if (!file.name.toLowerCase().endsWith('.txt')) {
+        toast('الرجاء اختيار ملف txt فقط', 'e');
+        event.target.value = '';
+        return;
+    }
+
+    var reader = new FileReader();
+    reader.onload = function(e) {
+        var content = (e.target.result || '').trim();
+        if (!content) {
+            toast('الملف فارغ', 'e');
+            return;
+        }
+        $('transferCodeIn').value = content;
+        toast('تم تحميل الكود من الملف', 's');
+    };
+    reader.onerror = function() {
+        toast('تعذّر قراءة الملف', 'e');
+    };
+    reader.readAsText(file, 'UTF-8');
+
+    // إعادة تصفير حقل الملف للسماح باختيار نفس الملف مرة أخرى لاحقاً
+    event.target.value = '';
+}
+
+// ✅ استيراد كود النقل — استبدال كامل: يمسح كل بيانات هذا الجهاز ويستعيد بيانات الكود بالكامل
 function importTransferCode() {
     var code = $('transferCodeIn').value.trim();
     if (!code) {
@@ -2097,45 +2137,29 @@ function importTransferCode() {
         return;
     }
 
-    if (data.bots.length === 0) {
-        toast('الكود لا يحتوي على أي بوتات', 'e');
-        return;
-    }
-
-    // ✅ عد البوتات الموجودة + البوتات الجديدة
+    // ✅ تحذير واضح — استبدال كامل: مسح كل بيانات هذا الجهاز ووضع بيانات الكود بدلاً منها
     var existingCount = accounts.length;
     var newBotsCount = data.bots.length;
-
-    // ✅ تحذير — سيتم الإضافة على الموجود
-    var confirmMsg = 'سيتم إضافة ' + newBotsCount + ' بوت من الكود إلى ' + existingCount + ' بوت موجود.\nالإجمالي بعد الاستيراد: ' + (existingCount + newBotsCount) + ' بوت.\n\nهل أنت متأكد؟';
+    var confirmMsg = '⚠ استبدال كامل للبيانات\n\nسيتم حذف كل بيانات هذا الجهاز (' + existingCount + ' بوت وكل الإعدادات) نهائياً،\nواستبدالها ببيانات الكود بالكامل (' + newBotsCount + ' بوت بنفس الترتيب والقنوات والرسائل وسرعة الإرسال وكل الإعدادات).\n\nلا يمكن التراجع بعد الاستبدال. هل أنت متأكد؟';
     if (!confirm(confirmMsg)) return;
 
-    // ✅ تعقّب التوكنات الموجودة لتجاهل التكرار
-    var existingTokens = {};
-    for (var ei = 0; ei < accounts.length; ei++) {
-        existingTokens[accounts[ei].token] = true;
+    // ✅ إيقاف أي بوتات تعمل حالياً على هذا الجهاز قبل المسح
+    for (var si = 0; si < accounts.length; si++) {
+        accounts[si].isSending = false;
     }
 
-    var addedCount = 0;
-    var skippedCount = 0;
+    // ✅ مسح كل البيانات الحالية بالكامل
+    accounts = [];
+    selectedBots = {};
 
-    // ✅ إضافة البوتات الجديدة على الموجودة (بدون حذف)
+    var importedCount = 0;
+
+    // ✅ استعادة البوتات بنفس الترتيب تماماً كما في الكود
     for (var bi = 0; bi < data.bots.length; bi++) {
         var b = data.bots[bi];
+        if (!b || !b.token) continue;
 
-        // ✅ تخطّي البوتات المكررة (نفس التوكن)
-        if (existingTokens[b.token]) {
-            skippedCount++;
-            continue;
-        }
-
-        // ✅ فحص الحد الأقصى للبوتات
-        if (accounts.length >= MAX_BOTS) {
-            toast('تم الوصول للحد الأقصى للبوتات (' + MAX_BOTS + ')', 'e');
-            break;
-        }
-
-        // ✅ بناء القنوات
+        // ✅ بناء القنوات (نفس الرسائل وسرعة الإرسال وكل الخصائص)
         var channels = [];
         if (b.channels) {
             for (var ci = 0; ci < b.channels.length; ci++) {
@@ -2153,44 +2177,83 @@ function importTransferCode() {
                     randomMessages: !!ch.randomMessages,
                     chatroomId: ch.chatroomId || null,
                     verified: !!ch.verified,
+                    twoMessages: !!ch.twoMessages,
+                    stickersOnly: !!ch.stickersOnly,
                     status: 'idle', sent: 0, error: '', retries: 0
                 });
             }
         }
 
-        // ✅ توليد ID جديد للبوت (لتجنب تعارض المعرفات)
-        accIdCounter++;
+        // ✅ نحافظ على نفس المعرف الأصلي (نفس الترتيب والهوية بالضبط)
+        var botId = (typeof b.id === 'number') ? b.id : (importedCount + 1);
         var bot = {
-            id: accIdCounter,
+            id: botId,
             token: b.token,
             username: b.username,
             channels: channels,
-            autoRecover: true,
-            parallel: true,
+            autoRecover: (b.autoRecover !== false),
+            parallel: (b.parallel !== false),
             isSending: false,
             sent: 0,
             workingProxy: (typeof b.workingProxy === 'number' && b.workingProxy >= 0) ? b.workingProxy : -1,
             workingSendProxy: -1
         };
         accounts.push(bot);
-        existingTokens[b.token] = true; // ✅ منع التكرار داخل نفس الكود
-        addedCount++;
+        if (b.selected) selectedBots[botId] = true;
+        importedCount++;
     }
 
-    // ✅ حفظ وإعادة عرض
+    // ✅ استعادة عدّاد المعرفات — لضمان عدم تعارض أي بوت جديد يُضاف لاحقاً
+    if (typeof data.counter === 'number' && data.counter >= 0) {
+        accIdCounter = data.counter;
+    } else {
+        accIdCounter = 0;
+        for (var ai = 0; ai < accounts.length; ai++) {
+            if (accounts[ai].id > accIdCounter) accIdCounter = accounts[ai].id;
+        }
+    }
+
+    // ✅ استعادة الإعدادات الموحدة (إن وُجدت في الكود)
+    if (data.unifiedSettings && typeof data.unifiedSettings === 'object') {
+        unifiedSettings.enabled = !!data.unifiedSettings.enabled;
+        unifiedSettings.messages = data.unifiedSettings.messages || '';
+        unifiedSettings.interval = data.unifiedSettings.interval || 5;
+        unifiedSettings.repeat = data.unifiedSettings.repeat || 1;
+        unifiedSettings.isInfinite = !!data.unifiedSettings.isInfinite;
+        unifiedSettings.randomDelay = !!data.unifiedSettings.randomDelay;
+        unifiedSettings.delayMin = data.unifiedSettings.delayMin || 3;
+        unifiedSettings.delayMax = data.unifiedSettings.delayMax || 7;
+        unifiedSettings.randomMessages = !!data.unifiedSettings.randomMessages;
+        try { localStorage.setItem('redkick_unified_v1', JSON.stringify(unifiedSettings)); } catch(e) {}
+    }
+
+    // ✅ استعادة حالة الإرسال لغير المباشر
+    if (typeof data.sendToNonLive === 'boolean') {
+        sendToNonLive = data.sendToNonLive;
+        saveSendToNonLive();
+        setToggle('tgSendNonLive', sendToNonLive);
+    }
+
+    // ✅ استعادة أفضل بروكسي محفوظ
+    if (typeof data.bestProxy === 'number' && data.bestProxy >= 0) {
+        _bestProxy = data.bestProxy;
+        saveBestProxy();
+    }
+
+    // ✅ مسح أي حالة تشغيل قديمة كانت على هذا الجهاز (غير صالحة بعد الاستبدال)
+    clearRunningState();
+
+    // ✅ حفظ وإعادة عرض كل شيء
     persist();
     renderBotList();
     if (typeof updateBulkUI === 'function') updateBulkUI();
+    forceUIUpdate();
     closeTransferModal();
 
-    if (addedCount > 0) {
-        var msg = 'تم إضافة ' + addedCount + ' بوت بنجاح';
-        if (skippedCount > 0) msg += ' (تم تخطّي ' + skippedCount + ' بوت مكرر)';
-        toast(msg, 's');
-    } else if (skippedCount > 0) {
-        toast('كل البوتات في الكود مضافة مسبقاً (' + skippedCount + ' بوت)', 'i');
+    if (importedCount > 0) {
+        toast('✓ تم استبدال بيانات الجهاز بالكامل — تم استعادة ' + importedCount + ' بوت', 's');
     } else {
-        toast('لم يتم إضافة أي بوت', 'e');
+        toast('الكود لا يحتوي على أي بوتات — تم مسح بيانات الجهاز فقط', 'i');
     }
 }
 
@@ -2198,7 +2261,6 @@ function uToggleEnabled() {
     unifiedSettings.enabled = !unifiedSettings.enabled;
     setToggle('tgUnifiedEnabled', unifiedSettings.enabled);
     $('unifiedFields').style.display = unifiedSettings.enabled ? 'block' : 'none';
-    playToggleSound(unifiedSettings.enabled);
 }
 
 function uToggleInfinite() {
@@ -2207,7 +2269,6 @@ function uToggleInfinite() {
     $('uRepeat').disabled = unifiedSettings.isInfinite;
     if (unifiedSettings.isInfinite) $('uRepeat').value = 0;
     else if ($('uRepeat').value == 0) $('uRepeat').value = 1;
-    playToggleSound(unifiedSettings.isInfinite);
 }
 
 function uToggleRandomDelay() {
@@ -2219,13 +2280,11 @@ function uToggleRandomDelay() {
         uIntervalWrap.style.opacity = unifiedSettings.randomDelay ? '0.35' : '1';
         uIntervalWrap.style.pointerEvents = unifiedSettings.randomDelay ? 'none' : 'auto';
     }
-    playToggleSound(unifiedSettings.randomDelay);
 }
 
 function uToggleRandomMessages() {
     unifiedSettings.randomMessages = !unifiedSettings.randomMessages;
     setToggle('uTgRandomMessages', unifiedSettings.randomMessages);
-    playToggleSound(unifiedSettings.randomMessages);
 }
 
 function saveUnifiedSettings() {
@@ -2276,26 +2335,25 @@ var qsSeparateMode = false;
 var qsSeparateMessages = {}; // { botId: 'message' }
 
 function openQuickSend() {
-    playModalSound(true);
     qsSelectedBots = {};
     qsSelectedChannels = {};
     qsExpandedBot = null;
     $('qsMessage').value = '';
     renderQsBotList();
     updateQsSendButton();
-    renderQsSeparateList();
+    // ✅ لا تنادي renderQsSeparateList هنا لأنها بتحدد كل البوتات تلقائياً (qsSelectedBots)
+    // وده كان بيخلي كل الحسابات تظهر محددة في القائمة العادية بمجرد فتح المودال
+    if (qsSeparateMode) renderQsSeparateList();
     $('quickSendModal').classList.add('open');
 }
 
 function closeQuickSend() {
-    playModalSound(false);
     $('quickSendModal').classList.remove('open');
 }
 
 // ✅ تبديل وضع الإعدادات المنفصلة
 function toggleQsSeparateMode() {
     qsSeparateMode = !qsSeparateMode;
-    playToggleSound(qsSeparateMode);
     var tg = $('tgQsSeparate');
     if (qsSeparateMode) tg.classList.add('on');
     else tg.classList.remove('on');
@@ -2364,7 +2422,7 @@ async function quickSendSingleBot(botId) {
     var msgEl = $('qsSepMsg_' + botId);
     if (!msgEl) return;
     var msg = msgEl.value.trim();
-    if (!msg) { toast('أدخل رسالة لـ ' + b.username, 'e'); return; }
+    if (!msg) { toast('أدخلي رسالة لـ ' + b.username, 'e'); return; }
 
     var selChannels = qsSelectedChannels[botId];
     if (!selChannels) {
@@ -2455,7 +2513,6 @@ function qsToggleChannel(botId, slug) {
     var newState = !qsSelectedChannels[botId][slug];
     if (qsSelectedChannels[botId][slug]) delete qsSelectedChannels[botId][slug];
     else qsSelectedChannels[botId][slug] = true;
-    playToggleSound(newState);
     renderQsChannelList();
     updateQsSendButton();
     // ✅ حدّث القائمة المنفصلة لعرض عدّاد القنوات المحددة
@@ -2489,7 +2546,6 @@ function renderQsBotList() {
 }
 
 function openQsChannels(botId) {
-    playModalSound(true);
     qsExpandedBot = botId;
     var b = findBot(botId);
     if (!b) return;
@@ -2499,7 +2555,6 @@ function openQsChannels(botId) {
 }
 
 function closeQsChannels() {
-    playModalSound(false);
     $('qsChannelsModal').classList.remove('open');
     qsExpandedBot = null;
 }
@@ -2636,11 +2691,13 @@ function persist() {
                             isInfinite: ch.isInfinite,
                             enabled: ch.enabled !== false,
                             randomDelay: !!ch.randomDelay,
-                            delayMin: ch.delayMin || 3,
-                            delayMax: ch.delayMax || 7,
+                            delayMin: ch.delayMin || 240,
+                            delayMax: ch.delayMax || 300,
                             randomMessages: !!ch.randomMessages,
                             chatroomId: ch.chatroomId || null,
-                            verified: !!ch.verified
+                            verified: !!ch.verified,
+                            twoMessages: !!ch.twoMessages,
+                            stickersOnly: !!ch.stickersOnly
                         };
                     }),
                     autoRecover: b.autoRecover,
@@ -2679,11 +2736,13 @@ function loadFromStorage() {
                         isInfinite: !!ch.isInfinite,
                         enabled: ch.enabled !== false,
                         randomDelay: !!ch.randomDelay,
-                        delayMin: ch.delayMin || 3,
-                        delayMax: ch.delayMax || 7,
+                        delayMin: ch.delayMin || 240,
+                        delayMax: ch.delayMax || 300,
                         randomMessages: !!ch.randomMessages,
                         chatroomId: ch.chatroomId || null,
                         verified: !!ch.verified,
+                        twoMessages: !!ch.twoMessages,
+                        stickersOnly: !!ch.stickersOnly,
                         status: 'idle', sent: 0, error: '', retries: 0
                     });
                 }
@@ -2717,7 +2776,7 @@ function loadFromStorage() {
                 workingProxy: (typeof b.workingProxy === 'number' && b.workingProxy >= 0) ? b.workingProxy : -1,
                 workingSendProxy: -1
             };
-            if (b.selected) selectedBots[b.id] = true;
+            // ✅ لا نستعيد حالة التحديد بعد إعادة الدخول للموقع — التحديد يبدأ دائماً فارغاً
             accounts.push(bot);
         }
     } catch(e) { console.warn('Load failed', e); }
@@ -2804,21 +2863,8 @@ function playModalSound(open) {
     }
 }
 
-// ✅ مستمع عام: أي زر/عنصر قابل للنقر → صوت فوري
-// نستخدم capture phase للسرعة القصوى (قبل أي معالجة أخرى)
-document.addEventListener('pointerdown', function(e) {
-    var t = e.target;
-    if (!t) return;
-    // ✅ تجاهل النقر على حقول الإدخال
-    if (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA') return;
-    // ✅ ابحث عن أقرب عنصر قابل للنقر
-    var el = t.closest('button, [onclick], .toggle, .header-toggle, .bot-checkbox, .info-tab, .quick-item, .feature-card, .info-fab, .whatsapp-fab, .back-btn, .modal-x, .nav-btn');
-    if (!el) return;
-    // ✅ صوت فوري — لا انتظار
-    playClickSound();
-}, true);
-
-// ✅ تفعيل AudioContext عند أول تفاعل (سياسة المتصفح)
+// ✅ تفعيل AudioContext عند أول تفاعل (سياسة المتصفح) — بدون تشغيل صوت النقر العام
+// ملاحظة: تم إلغاء صوت النقر العام على كل الأزرار، الصوت الآن فقط عند تحديد/إلغاء تحديد حساب
 document.addEventListener('pointerdown', function() {
     _getSfxCtx();
 }, { once: true });
@@ -2833,13 +2879,9 @@ document.addEventListener('keydown', function() {
 function showPhase(name) {
     document.querySelectorAll('.phase').forEach(function(p){ p.classList.remove('active'); });
     $('ph-'+name).classList.add('active');
-    playClickSound(); // ✅ صوت عند التنقل بين الصفحات
 }
 
 function toast(msg, type) {
-    // ✅ صوت حسب نوع الرسالة
-    if (type === 's') playSuccessSound();
-    else if (type === 'e') playErrorSound();
     var t = document.createElement('div');
     t.className = 'toast toast-' + (type || 'i');
     t.textContent = msg;
@@ -2879,9 +2921,9 @@ async function verifyAndAdd() {
         for (var ei = 0; ei < endpoints.length && (!pr || !pr.res.ok); ei++) {
             try { pr = await proxiedFetch(endpoints[ei], {token:token, timeout:6000}); } catch(e) { continue; }
         }
-        if (!pr) throw new Error('فشل الاتصال — تحقق من الإنترنت');
+        if (!pr) throw new Error('فشل الاتصال — تحققي من الإنترنت');
         if (!pr.res.ok) {
-            if (pr.res.status===401||pr.res.status===403) throw new Error('التوكن غير صالح');
+            if (pr.res.status===401||pr.res.status===403) throw new Error('التوكن منتهي يكوتي');
             throw new Error('خطأ HTTP: '+pr.res.status);
         }
         var raw = await pr.res.text(); var data;
@@ -2940,14 +2982,12 @@ function navBackFromAdd() {
 //  ✅ زر التواصل عبر واتساب
 // ═══════════════════════════════════════
 function openWhatsAppModal() {
-    playModalSound(true);
     $('whatsAppModal').classList.add('open');
 }
 function closeWhatsAppModal() {
-    playModalSound(false);
     $('whatsAppModal').classList.remove('open');
 }
-// ✅ تحويل المستخدم إلى واتساب على الرقم +963 995271182
+// ✅ تحويل المستخدم إلى واتساب على الرقم 
 function goToWhatsApp() {
     var url = 'https://wa.me/201221053263';
     window.open(url, '_blank');
@@ -2957,11 +2997,9 @@ function goToWhatsApp() {
 //  ✅ نافذة المعلومات الشاملة
 // ═══════════════════════════════════════
 function openInfoModal() {
-    playModalSound(true);
     $('infoModal').classList.add('open');
 }
 function closeInfoModal() {
-    playModalSound(false);
     $('infoModal').classList.remove('open');
 }
 // ✅ تبديل بين أقسام المعلومات
@@ -2988,7 +3026,6 @@ function switchInfoTab(tabName, btnEl) {
 var renewTokenBotId = null;
 
 function openRenewToken(id) {
-    playModalSound(true);
     var b = findBot(id);
     if (!b) return;
     renewTokenBotId = id;
@@ -3002,7 +3039,6 @@ function openRenewToken(id) {
 }
 
 function closeRenewToken() {
-    playModalSound(false);
     $('renewTokenModal').classList.remove('open');
     renewTokenBotId = null;
 }
@@ -3150,8 +3186,24 @@ function renderBotList() {
         html += '</div>';
     }
     box.innerHTML = html;
+    capBotListHeight();
     updateBulkUI();
 }
+
+// ✅ تثبيت ارتفاع قائمة البوتات على 5 حسابات بالظبط، والباقي يظهر بالسكرول
+function capBotListHeight() {
+    var box = $('botList');
+    var cards = box.querySelectorAll('.bot-card');
+    if (cards.length > 5) {
+        var gap = parseFloat(getComputedStyle(box).rowGap) || 10;
+        var cardH = cards[0].getBoundingClientRect().height;
+        box.style.maxHeight = (cardH * 5 + gap * 4) + 'px';
+    } else {
+        box.style.maxHeight = '';
+    }
+}
+
+window.addEventListener('resize', capBotListHeight);
 
 // ═══════════════════════════════════════
 //  التحديد
@@ -3161,6 +3213,16 @@ function toggleSelect(id) {
     if (selectedBots[id]) delete selectedBots[id];
     else selectedBots[id] = true;
     playToggleSound(newState);
+    // ✅ لو وضع "التشغيل الجماعي" مفعّل والبوت اتحدد جديد (مش اتشال)، يلتحق بالتشغيل تلقائياً وفوراً
+    if (newState && _bulkRunActive) {
+        var _joinedBot = findBot(parseInt(id));
+        _autoJoinBulkRun(_joinedBot);
+    }
+    // ✅ لو البوت اتشال من التحديد وكان شغّال، يوقف فوراً كأنه ضغط إيقاف له لوحده
+    if (!newState) {
+        var _leftBot = findBot(parseInt(id));
+        _stopSingleBot(_leftBot);
+    }
     persist();
     renderBotList();
 }
@@ -3211,26 +3273,49 @@ function updateBulkUI() {
     $('btnClearSel').disabled = count === 0;
 }
 
+// ═══════════════════════════════════════
+//  ✅ نافذة تأكيد الحذف العامة
+// ═══════════════════════════════════════
+var _confirmDeleteAction = null;
+
+function askConfirmDelete(message, onYes) {
+    $('confirmDeleteMsg').textContent = message;
+    _confirmDeleteAction = onYes;
+    $('confirmDeleteModal').classList.add('open');
+}
+
+function closeConfirmDelete() {
+    $('confirmDeleteModal').classList.remove('open');
+    _confirmDeleteAction = null;
+}
+
+function confirmDeleteYes() {
+    var action = _confirmDeleteAction;
+    closeConfirmDelete();
+    if (typeof action === 'function') action();
+}
+
 function removeBot(id) {
     var b = findBot(id);
     if (!b) return;
-    if (b.isSending) {
-        b.isSending = false;
-        if (abortControllers[id]) abortControllers[id].abort();
-    }
-    accounts = accounts.filter(function(a){ return a.id !== id; });
-    delete selectedBots[id];
-    delete abortControllers[id];
-    persist();
-    renderBotList();
-    toast('تم حذف البوت', 'i');
+    askConfirmDelete('هل أنت متأكد من حذف الحساب "' + b.username + '"؟', function() {
+        if (b.isSending) {
+            b.isSending = false;
+            if (abortControllers[id]) abortControllers[id].abort();
+        }
+        accounts = accounts.filter(function(a){ return a.id !== id; });
+        delete selectedBots[id];
+        delete abortControllers[id];
+        persist();
+        renderBotList();
+        toast('تم حذف البوت', 'i');
+    });
 }
 
 // ═══════════════════════════════════════
 //  النافذة المنبثقة لإعدادات البوت
 // ═══════════════════════════════════════
 function openSettings(id) {
-    playModalSound(true);
     var b = findBot(id);
     if (!b) return;
     activeModalBotId = id;
@@ -3247,7 +3332,6 @@ function openSettings(id) {
 }
 
 function closeSettings() {
-    playModalSound(false);
     $('settingsModal').classList.remove('open');
     activeModalBotId = null;
 }
@@ -3263,7 +3347,6 @@ function mToggle(toggleId, fieldName) {
     if (!b) return;
     b[fieldName] = !b[fieldName];
     setToggle(toggleId, b[fieldName]);
-    playToggleSound(b[fieldName]);
     persist();
 }
 
@@ -3335,9 +3418,13 @@ function mRemoveChannel(slug) {
     if (activeModalBotId === null) return;
     var b = findBot(activeModalBotId);
     if (!b) return;
-    b.channels = b.channels.filter(function(c){ return c.slug !== slug; });
-    renderChannelsList(b);
-    persist();
+    askConfirmDelete('هل أنت متأكد من حذف القناة "' + slug + '"؟', function() {
+        var bb = findBot(activeModalBotId);
+        if (!bb) return;
+        bb.channels = bb.channels.filter(function(c){ return c.slug !== slug; });
+        renderChannelsList(bb);
+        persist();
+    });
 }
 
 function renderChannelsList(b) {
@@ -3436,8 +3523,46 @@ function saveSettings() {
 // ═══════════════════════════════════════
 var activeChannelSlug = null;
 
+const stickersList = `[emote:4851601:dommyxmommyevilduck]
+!points
+⚡🔥 ULTRA POWER 🔥⚡
+[emote:3302862:destrox88xElmoShrug]
+💥👑 KING MODE 👑💥
+[emote:5470844:kickclassic]
+[emote:3421897:dommyxmommycatpunch]
+!points
+⚡️🔥 BIG ENERGY 🔥⚡️
+[emote:3304255:destrox88xSus]
+🔥⚡ MAX POWER ⚡🔥
+[emote:2030528:destrox88xExcellent]
+!points
+[emote:4851601:dommyxmommyevilduck]
+⚡💣 BOOM TIME 💣⚡
+[emote:4851612:dommyxmommycoolduck]
+🔥⚡ OVERDRIVE ⚡🔥
+[emote:3304255:destrox88xSus]
+!points
+[emote:4851610:dommyxmommysadduck]
+👑⚡ LEGEND 👑⚡
+[emote:3538787:dommyxmommydapmeup]
+🔥💣 FIRE UP 💣🔥
+[emote:2030859:destrox88xKermitNod]
+[emote:4157261:dommyxmommyFACEPALM]
+!points
+💥⚡ HYPER ⚡💥
+[emote:4157265:dommyxmommyKISSY]
+⚡🚀 SKY HIGH 🚀⚡
+[emote:1508551:destrox88xlove]
+[emote:4157273:dommyxmommyANGRYGROGU]
+!points
+💥⚡3AAAAASH⚡💥
+[emote:4851601:dommyxmommyevilduck]
+🔥⚡ OVERDRIVE ⚡🔥
+[emote:3304255:destrox88xSus]
+!points
+[emote:2030528:destrox88xExcellent]`;
+
 function openChannelSettings(slug) {
-    playModalSound(true);
     if (activeModalBotId === null) return;
     var b = findBot(activeModalBotId);
     if (!b) return;
@@ -3454,6 +3579,16 @@ function openChannelSettings(slug) {
     setToggle('tgChannelInfinite', ch.isInfinite);
     setToggle('tgRandomDelay', ch.randomDelay);
     setToggle('tgRandomMessages', ch.randomMessages);
+    setToggle('tgTwoMessages', !!ch.twoMessages);
+    setToggle('tgStickersOnly', !!ch.stickersOnly);
+
+    if (ch.stickersOnly) {
+        $('cMessages').value = stickersList;
+        $('cMessages').readOnly = true;
+    } else {
+        $('cMessages').readOnly = false;
+    }
+
     // ✅ إظهار/إخفاء خانات التأخير العشوائي
     $('randomDelayFields').style.display = ch.randomDelay ? 'grid' : 'none';
     var cIntervalWrap = $('cIntervalWrap');
@@ -3465,7 +3600,6 @@ function openChannelSettings(slug) {
 }
 
 function closeChannelSettings() {
-    playModalSound(false);
     $('channelModal').classList.remove('open');
     activeChannelSlug = null;
 }
@@ -3480,7 +3614,6 @@ function cToggleInfinite() {
     $('cRepeat').disabled = ch.isInfinite;
     if (ch.isInfinite) $('cRepeat').value = 0;
     else if ($('cRepeat').value == 0) $('cRepeat').value = 1;
-    playToggleSound(ch.isInfinite);
     persist();
 }
 
@@ -3498,7 +3631,6 @@ function cToggleRandomDelay() {
         cIntervalWrap.style.opacity = ch.randomDelay ? '0.35' : '1';
         cIntervalWrap.style.pointerEvents = ch.randomDelay ? 'none' : 'auto';
     }
-    playToggleSound(ch.randomDelay);
     persist();
 }
 
@@ -3510,7 +3642,33 @@ function cToggleRandomMessages() {
     if (!ch) return;
     ch.randomMessages = !ch.randomMessages;
     setToggle('tgRandomMessages', ch.randomMessages);
-    playToggleSound(ch.randomMessages);
+    persist();
+}
+
+// ✅ تبديل "رسالتين معاً"
+function cToggleTwoMessages() {
+    if (activeModalBotId === null || !activeChannelSlug) return;
+    var b = findBot(activeModalBotId);
+    var ch = findChannel(b, activeChannelSlug);
+    if (!ch) return;
+    ch.twoMessages = !ch.twoMessages;
+    setToggle('tgTwoMessages', ch.twoMessages);
+    persist();
+}
+
+function cToggleStickersOnly() {
+    if (activeModalBotId === null || !activeChannelSlug) return;
+    var b = findBot(activeModalBotId);
+    var ch = findChannel(b, activeChannelSlug);
+    if (!ch) return;
+    ch.stickersOnly = !ch.stickersOnly;
+    setToggle('tgStickersOnly', ch.stickersOnly);
+    if (ch.stickersOnly) {
+        $('cMessages').value = stickersList;
+        $('cMessages').readOnly = true;
+    } else {
+        $('cMessages').readOnly = false;
+    }
     persist();
 }
 
@@ -3531,6 +3689,8 @@ function saveChannelSettings() {
     ch.isInfinite = $('tgChannelInfinite').classList.contains('on');
     ch.randomDelay = $('tgRandomDelay').classList.contains('on');
     ch.randomMessages = $('tgRandomMessages').classList.contains('on');
+    ch.twoMessages = $('tgTwoMessages').classList.contains('on');
+    ch.stickersOnly = $('tgStickersOnly').classList.contains('on');
     var rv = parseInt($('cRepeat').value) || 1;
     ch.repeat = ch.isInfinite ? 0 : Math.max(1, rv);
     persist();
@@ -3547,6 +3707,7 @@ function saveChannelSettings() {
 var _botStartQueue = [];          // قائمة البوتات المنتظرة للتشغيل
 var _botStartTimer = null;        // مؤقّت التأخير بين البوتات
 var _forceStopAll = false;        // علم الإيقاف الإجباري
+var _bulkRunActive = false;       // ✅ يصبح true بعد الضغط على "تشغيل المحددة" — أي بوت يتم تحديده بعدها يلتحق بالتشغيل تلقائياً
 
 async function startSelectedBots() {
     var toStart = [];
@@ -3587,6 +3748,7 @@ async function startSelectedBots() {
 
     // ✅ إعادة ضبط حالة الإيقاف الإجباري + بناء قائمة الانتظار
     _forceStopAll = false;
+    _bulkRunActive = true; // ✅ تفعيل وضع "التشغيل الجماعي" — أي تحديد جديد بعد كده يلتحق بالتشغيل تلقائياً
     _botStartQueue = toStart.slice();
     toast('تشغيل ' + toStart.length + ' بوت (كل بوت بعد 3 ثوانٍ)', 's');
 
@@ -3623,9 +3785,48 @@ function _startNextBotInQueue() {
     }
 }
 
+// ✅ عند تحديد بوت جديد أثناء نشاط وضع "التشغيل الجماعي" — يلتحق بالتشغيل فوراً بدون داعي للضغط على تشغيل المحددة تاني
+function _autoJoinBulkRun(bot) {
+    if (!bot || bot.isSending) return; // بوت شغّال بالفعل أو غير موجود — تجاهل
+    var unifiedReady = unifiedSettings.enabled && unifiedSettings.messages && unifiedSettings.messages.trim();
+    var validChannels = 0;
+    if (unifiedReady) {
+        for (var c = 0; c < bot.channels.length; c++) {
+            if (bot.channels[c].enabled !== false) validChannels++;
+        }
+    } else {
+        for (var c = 0; c < bot.channels.length; c++) {
+            if (bot.channels[c].messages && bot.channels[c].messages.trim()) validChannels++;
+        }
+    }
+    if (bot.channels.length === 0 || validChannels === 0) return; // لا توجد قنوات/رسائل صالحة — تجاهل بصمت
+
+    // ✅ يشتغل فوراً بدون أي تأخير أو انتظار دوره في طابور التشغيل المتسلسل
+    startBotLoop(bot).catch(function(){});
+    toast('(' + bot.username + ') انضم للتشغيل فوراً', 's');
+}
+
+// ✅ إيقاف بوت واحد فقط (يُستخدم عند إلغاء تحديده أثناء عمله — كأنه إيقاف فردي)
+function _stopSingleBot(bot) {
+    if (!bot || !bot.isSending) return;
+    bot.isSending = false;
+    if (abortControllers[bot.id]) {
+        abortControllers[bot.id].abort();
+        delete abortControllers[bot.id];
+    }
+    // ✅ احذفه من طابور الانتظار لو كان لسه ما بدأش
+    for (var i = _botStartQueue.length - 1; i >= 0; i--) {
+        if (_botStartQueue[i].id === bot.id) _botStartQueue.splice(i, 1);
+    }
+    forceUIUpdate();
+    saveRunningState();
+    toast('(' + bot.username + ') تم إيقافه', 'i');
+}
+
 function stopAllBots() {
     // ✅ تفعيل الإيقاف الإجباري — يوقف قائمة الانتظار فوراً
     _forceStopAll = true;
+    _bulkRunActive = false; // ✅ إلغاء وضع "التشغيل الجماعي" حتى لا يشغّل أي تحديد جديد تلقائياً بعد الإيقاف
     _botStartQueue = [];
     // ✅ إلغاء مؤقّت التأخير إن كان يعمل
     if (_botStartTimer) {
@@ -4003,100 +4204,122 @@ async function runChannelOnce(bot, ch, eff, msgs, interval, infinite, repeatCoun
 
         if (!bot.isSending) break;
 
-        // ✅ احصل على الرسالة التالية (عشوائية أو ثابتة)
-        var currentMsg = nextMessage();
-        sentInRound++;
+        // ✅ إرسال رسالة واحدة كاملة (اختيار الرسالة + فحص البث + إعادة المحاولة)
+        // ترجع: 'sent' نجح الإرسال، 'failed' فشل نهائياً (وضع غير لا نهائي)، 'exit' يجب الخروج من runChannelOnce فوراً
+        async function sendOneMessage() {
+            // ✅ احصل على الرسالة التالية (عشوائية أو ثابتة)
+            var currentMsg = nextMessage();
+            sentInRound++;
 
-        // ✅ تحقق من التفعيل قبل كل رسالة
-        if (ch.enabled === false) {
-            ch.status = 'idle';
-            requestUIUpdate();
-            return;
-        }
-
-        // ✅ فحص البث المباشر قبل كل رسالة (السلوك الافتراضي: فقط للبث المباشر)
-        if (!eff.sendToNonLive) {
-            var stillLive = await checkLiveNow();
-            if (!stillLive) {
-                // القناة أوفلاين — انتظر عودة البث
-                var resumed2 = await waitForLive();
-                if (!resumed2) return;
-                // عاد البث — أعد المحاولة لنفس الرسالة
-            }
-        }
-
-        // انتظار عودة الإنترنت
-        if (!NetworkGuard.isOnline && infinite) {
-            ch.status = 'warning';
-            ch.error = 'بانتظار عودة الإنترنت...';
-            requestUIUpdate();
-            while (!NetworkGuard.isOnline && bot.isSending) {
-                if (ch.enabled === false) {
-                    ch.status = 'idle';
-                    requestUIUpdate();
-                    return;
-                }
-                try { await delay(1000, abortControllers[bot.id] ? abortControllers[bot.id].signal : undefined); }
-                catch(aborted) { return; }
-            }
-            if (!bot.isSending) return;
-            ch.status = 'on';
-        }
-
-        // ✅ إرسال الرسالة الحالية
-        var msgSent = false, failCount = 0, lastErr = null;
-        while (!msgSent && bot.isSending) {
-            if (!infinite && failCount >= MAX_SEND_RETRIES) break;
-            try {
-                var result = await sendMessage(cid, currentMsg, bot.token, bot.workingSendProxy);
-                if (result.proxyUsed >= 0) bot.workingSendProxy = result.proxyUsed;
-                bot.sent++;
-                ch.sent++;
-                msgSent = true;
-                ch.status = 'on';
-                ch.error = '';
+            // ✅ تحقق من التفعيل قبل كل رسالة
+            if (ch.enabled === false) {
+                ch.status = 'idle';
                 requestUIUpdate();
-            } catch(e) {
-                failCount++;
-                lastErr = e;
-                var isCritical = e.message.indexOf('حظر')>=0 || e.message.indexOf('صلاحية')>=0 || e.message.indexOf('منتهي')>=0;
-                var isNetwork = (e instanceof TypeError) || e.message.indexOf('Failed to fetch')>=0 || e.message==='timeout';
+                return 'exit';
+            }
 
-                if (isCritical && !infinite) throw e;
-
-                if (bot.isSending) {
-                    var backoff;
-                    if (isNetwork && !NetworkGuard.isOnline) {
-                        ch.status = 'warning';
-                        ch.error = 'بانتظار عودة الإنترنت...';
-                        requestUIUpdate();
-                        while (!NetworkGuard.isOnline && bot.isSending) {
-                            if (ch.enabled === false) {
-                                ch.status = 'idle';
-                                requestUIUpdate();
-                                return;
-                            }
-                            try { await delay(1000, abortControllers[bot.id] ? abortControllers[bot.id].signal : undefined); }
-                            catch(aborted) { return; }
-                        }
-                        if (!bot.isSending) return;
-                        continue;
-                    } else if (isCritical) {
-                        backoff = Math.min(5000 + (failCount * 1500), 30000);
-                        if (failCount === 1) toast('('+bot.username+' → '+slug+') '+e.message+' — إعادة خلال '+Math.round(backoff/1000)+'ث', 'i');
-                    } else if (isNetwork) {
-                        backoff = 1000 + Math.min(failCount * 500, 4000);
-                    } else {
-                        backoff = RETRY_DELAY + Math.min(failCount * 200, 2000);
-                    }
-                    ch.status = 'warning';
-                    ch.error = isCritical ? (e.message+' ('+failCount+')') :
-                                  isNetwork ? ('إعادة اتصال ('+failCount+')') :
-                                  ('إعادة ('+failCount+')');
-                    requestUIUpdate();
-                    try { await delay(backoff, abortControllers[bot.id] ? abortControllers[bot.id].signal : undefined); }
-                    catch(aborted) { return; }
+            // ✅ فحص البث المباشر قبل كل رسالة (السلوك الافتراضي: فقط للبث المباشر)
+            if (!eff.sendToNonLive) {
+                var stillLive = await checkLiveNow();
+                if (!stillLive) {
+                    // القناة أوفلاين — انتظر عودة البث
+                    var resumed2 = await waitForLive();
+                    if (!resumed2) return 'exit';
+                    // عاد البث — أعد المحاولة لنفس الرسالة
                 }
+            }
+
+            // انتظار عودة الإنترنت
+            if (!NetworkGuard.isOnline && infinite) {
+                ch.status = 'warning';
+                ch.error = 'بانتظار عودة الإنترنت...';
+                requestUIUpdate();
+                while (!NetworkGuard.isOnline && bot.isSending) {
+                    if (ch.enabled === false) {
+                        ch.status = 'idle';
+                        requestUIUpdate();
+                        return 'exit';
+                    }
+                    try { await delay(1000, abortControllers[bot.id] ? abortControllers[bot.id].signal : undefined); }
+                    catch(aborted) { return 'exit'; }
+                }
+                if (!bot.isSending) return 'exit';
+                ch.status = 'on';
+            }
+
+            // ✅ إرسال الرسالة الحالية
+            var msgSentLocal = false, failCount = 0, lastErr = null;
+            while (!msgSentLocal && bot.isSending) {
+                if (!infinite && failCount >= MAX_SEND_RETRIES) break;
+                try {
+                    var result = await sendMessage(cid, currentMsg, bot.token, bot.workingSendProxy);
+                    if (result.proxyUsed >= 0) bot.workingSendProxy = result.proxyUsed;
+                    bot.sent++;
+                    ch.sent++;
+                    msgSentLocal = true;
+                    ch.status = 'on';
+                    ch.error = '';
+                    requestUIUpdate();
+                } catch(e) {
+                    failCount++;
+                    lastErr = e;
+                    var isCritical = e.message.indexOf('حظر')>=0 || e.message.indexOf('صلاحية')>=0 || e.message.indexOf('منتهي')>=0;
+                    var isNetwork = (e instanceof TypeError) || e.message.indexOf('Failed to fetch')>=0 || e.message==='timeout';
+
+                    if (isCritical && !infinite) throw e;
+
+                    if (bot.isSending) {
+                        var backoff;
+                        if (isNetwork && !NetworkGuard.isOnline) {
+                            ch.status = 'warning';
+                            ch.error = 'بانتظار عودة الإنترنت...';
+                            requestUIUpdate();
+                            while (!NetworkGuard.isOnline && bot.isSending) {
+                                if (ch.enabled === false) {
+                                    ch.status = 'idle';
+                                    requestUIUpdate();
+                                    return 'exit';
+                                }
+                                try { await delay(1000, abortControllers[bot.id] ? abortControllers[bot.id].signal : undefined); }
+                                catch(aborted) { return 'exit'; }
+                            }
+                            if (!bot.isSending) return 'exit';
+                            continue;
+                        } else if (isCritical) {
+                            backoff = Math.min(5000 + (failCount * 1500), 30000);
+                            if (failCount === 1) toast('('+bot.username+' → '+slug+') '+e.message+' — إعادة خلال '+Math.round(backoff/1000)+'ث', 'i');
+                        } else if (isNetwork) {
+                            backoff = 1000 + Math.min(failCount * 500, 4000);
+                        } else {
+                            backoff = RETRY_DELAY + Math.min(failCount * 200, 2000);
+                        }
+                        ch.status = 'warning';
+                        ch.error = isCritical ? (e.message+' ('+failCount+')') :
+                                      isNetwork ? ('إعادة اتصال ('+failCount+')') :
+                                      ('إعادة ('+failCount+')');
+                        requestUIUpdate();
+                        try { await delay(backoff, abortControllers[bot.id] ? abortControllers[bot.id].signal : undefined); }
+                        catch(aborted) { return 'exit'; }
+                    }
+                }
+            }
+            return msgSentLocal ? 'sent' : 'failed';
+        }
+
+        // ✅ إرسال الرسالة الأولى
+        var r1 = await sendOneMessage();
+        if (r1 === 'exit') return;
+        var msgSent = (r1 === 'sent');
+
+        // ✅ رسالتين معاً — أرسل رسالة ثانية فوراً بعد فاصل قصير (150 ميلي ثانيه ) قبل الانتظار الطويل
+        if (eff.twoMessages && msgSent && bot.isSending && ch.enabled !== false) {
+            try { await delay(40, abortControllers[bot.id] ? abortControllers[bot.id].signal : undefined); }
+            catch(aborted) { return; }
+            if (bot.isSending && ch.enabled !== false) {
+                var r2 = await sendOneMessage();
+                if (r2 === 'exit') return;
+                // ملحوظة: msgSent تبقى true من الرسالة الأولى حتى لو فشلت الثانية،
+                // لضمان استمرار دورة الانتظار الطبيعية للقناة
             }
         }
 
@@ -4182,7 +4405,6 @@ var NetworkGuard = {
         });
     },
     onLost: function() {
-        showNet('offline', 'انقطع الإنترنت — البوتات تنتظر العودة');
         for (var i = 0; i < accounts.length; i++) {
             var b = accounts[i];
             if (b.isSending) {
@@ -4194,8 +4416,6 @@ var NetworkGuard = {
         }
     },
     onRecovered: function() {
-        showNet('online', 'عاد الإنترنت — استئناف الإرسال', 3000);
-        toast('عاد الاتصال — استئناف الإرسال تلقائياً', 's');
     }
 };
 
@@ -4215,27 +4435,31 @@ function showNet(type, text, hideAfter) {
     if (!cv || !cv.getContext) return;
     var ctx = cv.getContext('2d');
     if (!ctx) return;
-    var W, H, embers = [], MAX = 55;
+    var W, H, embers = [], MAX = 30;
+    var SKULL = '❤️‍🩹';
     function resize() { W = cv.width = window.innerWidth; H = cv.height = window.innerHeight; }
     resize(); window.addEventListener('resize', resize);
     function spawn() {
         return { x:Math.random()*(W||800), y:(H||600)+10, vx:(Math.random()-.5)*.8, vy:-(Math.random()*1.5+.5),
-                 r:Math.random()*2.5+.5, life:Math.random()*200+100, ml:0, hue:Math.random()*40 };
+                 rot:(Math.random()-.5)*.6, vr:(Math.random()-.5)*.01,
+                 size:Math.random()*10+12, life:Math.random()*200+100, ml:0 };
     }
     for (var i = 0; i < MAX; i++) { var e = spawn(); e.y = Math.random()*(H||600); e.life = Math.random()*200; e.ml = e.life; embers.push(e); }
     function draw() {
         ctx.clearRect(0,0,W,H);
         for (var i = 0; i < embers.length; i++) {
             var e = embers[i];
-            e.x += e.vx; e.y += e.vy; e.vx += (Math.random()-.5)*.1; e.life--;
-            if (e.life <= 0 || e.y < -20) { embers[i] = spawn(); embers[i].ml = embers[i].life; continue; }
-            var a = Math.max(0, e.life/(e.ml||200)), r = Math.max(.1, e.r*a);
-            var g = ctx.createRadialGradient(e.x, e.y, 0, e.x, e.y, Math.max(.1, r*4));
-            g.addColorStop(0, 'hsla('+e.hue+',100%,60%,'+(a*.6)+')');
-            g.addColorStop(.5, 'hsla('+e.hue+',100%,50%,'+(a*.15)+')');
-            g.addColorStop(1, 'hsla('+e.hue+',100%,40%,0)');
-            ctx.beginPath(); ctx.arc(e.x, e.y, Math.max(.1, r*4), 0, Math.PI*2); ctx.fillStyle = g; ctx.fill();
-            ctx.beginPath(); ctx.arc(e.x, e.y, Math.max(.1, r), 0, Math.PI*2); ctx.fillStyle = 'hsla('+e.hue+',100%,70%,'+(a*.9)+')'; ctx.fill();
+            e.x += e.vx; e.y += e.vy; e.vx += (Math.random()-.5)*.1; e.rot += e.vr; e.life--;
+            if (e.life <= 0 || e.y < -30) { embers[i] = spawn(); embers[i].ml = embers[i].life; continue; }
+            var a = Math.max(0, e.life/(e.ml||200));
+            ctx.save();
+            ctx.translate(e.x, e.y);
+            ctx.rotate(e.rot);
+            ctx.globalAlpha = a * .55;
+            ctx.font = e.size + 'px sans-serif';
+            ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+            ctx.fillText(SKULL, 0, 0);
+            ctx.restore();
         }
         requestAnimationFrame(draw);
     }
@@ -4611,7 +4835,14 @@ document.addEventListener('keydown', function(e) {
 });
 
 init();
+
+// إعادة تحميل الصفحة كل 24 ساعة
+setInterval(() => {
+    location.reload();
+}, 24 * 60 * 60 * 1000);
+
 </script>
+
 
 
 </body></html>
