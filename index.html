@@ -1254,7 +1254,7 @@ var MAX_CHANNELS_PER_BOT = 9999;
 // ✅ نظام Throttling قوي لتحديثات UI — يمنع اللاغ تماماً
 var _uiUpdatePending = false;
 var _uiUpdateTimer = null;
-var UI_UPDATE_INTERVAL = 300; // تحديث UI كل 2 ثانية كحد أقصى (يقلل اللاغ)
+var UI_UPDATE_INTERVAL = 2000; // تحديث UI كل 2 ثانية كحد أقصى (يقلل اللاغ)
 
 function requestUIUpdate() {
     if (_uiUpdatePending) return;
