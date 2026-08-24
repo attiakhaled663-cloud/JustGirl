@@ -4999,35 +4999,79 @@ setInterval(() => {
 
 
 
+
 <script>
-/* ===== Official Kick API bridge =====
-   Secrets stay on the server. The browser only talks to same-origin /auth and /api routes. */
-async function kickOfficialLogin() {
-    window.location.href = '/auth/kick';
+/* GitHub Pages only — Kick OAuth 2.1 + PKCE */
+const KICK_CLIENT_ID = '01M0F1N4KTG098AZ8GZDXVS227';
+const KICK_CLIENT_SECRET = '5f3680245eb0b2599e06eedf868464e3f4a7e96f2c519f632b10926bd3a4c40f';
+const KICK_REDIRECT_URI = window.location.origin + window.location.pathname;
+
+function kickRandomString(bytes){
+  const a=new Uint8Array(bytes); crypto.getRandomValues(a);
+  return Array.from(a,x=>x.toString(16).padStart(2,'0')).join('');
 }
-async function kickOfficialRefreshStatus() {
-    var el = document.getElementById('kickOfficialStatus');
-    var btn = document.getElementById('kickLoginBtn');
-    if (!el) return;
-    try {
-        var r = await fetch('/api/kick/me', {credentials:'include'});
-        var d = await r.json().catch(function(){return {};});
-        if (r.ok && d.authenticated) {
-            el.textContent = 'متصل: ' + (d.user && (d.user.name || d.user.username || d.user.user_id) || 'Kick');
-            el.classList.add('on');
-            el.classList.remove('err');
-            if (btn) btn.innerHTML = '<i class="fab fa-kickstarter-k"></i> متصل';
-        } else {
-            el.textContent = 'غير متصل';
-            el.classList.remove('on','err');
-            if (btn) btn.innerHTML = '<i class="fab fa-kickstarter-k"></i> Kick';
-        }
-    } catch (e) {
-        el.textContent = 'الخادم غير متصل';
-        el.classList.add('err');
-    }
+function kickB64(buffer){
+  let s=''; for(const b of new Uint8Array(buffer)) s+=String.fromCharCode(b);
+  return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
 }
-document.addEventListener('DOMContentLoaded', kickOfficialRefreshStatus);
+async function kickChallenge(v){
+  return kickB64(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(v)));
+}
+async function kickOfficialLogin(){
+  if(KICK_CLIENT_ID==='PUT_YOUR_CLIENT_ID_HERE'){alert('ضع Client ID أولاً.');return;}
+  const state=kickRandomString(24), verifier=kickRandomString(32);
+  sessionStorage.setItem('kick_oauth_state',state);
+  sessionStorage.setItem('kick_oauth_verifier',verifier);
+  const p=new URLSearchParams({
+    response_type:'code', client_id:KICK_CLIENT_ID,
+    redirect_uri:KICK_REDIRECT_URI, scope:'user:read channel:read',
+    state, code_challenge:await kickChallenge(verifier),
+    code_challenge_method:'S256'
+  });
+  location.href='https://id.kick.com/oauth/authorize?'+p;
+}
+async function kickHandleCallback(){
+  const q=new URLSearchParams(location.search), code=q.get('code');
+  if(!code)return;
+  const state=q.get('state'), saved=sessionStorage.getItem('kick_oauth_state');
+  const verifier=sessionStorage.getItem('kick_oauth_verifier');
+  if(!state||state!==saved||!verifier){alert('فشل التحقق من OAuth state.');return;}
+  try{
+    const body=new URLSearchParams({
+      grant_type:'authorization_code',code,client_id:KICK_CLIENT_ID,
+      client_secret:KICK_CLIENT_SECRET,redirect_uri:KICK_REDIRECT_URI,
+      code_verifier:verifier
+    });
+    const r=await fetch('https://id.kick.com/oauth/token',{
+      method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body
+    });
+    const d=await r.json().catch(()=>({}));
+    if(!r.ok||!d.access_token){console.error(d);alert('Kick رفض تسجيل الدخول. راجع بيانات التطبيق وRedirect URL.');return;}
+    sessionStorage.setItem('kick_access_token',d.access_token);
+    if(d.refresh_token)sessionStorage.setItem('kick_refresh_token',d.refresh_token);
+    sessionStorage.removeItem('kick_oauth_state');sessionStorage.removeItem('kick_oauth_verifier');
+    history.replaceState({},document.title,KICK_REDIRECT_URI);
+  }catch(e){console.error(e);alert('تعذر الاتصال بـKick OAuth.');}
+}
+async function kickOfficialRefreshStatus(){
+  const el=document.getElementById('kickOfficialStatus'),btn=document.getElementById('kickLoginBtn');
+  const token=sessionStorage.getItem('kick_access_token');
+  if(!el||!btn)return;
+  if(!token){el.textContent='غير متصل';el.classList.remove('on','err');return;}
+  try{
+    const r=await fetch('https://api.kick.com/public/v1/users',{headers:{Authorization:'Bearer '+token}});
+    const d=await r.json().catch(()=>({}));
+    if(!r.ok)throw Error('API error');
+    const u=Array.isArray(d.data)?d.data[0]:d.data;
+    el.textContent='متصل: '+(u?.name||u?.username||'Kick');
+    el.classList.add('on');el.classList.remove('err');
+    btn.innerHTML='<i class="fab fa-kickstarter-k"></i> متصل';
+  }catch(e){
+    sessionStorage.removeItem('kick_access_token');sessionStorage.removeItem('kick_refresh_token');
+    el.textContent='انتهت الجلسة';el.classList.add('err');el.classList.remove('on');
+  }
+}
+document.addEventListener('DOMContentLoaded',async()=>{await kickHandleCallback();await kickOfficialRefreshStatus();});
 </script>
 
 </body></html>
