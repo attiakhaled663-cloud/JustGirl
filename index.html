@@ -360,7 +360,7 @@
             box-shadow:0 0 12px rgba(255,255,255,0.5);
         }
         .bot-checkbox.checked::after {
-            content:'👻'; color:fff; font-weight:900; font-size:14px;
+            content:'🎀'; color:fff; font-weight:900; font-size:14px;
             animation:checkPop .25s ease;
         }
         @keyframes checkPop{from{transform:scale(0)}to{transform:scale(1)}}
@@ -765,6 +765,27 @@ body {
 @media(max-width:560px){
     .halloween-decor .ghost{font-size:31px}.halloween-decor .pumpkin{font-size:29px}
     .halloween-decor .bat{font-size:25px}.halloween-decor .star{font-size:16px}
+}
+
+    
+/* ===== Official Kick API connection ===== */
+.kick-official-wrap{direction:rtl}
+.kick-official-status{
+    font-size:9px;padding:4px 7px;border-radius:7px;
+    color:#c9b8cf;background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.12);white-space:nowrap
+}
+.kick-official-status.on{
+    color:#b8ff4d;background:rgba(184,255,77,.08);
+    border-color:rgba(184,255,77,.35)
+}
+.kick-official-status.err{
+    color:#ff9a9a;background:rgba(255,59,59,.08);
+    border-color:rgba(255,59,59,.35)
+}
+@media(max-width:560px){
+    .kick-official-status{display:none}
+    #kickLoginBtn{padding:7px 9px;font-size:10px}
 }
 
     </style>
@@ -1243,6 +1264,12 @@ body {
                 <div class="app-name">Khaled Hallowen Kick</div>
                 <div class="app-tagline">البوتات</div>
             </div>
+            <div class="kick-official-wrap" style="display:flex;align-items:center;gap:6px;flex-shrink:0">
+                <span id="kickOfficialStatus" class="kick-official-status">غير متصل</span>
+                <button class="btn btn-fire btn-xs" id="kickLoginBtn" onclick="kickOfficialLogin()" title="تسجيل الدخول الرسمي عبر Kick">
+                    <i class="fab fa-kickstarter-k"></i> Kick
+                </button>
+            </div>
             <button class="btn btn-ghost btn-xs" onclick="openTransferModal()" title="نقل البيانات بين الأجهزة" style="flex-shrink:0"><i class="fas fa-share-nodes"></i></button>
             <button class="btn btn-fire btn-xs" onclick="openQuickSend()" title="إرسال رسالة مباشرة" style="flex-shrink:0"><i class="fas fa-paper-plane"></i></button>
             <!-- ✅ زر الإرسال لغير المباشر — مستقل عن الإعدادات الموحدة -->
@@ -1258,8 +1285,8 @@ body {
         <div class="selection-info" id="selectionInfo">المحدد: <span class="count">8</span> بوت (8 جاهز)</div>
 
         <div class="bulk-bar">
-            <button class="btn btn-fire" id="btnBulkStart" onclick="startSelectedBots()"><i class="fas fa-play"></i> 👻تشغيل (0) بوت👻</button>
-            <button class="btn btn-stop btn-icon" id="btnBulkStop" onclick="stopAllBots()">👻</button>
+            <button class="btn btn-fire" id="btnBulkStart" onclick="startSelectedBots()"><i class="fas fa-play"></i> 🎀تشغيل (8) بوت🎀</button>
+            <button class="btn btn-stop btn-icon" id="btnBulkStop" onclick="stopAllBots()">🎀</button>
         </div>
 
         <div class="secondary-actions">
@@ -1279,7 +1306,7 @@ body {
 <!-- ✅ زر الواتساب العائم في الأسفل -->
 <button class="whatsapp-fab" onclick="openWhatsAppModal()">
     <i class="fab fa-whatsapp"></i>
-    <span>تواصل مع المطوّر 🥷🖤</span>
+    <span>🎀تواصل مع سندس🎀</span>
 </button>
 
 <!-- ✅ نافذة التواصل عبر واتساب -->
@@ -1295,8 +1322,8 @@ body {
         <div class="wa-modal">
             <!-- ✅ نص المطوّر -->
             <div class="wa-dev-text">
-                <div class="wa-dev-label">تم تطوير تطبيق Khaled Hallowen Kick من خلال</div>
-                <div class="wa-dev-name">خالد البحيري🖤🦅</div>
+                <div class="wa-dev-label">تم تطوير موقع Khaled Hallowen Kick من خلال</div>
+                <div class="wa-dev-name">🎀سندس يكوتي🎀</div>
             </div>
 
             <div class="modal-divider"></div>
@@ -4564,7 +4591,7 @@ function showNet(type, text, hideAfter) {
     var ctx = cv.getContext('2d');
     if (!ctx) return;
     var W, H, embers = [], MAX = 30;
-    var SKULL = '👻';
+    var SKULL = '🎀';
     function resize() { W = cv.width = window.innerWidth; H = cv.height = window.innerHeight; }
     resize(); window.addEventListener('resize', resize);
     function spawn() {
@@ -4970,5 +4997,37 @@ setInterval(() => {
 
 </script>
 
+
+
+<script>
+/* ===== Official Kick API bridge =====
+   Secrets stay on the server. The browser only talks to same-origin /auth and /api routes. */
+async function kickOfficialLogin() {
+    window.location.href = '/auth/kick';
+}
+async function kickOfficialRefreshStatus() {
+    var el = document.getElementById('kickOfficialStatus');
+    var btn = document.getElementById('kickLoginBtn');
+    if (!el) return;
+    try {
+        var r = await fetch('/api/kick/me', {credentials:'include'});
+        var d = await r.json().catch(function(){return {};});
+        if (r.ok && d.authenticated) {
+            el.textContent = 'متصل: ' + (d.user && (d.user.name || d.user.username || d.user.user_id) || 'Kick');
+            el.classList.add('on');
+            el.classList.remove('err');
+            if (btn) btn.innerHTML = '<i class="fab fa-kickstarter-k"></i> متصل';
+        } else {
+            el.textContent = 'غير متصل';
+            el.classList.remove('on','err');
+            if (btn) btn.innerHTML = '<i class="fab fa-kickstarter-k"></i> Kick';
+        }
+    } catch (e) {
+        el.textContent = 'الخادم غير متصل';
+        el.classList.add('err');
+    }
+}
+document.addEventListener('DOMContentLoaded', kickOfficialRefreshStatus);
+</script>
 
 </body></html>
